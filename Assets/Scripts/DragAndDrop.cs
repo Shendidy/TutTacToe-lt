@@ -14,6 +14,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Rigidbody2D nodeBottomLeft;
     private Vector2 pieceStartPosition;
     private Vector2[] slotCentres;
+    // Slots
     public Rigidbody2D slot11;
     public Rigidbody2D slot21;
     public Rigidbody2D slot31;
@@ -23,6 +24,13 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Rigidbody2D slot13;
     public Rigidbody2D slot23;
     public Rigidbody2D slot33;
+    // Players
+    public Rigidbody2D player11;
+    public Rigidbody2D player12;
+    public Rigidbody2D player13;
+    public Rigidbody2D player21;
+    public Rigidbody2D player22;
+    public Rigidbody2D player23;
     #endregion
 
     private void Awake()
@@ -45,12 +53,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 1.0f;
 
         var isOutOfBoard = CheckIfOutOfBoard();
-        if (isOutOfBoard) rectTransform.position = pieceStartPosition;
-        else
-        {
-            Vector2 finalSlot = GetFinalPosition();
-            rectTransform.position = finalSlot;
-        }
+
+        MovePiece(isOutOfBoard);
     }
 
     public void OnDrop(PointerEventData eventData){}
@@ -96,5 +100,20 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         slotCentres[6] = slot13.position;
         slotCentres[7] = slot23.position;
         slotCentres[8] = slot33.position;
+    }
+
+    private void MovePiece(bool isOutOfBoard)
+    {
+        if (isOutOfBoard || !SlotIsFree()) rectTransform.position = pieceStartPosition;
+        else
+        {
+            Vector2 finalSlot = GetFinalPosition();
+            rectTransform.position = finalSlot;
+        }
+    }
+
+    private bool SlotIsFree()
+    {
+        return false;
     }
 }

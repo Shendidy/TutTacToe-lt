@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 26749565}
   - component: {fileID: 26749567}
   - component: {fileID: 26749568}
+  - component: {fileID: 26749569}
   m_Layer: 5
   m_Name: Player2-1
   m_TagString: Untagged
@@ -222,6 +223,12 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
 --- !u!225 &26749568
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -234,6 +241,27 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!50 &26749569
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26749563}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &59727410
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +564,7 @@ GameObject:
   - component: {fileID: 152025017}
   - component: {fileID: 152025019}
   - component: {fileID: 152025020}
+  - component: {fileID: 152025021}
   m_Layer: 5
   m_Name: Player2-2
   m_TagString: Untagged
@@ -624,6 +653,12 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
 --- !u!225 &152025020
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -636,6 +671,27 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!50 &152025021
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152025015}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &163538223
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +845,7 @@ GameObject:
   - component: {fileID: 311269735}
   - component: {fileID: 311269738}
   - component: {fileID: 311269737}
+  - component: {fileID: 311269739}
   m_Layer: 5
   m_Name: Player1-3
   m_TagString: Untagged
@@ -889,6 +946,33 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
+--- !u!50 &311269739
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311269733}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &313863947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1545,7 @@ GameObject:
   - component: {fileID: 1105191226}
   - component: {fileID: 1105191228}
   - component: {fileID: 1105191229}
+  - component: {fileID: 1105191230}
   m_Layer: 5
   m_Name: Player2-3
   m_TagString: Untagged
@@ -1549,6 +1634,12 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
 --- !u!225 &1105191229
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1561,6 +1652,27 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!50 &1105191230
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105191224}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1167870872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1686,7 @@ GameObject:
   - component: {fileID: 1167870874}
   - component: {fileID: 1167870876}
   - component: {fileID: 1167870877}
+  - component: {fileID: 1167870878}
   m_Layer: 5
   m_Name: Player1-2
   m_TagString: Untagged
@@ -1662,6 +1775,12 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
 --- !u!225 &1167870877
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1674,6 +1793,27 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!50 &1167870878
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167870872}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1217472821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1827,7 @@ GameObject:
   - component: {fileID: 1217472823}
   - component: {fileID: 1217472825}
   - component: {fileID: 1217472826}
+  - component: {fileID: 1217472827}
   m_Layer: 5
   m_Name: Player1-1
   m_TagString: Untagged
@@ -1775,6 +1916,12 @@ MonoBehaviour:
   slot13: {fileID: 1972888691}
   slot23: {fileID: 1757633478}
   slot33: {fileID: 1372200252}
+  player11: {fileID: 1217472827}
+  player12: {fileID: 1167870878}
+  player13: {fileID: 311269739}
+  player21: {fileID: 26749569}
+  player22: {fileID: 152025021}
+  player23: {fileID: 1105191230}
 --- !u!225 &1217472826
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1787,6 +1934,27 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!50 &1217472827
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217472821}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1372200248
 GameObject:
   m_ObjectHideFlags: 0

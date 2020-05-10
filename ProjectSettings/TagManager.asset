@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - slot11
+  - slot21
+  - slot31
+  - slot12
+  - slot22
+  - slot23
+  - slot13
+  - slot33
+  - slot32
   layers:
   - Default
   - TransparentFX

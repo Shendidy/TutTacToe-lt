@@ -13,11 +13,18 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Rigidbody2D nodeTopRight;
     public Rigidbody2D nodeBottomLeft;
     private Vector2 pieceStartPosition;
+    private Vector2[] slotCentres;
+    public Rigidbody2D slot11;
+    public Rigidbody2D slot21;
+    public Rigidbody2D slot31;
+    public Rigidbody2D slot12;
+    public Rigidbody2D slot22;
+    public Rigidbody2D slot32;
+    public Rigidbody2D slot13;
+    public Rigidbody2D slot23;
+    public Rigidbody2D slot33;
+    #endregion
 
-    //slots
-
-#endregion
-    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -38,7 +45,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 1.0f;
 
         var isOutOfBoard = CheckIfOutOfBoard();
-        if (isOutOfBoard) transform.position = pieceStartPosition;
+        if (isOutOfBoard) rectTransform.position = pieceStartPosition;
+        else
+        {
+            Vector2 finalSlot = GetFinalPosition();
+            rectTransform.position = finalSlot;
+        }
     }
 
     public void OnDrop(PointerEventData eventData){}
@@ -54,5 +66,35 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             return true;
         
         return false;
+    }
+
+    private Vector2 GetFinalPosition()
+    {
+        PopulateSlotCentres();
+
+        float distance = float.MaxValue;
+        Vector2 vector = new Vector2();
+        foreach (Vector2 slot in slotCentres)
+            if (Vector2.Distance(rectTransform.position, slot) < distance)
+            {
+                distance = Vector2.Distance(rectTransform.position, slot);
+                vector = slot;
+            }
+
+        return vector;
+    }
+
+    private void PopulateSlotCentres()
+    {
+        slotCentres = new Vector2[9];
+        slotCentres[0] = slot11.position;
+        slotCentres[1] = slot21.position;
+        slotCentres[2] = slot31.position;
+        slotCentres[3] = slot12.position;
+        slotCentres[4] = slot22.position;
+        slotCentres[5] = slot32.position;
+        slotCentres[6] = slot13.position;
+        slotCentres[7] = slot23.position;
+        slotCentres[8] = slot33.position;
     }
 }

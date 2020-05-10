@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 26749566}
   - component: {fileID: 26749565}
   - component: {fileID: 26749567}
+  - component: {fileID: 26749568}
   m_Layer: 5
   m_Name: Player2-1
   m_TagString: Untagged
@@ -208,7 +209,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
+--- !u!225 &26749568
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26749563}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &59727410
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +453,7 @@ GameObject:
   - component: {fileID: 152025018}
   - component: {fileID: 152025017}
   - component: {fileID: 152025019}
+  - component: {fileID: 152025020}
   m_Layer: 5
   m_Name: Player2-2
   m_TagString: Untagged
@@ -512,7 +529,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
+--- !u!225 &152025020
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152025015}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &163538223
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +697,7 @@ GameObject:
   - component: {fileID: 311269736}
   - component: {fileID: 311269735}
   - component: {fileID: 311269738}
+  - component: {fileID: 311269737}
   m_Layer: 5
   m_Name: Player1-3
   m_TagString: Untagged
@@ -728,6 +761,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311269733}
   m_CullTransparentMesh: 0
+--- !u!225 &311269737
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311269733}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &311269738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,7 +785,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
 --- !u!1 &313863947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1287,7 @@ GameObject:
   - component: {fileID: 1105191227}
   - component: {fileID: 1105191226}
   - component: {fileID: 1105191228}
+  - component: {fileID: 1105191229}
   m_Layer: 5
   m_Name: Player2-3
   m_TagString: Untagged
@@ -1314,7 +1363,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
+--- !u!225 &1105191229
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105191224}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1167870872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1391,7 @@ GameObject:
   - component: {fileID: 1167870875}
   - component: {fileID: 1167870874}
   - component: {fileID: 1167870876}
+  - component: {fileID: 1167870877}
   m_Layer: 5
   m_Name: Player1-2
   m_TagString: Untagged
@@ -1402,7 +1467,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
+--- !u!225 &1167870877
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167870872}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1217472821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1495,7 @@ GameObject:
   - component: {fileID: 1217472824}
   - component: {fileID: 1217472823}
   - component: {fileID: 1217472825}
+  - component: {fileID: 1217472826}
   m_Layer: 5
   m_Name: Player1-1
   m_TagString: Untagged
@@ -1490,7 +1571,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1040330035}
+  mainCanvas: {fileID: 1040330035}
+  boardCanvas: {fileID: 313863948}
+  nodeTopRight: {fileID: 1669721878}
+  nodeBottomLeft: {fileID: 419830397}
+--- !u!225 &1217472826
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217472821}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1372200248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,7 +2135,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719568462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.9990232}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 313863948}

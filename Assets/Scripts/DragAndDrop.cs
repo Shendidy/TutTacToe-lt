@@ -40,13 +40,23 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private void Awake()
     {
+        Debug.Log(slot11.position);
+        Debug.Log(slot21.position);
+        Debug.Log(slot31.position);
+        Debug.Log(slot12.position);
+        Debug.Log(slot22.position);
+        Debug.Log(slot23.position);
+        Debug.Log(slot13.position);
+        Debug.Log(slot23.position);
+        Debug.Log(slot33.position);
+
         slotCentres = new Slot[9];
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
         if (newGame)
         {
-            Debug.Log("New Game!");
+            //Debug.Log("New Game!");
             PopulateSlotCentres();
             AddSlotCentresOccupiers();
             newGame = false;

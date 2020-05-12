@@ -44,6 +44,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         GameManager.newGame = true;
+        GameManager.playerInTurn = 1;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -102,7 +103,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         Slot finalSlot = GetFinalSlot();
 
-        if (isOutOfBoard || !SlotIsFree(finalSlot))
+        if (isOutOfBoard || !SlotIsFree(finalSlot) || !ValidPlayer())
         {
             rectTransform.position = pieceStartSlot.SVector2;
             canvasGroup.alpha = canvasDotAlpha;
@@ -131,6 +132,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             }
 
             canvasGroup.alpha = Constants.StandingPlayerTransparency;
+            GameManager.playerInTurn = GameManager.playerInTurn == 1 ? 2 : 1;
         }
     }
     private Rigidbody2D GetCurrentPlayer()
@@ -190,4 +192,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             if (slot.SOccupier) playersLocation.Add(slot);
         }
     }
+    private bool ValidPlayer() =>
+        rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler//, IPointerDownHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     #region Class Variables
     private RectTransform rectTransform;
@@ -40,7 +40,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
     private void Awake()
     {
-        Debug.Log("Awake!");
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         GameManager.newGame = true;
@@ -65,7 +64,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("OnDrag!");
         rectTransform.anchoredPosition += eventData.delta / mainCanvas.scaleFactor;
     }
     public void OnEndDrag(PointerEventData eventData)
@@ -74,7 +72,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         MovePiece(isOutOfBoard);
     }
     public void OnDrop(PointerEventData eventData) { }
-    //public void OnPointerDown(PointerEventData eventData) { }
     private bool CheckIfOutOfBoard()
     {
         if (rectTransform.position.x > nodeTopRight.position.x ||
@@ -89,7 +86,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         float distance = float.MaxValue;
         Slot finalSlot = new Slot("temp", new Vector2(0, 0));
-        //Vector2 vector = new Vector2();
+
         foreach (Slot slot in GameManager.slotCentres)
             if (Vector2.Distance(rectTransform.position, slot.SVector2) < distance)
             {
@@ -145,7 +142,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     private void PopulateSlotCentres()
     {
-        Debug.Log("Populating slotCentres");
         GameManager.slotCentres = new Slot[9];
         GameManager.slotCentres[0] = new Slot("slot11", slot11.position);
         GameManager.slotCentres[1] = new Slot("slot21", slot21.position);
@@ -187,9 +183,5 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         {
             if (slot.SOccupier) playersLocation.Add(slot);
         }
-
-        //foreach(Rigidbody2D player in players)
-        //if (Vector2.Distance(player.position, slot.SVector2) < 0.25)
-        //playersLocation.Add((player.name, slot));
     }
 }

@@ -36,6 +36,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public Rigidbody2D player23;
 
     private bool isOutOfBoard;
+    private float canvasDotAlpha;
     #endregion
 
     private void Awake()
@@ -57,6 +58,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             if (slot.SOccupier)
                 if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
 
+        canvasDotAlpha = canvasGroup.alpha;
         canvasGroup.alpha = Constants.MovingPlayerTransparency;
 
         PopulatePlayers();
@@ -100,13 +102,17 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         Slot finalSlot = GetFinalSlot();
 
-        if (isOutOfBoard || !SlotIsFree(finalSlot)) rectTransform.position = pieceStartSlot.SVector2;
+        if (isOutOfBoard || !SlotIsFree(finalSlot))
+        {
+            rectTransform.position = pieceStartSlot.SVector2;
+            canvasGroup.alpha = canvasDotAlpha;
+        }
         else
         {
             Rigidbody2D currentPlayer = GetCurrentPlayer();
             rectTransform.position = finalSlot.SVector2;
 
-            foreach(Slot slot in GameManager.slotCentres)
+            foreach (Slot slot in GameManager.slotCentres)
             {
                 if (slot.SOccupier?.name == rectTransform.name)
                 {
@@ -117,7 +123,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
             foreach (Slot slot in GameManager.slotCentres)
             {
-                if(Vector2.Distance(slot.SVector2, rectTransform.position) < 0.25)
+                if (Vector2.Distance(slot.SVector2, rectTransform.position) < 0.25)
                 {
                     slot.SOccupier = currentPlayer;
                     break;

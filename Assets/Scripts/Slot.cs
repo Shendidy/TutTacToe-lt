@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//public class GameSlot : MonoBehaviour, IDropHandler
-//{
-//    public void OnDrop(PointerEventData eventData)
-//    {
-//        if(eventData.pointerDrag != null)
-//        {
-//            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-//        }
-//    }
-//}
+public class Slot
+{
+    public string SName { get; set; }
+    public Vector2 SVector2 { get; set; }
+    public Rigidbody2D SOccupier { get; set; }
+
+    public Slot(string sName, Vector2 sVector2)
+    {
+        SName = sName;
+        SVector2 = sVector2;
+    }
+}

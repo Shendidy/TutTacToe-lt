@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler//, IPointerDownHandler
 {
     #region Class Variables
     private RectTransform rectTransform;
@@ -36,51 +37,30 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Rigidbody2D player23;
 
     private bool newGame = true;
+    private bool isOutOfBoard;
     #endregion
 
     private void Awake()
     {
-        Debug.Log(slot11.position);
-        Debug.Log(slot21.position);
-        Debug.Log(slot31.position);
-        Debug.Log(slot12.position);
-        Debug.Log(slot22.position);
-        Debug.Log(slot23.position);
-        Debug.Log(slot13.position);
-        Debug.Log(slot23.position);
-        Debug.Log(slot33.position);
-
-        slotCentres = new Slot[9];
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
         if (newGame)
         {
-            //Debug.Log("New Game!");
             PopulateSlotCentres();
             AddSlotCentresOccupiers();
             newGame = false;
         }
-        else
-        {
-            Debug.Log("Old Game!");
-        }
-    }
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        foreach (Slot slot in slotCentres)
-        {
-            if (slot.SOccupier)
-            {
-                //Debug.Log("player: " + slot.SOccupier.name + " is at slot: " + slot.SName);
-                if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
-            }
-        }
 
-        canvasGroup.alpha = 0.6f;
+        foreach (Slot slot in slotCentres)
+            if (slot.SOccupier)
+                if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
+
+        canvasGroup.alpha = Constants.MovingPlayerTransparency;
 
         PopulatePlayers();
-        //PopulateSlotCentres();
         PopulatePlayersLocation();
     }
     public void OnDrag(PointerEventData eventData)
@@ -90,24 +70,20 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = 1.0f;
-
-        //PopulateSlotCentres();
-
-        var isOutOfBoard = CheckIfOutOfBoard();
-
+        canvasGroup.alpha = Constants.StandingPlayerTransparency;
+        isOutOfBoard = CheckIfOutOfBoard();
         MovePiece(isOutOfBoard);
     }
-    public void OnDrop(PointerEventData eventData){}
-    public void OnPointerDown(PointerEventData eventData){}
+    public void OnDrop(PointerEventData eventData) { }
+    //public void OnPointerDown(PointerEventData eventData) { }
     private bool CheckIfOutOfBoard()
     {
-        if(rectTransform.position.x > nodeTopRight.position.x ||
+        if (rectTransform.position.x > nodeTopRight.position.x ||
            rectTransform.position.x < nodeBottomLeft.position.x ||
            rectTransform.position.y > nodeTopRight.position.y ||
            rectTransform.position.y < nodeBottomLeft.position.y)
             return true;
-        
+
         return false;
     }
     private Slot GetFinalSlot()
@@ -119,7 +95,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             if (Vector2.Distance(rectTransform.position, slot.SVector2) < distance)
             {
                 distance = Vector2.Distance(rectTransform.position, slot.SVector2);
-                finalSlot = slot;
+                finalSlot = slot;//don't attempt to break out of foreach after this step!
             }
 
         return finalSlot;
@@ -131,10 +107,41 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         if (isOutOfBoard || !SlotIsFree(finalSlot)) rectTransform.position = pieceStartSlot.SVector2;
         else
         {
+            Rigidbody2D currentPlayer = GetCurrentPlayer();
             rectTransform.position = finalSlot.SVector2;
 
+            foreach(Slot slot in slotCentres)
+            {
+                if (slot.SOccupier.name == rectTransform.name)
+                {
+                    slot.SOccupier = null;
+                    break;
+                }
+            }
+
+            foreach (Slot slot in slotCentres)
+            {
+                if(Vector2.Distance(slot.SVector2, rectTransform.position) < 0.25)
+                {
+                    slot.SOccupier = currentPlayer;
+                    break;
+                }
+            }
+
+                //Debug.Log(from slot in slotCentres
+                //          where slot.SVector2.x == rectTransform.position.x
+                //          where slot.SVector2.y == rectTransform.position.y
+                //          select slot.SName.ToString()
+                //    );
 
         }
+    }
+    private Rigidbody2D GetCurrentPlayer()
+    {
+        Rigidbody2D currentPlayer = new Rigidbody2D();
+        foreach (Rigidbody2D player in players)
+            if (player.name == rectTransform.name) currentPlayer = player;
+        return currentPlayer;
     }
     private bool SlotIsFree(Slot finalSlot)
     {
@@ -181,26 +188,13 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private void PopulatePlayersLocation()
     {
         playersLocation = new List<Slot>();
-        foreach(Slot slot in slotCentres)
+        foreach (Slot slot in slotCentres)
         {
             if (slot.SOccupier) playersLocation.Add(slot);
         }
 
-            //foreach(Rigidbody2D player in players)
-                //if (Vector2.Distance(player.position, slot.SVector2) < 0.25)
-                    //playersLocation.Add((player.name, slot));
-    }
-}
-
-public class Slot
-{
-    public string SName { get; set; }
-    public Vector2 SVector2 { get; set; }
-    public Rigidbody2D SOccupier { get; set; }
-
-    public Slot(string sName, Vector2 sVector2)
-    {
-        SName = sName;
-        SVector2 = sVector2;
+        //foreach(Rigidbody2D player in players)
+        //if (Vector2.Distance(player.position, slot.SVector2) < 0.25)
+        //playersLocation.Add((player.name, slot));
     }
 }

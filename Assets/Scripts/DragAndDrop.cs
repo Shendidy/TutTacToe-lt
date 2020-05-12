@@ -133,6 +133,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
             canvasGroup.alpha = Constants.StandingPlayerTransparency;
             GameManager.playerInTurn = GameManager.playerInTurn == 1 ? 2 : 1;
+            if (GameManager.playerInTurn == 2) ComputerMove();
         }
     }
     private Rigidbody2D GetCurrentPlayer()
@@ -194,4 +195,15 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     private bool ValidPlayer() =>
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
+    private void ComputerMove()
+    {
+        Slot newSlot = PickSlot();
+
+        MovePiece(false);
+    }
+    private Slot PickSlot()
+    {
+
+        return new Slot("sdf", new Vector2(0, 0));
+    }
 }

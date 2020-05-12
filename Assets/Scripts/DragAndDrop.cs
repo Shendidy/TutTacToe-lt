@@ -15,7 +15,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public Rigidbody2D nodeTopRight;
     public Rigidbody2D nodeBottomLeft;
     private Slot pieceStartSlot;
-    private Slot[] slotCentres;
     private Rigidbody2D[] players;
     private List<Slot> playersLocation;
     // Slots
@@ -36,25 +35,26 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public Rigidbody2D player22;
     public Rigidbody2D player23;
 
-    private bool newGame = true;
     private bool isOutOfBoard;
     #endregion
 
     private void Awake()
     {
+        Debug.Log("Awake!");
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        GameManager.newGame = true;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (newGame)
+        if (GameManager.newGame)
         {
             PopulateSlotCentres();
             AddSlotCentresOccupiers();
-            newGame = false;
+            GameManager.newGame = false;
         }
 
-        foreach (Slot slot in slotCentres)
+        foreach (Slot slot in GameManager.slotCentres)
             if (slot.SOccupier)
                 if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
 
@@ -70,7 +70,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = Constants.StandingPlayerTransparency;
         isOutOfBoard = CheckIfOutOfBoard();
         MovePiece(isOutOfBoard);
     }
@@ -91,7 +90,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         float distance = float.MaxValue;
         Slot finalSlot = new Slot("temp", new Vector2(0, 0));
         //Vector2 vector = new Vector2();
-        foreach (Slot slot in slotCentres)
+        foreach (Slot slot in GameManager.slotCentres)
             if (Vector2.Distance(rectTransform.position, slot.SVector2) < distance)
             {
                 distance = Vector2.Distance(rectTransform.position, slot.SVector2);
@@ -110,16 +109,16 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             Rigidbody2D currentPlayer = GetCurrentPlayer();
             rectTransform.position = finalSlot.SVector2;
 
-            foreach(Slot slot in slotCentres)
+            foreach(Slot slot in GameManager.slotCentres)
             {
-                if (slot.SOccupier.name == rectTransform.name)
+                if (slot.SOccupier?.name == rectTransform.name)
                 {
                     slot.SOccupier = null;
                     break;
                 }
             }
 
-            foreach (Slot slot in slotCentres)
+            foreach (Slot slot in GameManager.slotCentres)
             {
                 if(Vector2.Distance(slot.SVector2, rectTransform.position) < 0.25)
                 {
@@ -128,12 +127,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
                 }
             }
 
-                //Debug.Log(from slot in slotCentres
-                //          where slot.SVector2.x == rectTransform.position.x
-                //          where slot.SVector2.y == rectTransform.position.y
-                //          select slot.SName.ToString()
-                //    );
-
+            canvasGroup.alpha = Constants.StandingPlayerTransparency;
         }
     }
     private Rigidbody2D GetCurrentPlayer()
@@ -145,33 +139,34 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     private bool SlotIsFree(Slot finalSlot)
     {
-        foreach (Slot slot in slotCentres)
+        foreach (Slot slot in GameManager.slotCentres)
             if (slot == finalSlot && slot.SOccupier) return false;
         return true;
     }
     private void PopulateSlotCentres()
     {
-        slotCentres = new Slot[9];
-        slotCentres[0] = new Slot("slot11", slot11.position);
-        slotCentres[1] = new Slot("slot21", slot21.position);
-        slotCentres[2] = new Slot("slot31", slot31.position);
-        slotCentres[3] = new Slot("slot12", slot12.position);
-        slotCentres[4] = new Slot("slot22", slot22.position);
-        slotCentres[5] = new Slot("slot32", slot32.position);
-        slotCentres[6] = new Slot("slot13", slot13.position);
-        slotCentres[7] = new Slot("slot23", slot23.position);
-        slotCentres[8] = new Slot("slot33", slot33.position);
+        Debug.Log("Populating slotCentres");
+        GameManager.slotCentres = new Slot[9];
+        GameManager.slotCentres[0] = new Slot("slot11", slot11.position);
+        GameManager.slotCentres[1] = new Slot("slot21", slot21.position);
+        GameManager.slotCentres[2] = new Slot("slot31", slot31.position);
+        GameManager.slotCentres[3] = new Slot("slot12", slot12.position);
+        GameManager.slotCentres[4] = new Slot("slot22", slot22.position);
+        GameManager.slotCentres[5] = new Slot("slot32", slot32.position);
+        GameManager.slotCentres[6] = new Slot("slot13", slot13.position);
+        GameManager.slotCentres[7] = new Slot("slot23", slot23.position);
+        GameManager.slotCentres[8] = new Slot("slot33", slot33.position);
     }
     private void AddSlotCentresOccupiers()
     {
-        if (newGame)
+        if (GameManager.newGame)
         {
-            slotCentres[0].SOccupier = player11;
-            slotCentres[1].SOccupier = player12;
-            slotCentres[2].SOccupier = player13;
-            slotCentres[6].SOccupier = player21;
-            slotCentres[7].SOccupier = player22;
-            slotCentres[8].SOccupier = player23;
+            GameManager.slotCentres[0].SOccupier = player11;
+            GameManager.slotCentres[1].SOccupier = player12;
+            GameManager.slotCentres[2].SOccupier = player13;
+            GameManager.slotCentres[6].SOccupier = player21;
+            GameManager.slotCentres[7].SOccupier = player22;
+            GameManager.slotCentres[8].SOccupier = player23;
         }
     }
     private void PopulatePlayers()
@@ -188,7 +183,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     private void PopulatePlayersLocation()
     {
         playersLocation = new List<Slot>();
-        foreach (Slot slot in slotCentres)
+        foreach (Slot slot in GameManager.slotCentres)
         {
             if (slot.SOccupier) playersLocation.Add(slot);
         }

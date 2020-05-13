@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     [SerializeField] private Canvas mainCanvas;
     public Transform boardCanvas;
     private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup21;
+    public CanvasGroup canvasGroup22;
+    public CanvasGroup canvasGroup23;
     public Rigidbody2D nodeTopRight;
     public Rigidbody2D nodeBottomLeft;
     private Slot pieceStartSlot;
@@ -38,7 +42,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     private bool isOutOfBoard;
     private float canvasDotAlpha;
     #endregion
-
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -46,6 +49,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (GameManager.newGame)
@@ -74,7 +78,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         isOutOfBoard = CheckIfOutOfBoard();
         MovePiece(isOutOfBoard);
     }
-    public void OnDrop(PointerEventData eventData) { }
     private bool CheckIfOutOfBoard()
     {
         if (rectTransform.position.x > nodeTopRight.position.x ||
@@ -195,15 +198,72 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     }
     private bool ValidPlayer() =>
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
-    private void ComputerMove()
+    public void ComputerMove()
     {
         Slot newSlot = PickSlot();
+        Rigidbody2D newPlayerPiece = PickPlayerPiece();
+        Slot oldSlot = new Slot("temp", new Vector2(0, 0));
 
-        MovePiece(false);
+        // Get old slot
+        foreach (Slot slot in GameManager.slotCentres)
+        {
+            if (slot.SOccupier == newPlayerPiece)
+            {
+                oldSlot = slot;
+                break;
+            }
+        }
+
+        Thread.Sleep(250);
+        newPlayerPiece.position = newSlot.SVector2;
+
+        // Empty SOccupier of player 2 old slot
+        oldSlot.SOccupier = null;
+
+        // Add SOccupier to newSlot
+        foreach (Slot slot in GameManager.slotCentres)
+        {
+            if (Vector2.Distance(slot.SVector2, newPlayerPiece.position) < 0.25)
+            {
+                slot.SOccupier = newPlayerPiece;
+                break;
+            }
+        }
+
+        // Make alpha of newPlayerPiece = 1
+        switch (newPlayerPiece.name)
+        {
+            case "Player2-1":
+                canvasGroup21.alpha = 1;
+                break;
+            case "Player2-2":
+                canvasGroup22.alpha = 1;
+                break;
+            default:
+                canvasGroup23.alpha = 1;
+                break;
+        }
+
+        GameManager.playerInTurn = 1;
     }
     private Slot PickSlot()
     {
+        System.Random random = new System.Random();
 
-        return new Slot("sdf", new Vector2(0, 0));
+        while(true)
+        {
+            int i = random.Next(0, 9);
+            if(GameManager.slotCentres[i].SOccupier == null) return GameManager.slotCentres[i];
+        }
+    }
+    private Rigidbody2D PickPlayerPiece()
+    {
+        System.Random random = new System.Random();
+
+        while(true)
+        {
+            int i = random.Next(0, players.Length);
+            if (players[i].name.ToCharArray()[6].ToString() == "2") return players[i];
+        }
     }
 }

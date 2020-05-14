@@ -13,6 +13,7 @@ TagManager:
   - slot13
   - slot33
   - slot32
+  - backgroundMusic
   layers:
   - Default
   - TransparentFX

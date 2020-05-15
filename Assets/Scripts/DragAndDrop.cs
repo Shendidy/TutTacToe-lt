@@ -135,6 +135,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             }
 
             canvasGroup.alpha = Constants.StandingPlayerTransparency;
+            IsWinner();
             GameManager.playerInTurn = GameManager.playerInTurn == 1 ? 2 : 1;
             if (GameManager.playerInTurn == 2) ComputerMove();
         }
@@ -244,6 +245,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
                 break;
         }
 
+        IsWinner();
         GameManager.playerInTurn = 1;
     }
     private Slot PickSlot()
@@ -265,5 +267,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             int i = random.Next(0, players.Length);
             if (players[i].name.ToCharArray()[6].ToString() == "2") return players[i];
         }
+    }
+    private void IsWinner()
+    {
+        Debug.Log(GameManager.playerInTurn == 1 ? "You win!" : "You lose!");
     }
 }

@@ -6,7 +6,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     #region Class Variables
     private RectTransform rectTransform;
@@ -48,35 +48,46 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         canvasGroup = GetComponent<CanvasGroup>();
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
+        GameManager.gameOver = false;
+        GameManager.difficuly = 3;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (GameManager.newGame)
+        if (!GameManager.gameOver)
         {
-            PopulateSlotCentres();
-            AddSlotCentresOccupiers();
-            GameManager.newGame = false;
+            if (GameManager.newGame)
+            {
+                PopulateSlotCentres();
+                AddSlotCentresOccupiers();
+                GameManager.newGame = false;
+            }
+
+            foreach (Slot slot in GameManager.slotCentres)
+                if (slot.SOccupier)
+                    if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
+
+            canvasDotAlpha = canvasGroup.alpha;
+            canvasGroup.alpha = Constants.MovingPlayerTransparency;
+
+            PopulatePlayers();
+            PopulatePlayersLocation();
         }
-
-        foreach (Slot slot in GameManager.slotCentres)
-            if (slot.SOccupier)
-                if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
-
-        canvasDotAlpha = canvasGroup.alpha;
-        canvasGroup.alpha = Constants.MovingPlayerTransparency;
-
-        PopulatePlayers();
-        PopulatePlayersLocation();
     }
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / mainCanvas.scaleFactor;
+        if (!GameManager.gameOver)
+        {
+            rectTransform.anchoredPosition += eventData.delta / mainCanvas.scaleFactor;
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        isOutOfBoard = CheckIfOutOfBoard();
-        MovePiece(isOutOfBoard);
+        if (!GameManager.gameOver)
+        {
+            isOutOfBoard = CheckIfOutOfBoard();
+            MovePiece(isOutOfBoard);
+        }
     }
     private bool CheckIfOutOfBoard()
     {
@@ -135,9 +146,18 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             }
 
             canvasGroup.alpha = Constants.StandingPlayerTransparency;
-            IsWinner();
-            GameManager.playerInTurn = GameManager.playerInTurn == 1 ? 2 : 1;
-            if (GameManager.playerInTurn == 2) ComputerMove();
+
+            if (IsWinner())
+            {
+                GameManager.gameOver = true;
+                Debug.Log("You Win!");
+                //boardCanvas.GetComponent<Canvas>().enabled = false;
+            }
+            else
+            {
+                GameManager.playerInTurn = 2;
+                ComputerMove();
+            }
         }
     }
     private Rigidbody2D GetCurrentPlayer()
@@ -244,8 +264,11 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
                 canvasGroup23.alpha = 1;
                 break;
         }
-
-        IsWinner();
+        if (IsWinner())
+        {
+            GameManager.gameOver = true;
+            Debug.Log("You lose!");
+        }
         GameManager.playerInTurn = 1;
     }
     private Slot PickSlot()
@@ -268,8 +291,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             if (players[i].name.ToCharArray()[6].ToString() == "2") return players[i];
         }
     }
-    private void IsWinner()
+    private bool IsWinner()
     {
-        Debug.Log(GameManager.playerInTurn == 1 ? "You win!" : "You lose!");
+        Debug.Log(GameManager.playerInTurn);
+        return GameManager.playerInTurn == 2 ? true : false;
     }
 }

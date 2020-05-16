@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}
@@ -646,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}
@@ -945,6 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}
@@ -1585,6 +1588,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913ece3be1968497181dc4d2a80f4713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1011701063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011701064}
+  - component: {fileID: 1011701066}
+  - component: {fileID: 1011701065}
+  m_Layer: 5
+  m_Name: GameStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1011701064
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011701063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1040330036}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.18238889, y: 0.48117566}
+  m_AnchorMax: {x: 0.8193056, y: 0.53133786}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0.000011444092}
+  m_SizeDelta: {x: 0.00018310547, y: 0.000030517578}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1011701065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011701063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.08786251, g: 0.07338022, b: 0.9150943, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 6b1791bc77bbb46c58e09781a8592bc2, type: 3}
+    m_FontSize: 130
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 148
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: You win!
+--- !u!222 &1011701066
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011701063}
+  m_CullTransparentMesh: 0
 --- !u!1 &1040330032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1763,7 @@ RectTransform:
   - {fileID: 1811424366}
   - {fileID: 1565068521}
   - {fileID: 313863948}
+  - {fileID: 1011701064}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1779,6 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}
@@ -1926,6 +2009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}
@@ -2073,6 +2157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
   canvasGroup11: {fileID: 1217472826}

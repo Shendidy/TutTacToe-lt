@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     #region Class Variables
     private RectTransform rectTransform;
+    public Text gameStatus;
     [SerializeField] private Canvas mainCanvas;
     public Transform boardCanvas;
     private CanvasGroup canvasGroup;
@@ -49,6 +51,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        gameStatus.text = "";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
@@ -153,7 +156,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             if (IsWinner())
             {
                 GameManager.gameOver = true;
-                Debug.Log("You Win!");
+                gameStatus.color = Color.blue;
+                gameStatus.text = "YOU WIN!";
+                //Debug.Log("You Win!");
                 //boardCanvas.GetComponent<Canvas>().enabled = false;
             }
             else
@@ -271,7 +276,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         if (IsWinner())
         {
             GameManager.gameOver = true;
-            Debug.Log("You lose!");
+            //Debug.Log("You lose!");
+            gameStatus.color = Color.red;
+            gameStatus.text = "YOU LOSE!";
         }
         GameManager.playerInTurn = 1;
     }

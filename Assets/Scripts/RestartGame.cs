@@ -7,7 +7,7 @@ public class RestartGame : MonoBehaviour
 {
     public void Restart()
     {
-        switch (GameManager.difficuly)
+        switch (GameManager.difficulty)
         {
             case 3:
                 SceneManager.LoadScene("Scene3x3Game");

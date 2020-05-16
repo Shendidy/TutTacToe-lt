@@ -8,5 +8,21 @@ public class GameManager : MonoBehaviour
     public static Slot[] slotCentres { get; set; }
     public static int playerInTurn { get; set; }
     public static bool gameOver { get; set; }
-    public static int difficuly { get; set; }
+    public static int difficulty { get; set; }
+
+    public static List<string[]> winningSlotsArray { get; private set; }
+
+    GameManager()
+    {
+        winningSlotsArray = new List<string[]>();
+
+        winningSlotsArray.Add(new string[] { "slot11", "slot21", "slot31"});
+        winningSlotsArray.Add(new string[] { "slot12", "slot22", "slot32" });
+        winningSlotsArray.Add(new string[] { "slot13", "slot23", "slot33" });
+        winningSlotsArray.Add(new string[] { "slot11", "slot12", "slot13" });
+        winningSlotsArray.Add(new string[] { "slot21", "slot22", "slot23" });
+        winningSlotsArray.Add(new string[] { "slot31", "slot32", "slot33" });
+        winningSlotsArray.Add(new string[] { "slot11", "slot22", "slot33" });
+        winningSlotsArray.Add(new string[] { "slot31", "slot22", "slot13" });
+    }
 }

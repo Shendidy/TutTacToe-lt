@@ -212,6 +212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}
@@ -645,6 +648,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}
@@ -941,6 +947,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}
@@ -1772,6 +1781,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}
@@ -1916,6 +1928,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}
@@ -2060,6 +2075,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
+  canvasGroup11: {fileID: 1217472826}
+  canvasGroup12: {fileID: 1167870877}
+  canvasGroup13: {fileID: 311269737}
   canvasGroup21: {fileID: 26749568}
   canvasGroup22: {fileID: 152025020}
   canvasGroup23: {fileID: 1105191229}

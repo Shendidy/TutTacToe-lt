@@ -13,6 +13,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     [SerializeField] private Canvas mainCanvas;
     public Transform boardCanvas;
     private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup11;
+    public CanvasGroup canvasGroup12;
+    public CanvasGroup canvasGroup13;
     public CanvasGroup canvasGroup21;
     public CanvasGroup canvasGroup22;
     public CanvasGroup canvasGroup23;
@@ -49,7 +52,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
-        GameManager.difficuly = 3;
+        GameManager.difficulty = 3;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -176,6 +179,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private void PopulateSlotCentres()
     {
         GameManager.slotCentres = new Slot[9];
+
         GameManager.slotCentres[0] = new Slot("slot11", slot11.position);
         GameManager.slotCentres[1] = new Slot("slot21", slot21.position);
         GameManager.slotCentres[2] = new Slot("slot31", slot31.position);
@@ -235,7 +239,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             }
         }
 
-        Thread.Sleep(250);
+        //Thread.Sleep(250);
         newPlayerPiece.position = newSlot.SVector2;
 
         // Empty SOccupier of player 2 old slot
@@ -293,7 +297,50 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
     private bool IsWinner()
     {
-        Debug.Log(GameManager.playerInTurn);
-        return GameManager.playerInTurn == 2 ? true : false;
+        // I want to check if all pieces have moved
+        if(AllPlayerPiecesMoved())
+        {
+            String[] playersSlotsArray = new string[3];
+
+            foreach(Slot slot in GameManager.slotCentres)
+            {
+                if(slot.SOccupier?.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString())
+                {
+                    for (int i = 0; i < GameManager.difficulty; i++)
+                    {
+                        if (playersSlotsArray[i] == null)
+                        {
+                            playersSlotsArray[i] = slot.SName;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            foreach(String[] winningSlots in GameManager.winningSlotsArray)
+            {
+                bool[] winning = new bool[winningSlots.Length];
+                for(int i = 0; i < winningSlots.Length; i++)
+                {
+                    if (winningSlots[i] == playersSlotsArray[i]) winning[i] = true;
+                }
+
+                if (!winning.Contains(false)) return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool AllPlayerPiecesMoved()
+    {
+        if(GameManager.playerInTurn == 1)
+            if (canvasGroup11.alpha == 1 && canvasGroup12.alpha == 1 && canvasGroup13.alpha == 1 && GameManager.playerInTurn == 1)
+                return true;
+
+        if (canvasGroup21.alpha == 1 && canvasGroup22.alpha == 1 && canvasGroup23.alpha == 1 && GameManager.playerInTurn == 2)
+            return true;
+
+        return false;
     }
 }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static int playerInTurn { get; set; }
     public static bool gameOver { get; set; }
     public static int difficulty { get; set; }
+    public static int boardWidth { get; set; }
 
     public static List<string[]> winningSlotsArray { get; private set; }
 

@@ -26,6 +26,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private Slot pieceStartSlot;
     private Rigidbody2D[] players;
     private List<Slot> playersLocation;
+    private Rigidbody2D newComputerPiece;
+    private Slot newComputerSlot;
     // Slots
     public Rigidbody2D slot11;
     public Rigidbody2D slot21;
@@ -55,7 +57,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
-        GameManager.difficulty = 3;
+        GameManager.difficulty = 1;
+        GameManager.boardWidth = 3;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -230,14 +233,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
     public void ComputerMove()
     {
-        Slot newSlot = PickSlot();
-        Rigidbody2D newPlayerPiece = PickPlayerPiece();
+        PickComputerSlot();
+        if(GameManager.difficulty == 1) PickComputerPiece();
         Slot oldSlot = new Slot("temp", new Vector2(0, 0));
 
         // Get old slot
         foreach (Slot slot in GameManager.slotCentres)
         {
-            if (slot.SOccupier == newPlayerPiece)
+            if (slot.SOccupier == newComputerPiece)
             {
                 oldSlot = slot;
                 break;
@@ -245,7 +248,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         }
 
         //Thread.Sleep(250);
-        newPlayerPiece.position = newSlot.SVector2;
+        newComputerPiece.position = newComputerSlot.SVector2;
 
         // Empty SOccupier of player 2 old slot
         oldSlot.SOccupier = null;
@@ -253,15 +256,15 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // Add SOccupier to newSlot
         foreach (Slot slot in GameManager.slotCentres)
         {
-            if (Vector2.Distance(slot.SVector2, newPlayerPiece.position) < 0.25)
+            if (Vector2.Distance(slot.SVector2, newComputerPiece.position) < 0.25)
             {
-                slot.SOccupier = newPlayerPiece;
+                slot.SOccupier = newComputerPiece;
                 break;
             }
         }
 
         // Make alpha of newPlayerPiece = 1
-        switch (newPlayerPiece.name)
+        switch (newComputerPiece.name)
         {
             case "Player2-1":
                 canvasGroup21.alpha = 1;
@@ -282,24 +285,62 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         }
         GameManager.playerInTurn = 1;
     }
-    private Slot PickSlot()
+    private void PickComputerSlot()
     {
-        System.Random random = new System.Random();
-
-        while(true)
+        // In case of easy game an computer only picks a random slot and piece
+        if (GameManager.difficulty == 1)
         {
-            int i = random.Next(0, 9);
-            if(GameManager.slotCentres[i].SOccupier == null) return GameManager.slotCentres[i];
+            System.Random random = new System.Random();
+
+            while (true)
+            {
+                int i = random.Next(0, 9);
+                if (GameManager.slotCentres[i].SOccupier == null)
+                {
+                    newComputerSlot = GameManager.slotCentres[i];
+                    break;
+                }
+            }
+        }
+
+        // **** Using AI logic ****
+        // Check if oponent has any 2 out of 3 winning cases
+        // Check if the third place remaining for winning is empty
+        // If empty, pick a piece to fill and check if this opens another winning opportunity
+        // If it opens another winning opportunity then pick another piece and check again
+        // If third place remaining for winning is not empty then look if oponent has another oppotunity opened
+        // If so then again check to close it
+        // If oponent doesn't have any opportunity opened then check if computer has opportunity
+        // If yes, fill it and win the game
+        // If not, check if any unmoved piece remains unmoved
+        // If yes, check if moving it opens an oppurtunity to the oponent and move it or pick another one and check again.
+        // **** End of AI logic ****
+
+
+        System.Random random2 = new System.Random();
+
+        while (true)
+        {
+            int i = random2.Next(0, 9);
+            if (GameManager.slotCentres[i].SOccupier == null)
+            {
+                newComputerSlot = GameManager.slotCentres[i];
+                break;
+            }
         }
     }
-    private Rigidbody2D PickPlayerPiece()
+    private void PickComputerPiece()// In case of easy game only, otherwise it will be picked in the pick slot method
     {
-        System.Random random = new System.Random();
+        System.Random random3 = new System.Random();
 
-        while(true)
+        while (true)
         {
-            int i = random.Next(0, players.Length);
-            if (players[i].name.ToCharArray()[6].ToString() == "2") return players[i];
+            int i = random3.Next(0, players.Length);
+            if (players[i].name.ToCharArray()[6].ToString() == "2")
+            {
+                newComputerPiece = players[i];
+                break;
+            }
         }
     }
     private bool IsWinner()
@@ -313,7 +354,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             {
                 if(slot.SOccupier?.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString())
                 {
-                    for (int i = 0; i < GameManager.difficulty; i++)
+                    for (int i = 0; i < GameManager.boardWidth; i++)
                     {
                         if (playersSlotsArray[i] == null)
                         {

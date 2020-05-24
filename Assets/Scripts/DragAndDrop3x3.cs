@@ -48,6 +48,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     private bool isOutOfBoard;
     private float canvasDotAlpha;
+    private int boardScore;
     #endregion
     private void Awake()
     {
@@ -161,7 +162,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 GameManager.gameOver = true;
                 gameStatus.color = Color.blue;
                 gameStatus.text = "YOU WIN!";
-                //Debug.Log("You Win!");
                 //boardCanvas.GetComponent<Canvas>().enabled = false;
             }
             else
@@ -233,8 +233,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
     public void ComputerMove()
     {
+        Calculations.CalculateBoardScore();
+
         PickComputerSlot();
-        if(GameManager.difficulty == 1) PickComputerPiece();
+        PickComputerPiece();
         Slot oldSlot = new Slot("temp", new Vector2(0, 0));
 
         // Get old slot
@@ -279,49 +281,136 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         if (IsWinner())
         {
             GameManager.gameOver = true;
-            //Debug.Log("You lose!");
             gameStatus.color = Color.red;
             gameStatus.text = "YOU LOSE!";
         }
         GameManager.playerInTurn = 1;
     }
+
     private void PickComputerSlot()
     {
         // In case of easy game an computer only picks a random slot and piece
         if (GameManager.difficulty == 1)
         {
-            System.Random random = new System.Random();
-
-            while (true)
-            {
-                int i = random.Next(0, 9);
-                if (GameManager.slotCentres[i].SOccupier == null)
-                {
-                    newComputerSlot = GameManager.slotCentres[i];
-                    break;
-                }
-            }
+            PickRandomSlot();
         }
+        //else if (GameManager.difficulty == 2)
+        //{
+        //    #region Attacking
+        //    //      Build an array of slot names that are occupied by computer moved pieces
+        //    string[] computerActiveSlots = BuildComputersActiveSlots();
+        //    //      if computer have moved 2 pieces (or more in bigger boards)
+        //    if (computerActiveSlots.Length > 1)
+        //    {
+        //        //  Create a list with arrays of available winning options
+        //        List<string[]> computersWinningOptions = new List<string[]>();
+        //        foreach (string[] winArray in GameManager.winningSlotsArray3x3)
+        //        {
+        //            if (winArray.ContainsOnly(2, computerActiveSlots)) computersWinningOptions.Add(winArray);
+        //        }
 
-        // **** Using AI logic ****
-        // Check if oponent has any 2 out of 3 winning cases
-        // Check if the third place remaining for winning is empty
-        // If empty, pick a piece to fill and check if this opens another winning opportunity
-        // If it opens another winning opportunity then pick another piece and check again
-        // If third place remaining for winning is not empty then look if oponent has another oppotunity opened
-        // If so then again check to close it
-        // If oponent doesn't have any opportunity opened then check if computer has opportunity
-        // If yes, fill it and win the game
-        // If not, check if any unmoved piece remains unmoved
-        // If yes, check if moving it opens an oppurtunity to the oponent and move it or pick another one and check again.
-        // **** End of AI logic ****
+        //        if (computersWinningOptions.Count > 0)
+        //        {
+        //            // Remove options where third slot is occupied by player 1
+        //            foreach (string[] winningCase in computersWinningOptions)
+        //            {
+        //                bool loop1 = true;
+        //                while (loop1)
+        //                {
+        //                    foreach (string slotName in winningCase)
+        //                    {
+        //                        foreach (Slot slot in GameManager.slotCentres)
+        //                        {
+        //                            if (slot.SName == slotName && slot.SOccupier.name.ToCharArray()[6].ToString() == "1")
+        //                            {
+        //                                computersWinningOptions.Remove(winningCase);
+        //                                loop1 = false;
+        //                            }
+        //                            else if (slot.SName == slotName && slot.SOccupier == null)
+        //                            {
+        //                                newComputerSlot = slot;
+        //                                // pick remaining computer piece
+        //                                newComputerPiece = GetRemainingComputerPiece(winningCase);
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //            if (computersWinningOptions.Count == 0)
+        //                PickRandomSlot();
+
+        //            else
+        //            {
+        //                // Pick third slot if empty
+
+        //                foreach (string[] slotsArray in computersWinningOptions)
+        //                {
+        //                    List<Rigidbody2D> usedPieces = new List<Rigidbody2D>();
+        //                    Slot winningSlot;
+        //                    Slot[] usedComputerSlots = GameManager.slotCentres.Where(slot => (slot.SOccupier.name.ToCharArray()[6] == 2)).ToArray();
+        //                    foreach (Slot slot in usedComputerSlots)
+        //                    {
+        //                        if (slot.SName.ToCharArray()[6].ToString() == "1") usedPieces.Add(slot.SOccupier);
+        //                        if (slot.SOccupier == null) winningSlot = slot;
+        //                    }
+        //                    //if(winningSlot)
+        //                }
+        //            }
+        //            //  Get name of computer pice needed to win
+        //        }
+        //    }
+        //    else {
+        //        PickRandomSlot();
+        //        PickComputerPiece();
+        //    }
+        //    #endregion
+
+        //    #region Defending
+        //    // **** Using AI logic ****
+        //    //  1- Check if oponent has any 2 out of 3 winning cases
+        //    //      build array of slots occupied with moved pieces
+        //    //string[] opponentsActiveSlots = BuildOponentsActiveSlots();
+        //    //List<string[]> opponentsWinningOptions = new List<string[]>();
+        //    //foreach (string[] winArray in GameManager.winningSlotsArray3x3)
+        //    //{
+        //    //    if (winArray.ContainsOnly(2, opponentsActiveSlots)) opponentsWinningOptions.Add(winArray);
+        //    //}
+        //    //bool has2 = GameManager.slotCentres.Select(slot => slot.SOccupier.name.ToArray())
+        //    //  2- Check if the third place remaining for winning is empty
+        //    //  3- If empty, pick a piece to fill and check if this opens another winning opportunity
+        //    //  4- If it opens another winning opportunity then pick another piece and check again
+        //    //  5- If third place remaining for winning is not empty then look if oponent has another oppotunity opened
+        //    //  6- If so then again check to close it
+        //    //  7- If oponent doesn't have any opportunity opened then check if computer has opportunity
+        //    //  8- If yes, fill it and win the game
+        //    //  9- If not, check if any unmoved piece remains unmoved
+        //    // 10- If yes, check if moving it opens an oppurtunity to the oponent and move it or pick another one and check again.
+        //    // **** End of AI logic ****
+        //    #endregion
+        //}
+    }
+
+    //private Rigidbody2D GetRemainingComputerPiece(string[] winningCase)
+    //{
+    //    Rigidbody2D computerPiece = new Rigidbody2D();
+    //    Rigidbody2D[] computerPieces = new Rigidbody2D[]
+    //    {
+    //        player21,
+    //        player22,
+    //        player23
+    //    };
 
 
-        System.Random random2 = new System.Random();
+    //}
+
+    private void PickRandomSlot()
+    {
+        System.Random random = new System.Random();
 
         while (true)
         {
-            int i = random2.Next(0, 9);
+            int i = random.Next(0, 9);
             if (GameManager.slotCentres[i].SOccupier == null)
             {
                 newComputerSlot = GameManager.slotCentres[i];
@@ -329,17 +418,46 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             }
         }
     }
+
+    private string[] BuildOponentsActiveSlots()
+    {
+        Slot[] tempSlotsArray = GameManager.slotCentres.
+            Where(slot => slot.SOccupier?.name.ToCharArray()[6].ToString() == "1").
+            Where(slot => slot.SOccupier?.name == "Player1-1" ? PlayerPieceMoved(canvasGroup11) :
+                slot.SOccupier?.name == "Player1-2" ? PlayerPieceMoved(canvasGroup12) : PlayerPieceMoved(canvasGroup13)).
+            ToArray();
+
+        String[] playersSlotsArray = tempSlotsArray.Select(x => x.SName).ToArray();
+
+        return playersSlotsArray;
+    }
+    private string[] BuildComputersActiveSlots()
+    {
+        Slot[] tempSlotsArray = GameManager.slotCentres.
+            Where(slot => slot.SOccupier?.name.ToCharArray()[6].ToString() == "2").
+            Where(slot => slot.SOccupier?.name == "Player2-1" ? PlayerPieceMoved(canvasGroup21) :
+                slot.SOccupier?.name == "Player2-2" ? PlayerPieceMoved(canvasGroup22) : PlayerPieceMoved(canvasGroup23)).
+            ToArray();
+
+        String[] computersSlotsArray = tempSlotsArray.Select(x => x.SName).ToArray();
+
+        return computersSlotsArray;
+    }
+
     private void PickComputerPiece()// In case of easy game only, otherwise it will be picked in the pick slot method
     {
-        System.Random random3 = new System.Random();
-
-        while (true)
+        if (GameManager.difficulty == 1)
         {
-            int i = random3.Next(0, players.Length);
-            if (players[i].name.ToCharArray()[6].ToString() == "2")
+            System.Random random3 = new System.Random();
+
+            while (true)
             {
-                newComputerPiece = players[i];
-                break;
+                int i = random3.Next(0, players.Length);
+                if (players[i].name.ToCharArray()[6].ToString() == "2")
+                {
+                    newComputerPiece = players[i];
+                    break;
+                }
             }
         }
     }
@@ -348,29 +466,18 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // I want to check if all pieces have moved
         if(AllPlayerPiecesMoved())
         {
-            String[] playersSlotsArray = new string[3];
+            Slot[] tempSlotsArray = GameManager.slotCentres.Where(slot
+                => slot.SOccupier?.name.ToCharArray()[6].ToString()
+                == GameManager.playerInTurn.ToString()).ToArray();
 
-            foreach(Slot slot in GameManager.slotCentres)
-            {
-                if(slot.SOccupier?.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString())
-                {
-                    for (int i = 0; i < GameManager.boardWidth; i++)
-                    {
-                        if (playersSlotsArray[i] == null)
-                        {
-                            playersSlotsArray[i] = slot.SName;
-                            break;
-                        }
-                    }
-                }
-            }
+            String[] playersSlotsArray = tempSlotsArray.Select(x => x.SName).ToArray();
 
-            foreach(String[] winningSlots in GameManager.winningSlotsArray)
+            foreach(String[] winningSlots in GameManager.winningSlotsArray3x3)
             {
                 bool[] winning = new bool[winningSlots.Length];
                 for(int i = 0; i < winningSlots.Length; i++)
                 {
-                    if (winningSlots[i] == playersSlotsArray[i]) winning[i] = true;
+                    if (playersSlotsArray.Contains(winningSlots[i])) winning[i] = true;
                 }
 
                 if (!winning.Contains(false)) return true;
@@ -379,16 +486,24 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
         return false;
     }
-
     private bool AllPlayerPiecesMoved()
     {
-        if(GameManager.playerInTurn == 1)
-            if (canvasGroup11.alpha == 1 && canvasGroup12.alpha == 1 && canvasGroup13.alpha == 1 && GameManager.playerInTurn == 1)
-                return true;
+        if (GameManager.playerInTurn == 1
+            && PlayerPieceMoved(canvasGroup11)
+            && PlayerPieceMoved(canvasGroup12)
+            && PlayerPieceMoved(canvasGroup13))
+            return true;
 
-        if (canvasGroup21.alpha == 1 && canvasGroup22.alpha == 1 && canvasGroup23.alpha == 1 && GameManager.playerInTurn == 2)
+        if (GameManager.playerInTurn == 2
+            && PlayerPieceMoved(canvasGroup21)
+            && PlayerPieceMoved(canvasGroup22)
+            && PlayerPieceMoved(canvasGroup23))
             return true;
 
         return false;
+    }
+    private bool PlayerPieceMoved(CanvasGroup canvasGroup)
+    {
+        return canvasGroup.alpha == 1 ? true : false;
     }
 }

@@ -4,12 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Calculations
+public class CalculationsService
 {
     public static int CalculateBoardScore()
     {
-        Debug.Log("Calculating board score!");
-
         int boardScore = CalculateScoreFromMovedPieces();
         boardScore += CalculateScoreFromCentreSlot();
         boardScore += CalculateScoreFromCorners();
@@ -71,41 +69,6 @@ public class Calculations
             int ai = 0;
             bool thirdIsAI = false;
             bool thirdIsPlayer = false;
-            //foreach (string winningSlot in winningOption)
-            //{
-            //    foreach (Slot slot in GameManager.slotCentres3x3)
-            //    {
-            //        if (slot.SName == winningSlot)
-            //        {
-            //            if (slot.SOccupier != null)
-            //            {
-            //                if (slot.SOccupier.name == "Player1-1")
-            //                    if (GameManager.playersMoved3x3[0]) player += 1;
-            //                    else if (!GameManager.playersMoved3x3[0]) thirdIsPlayer = true;
-
-            //                if (slot.SOccupier.name == "Player1-2")
-            //                    if (GameManager.playersMoved3x3[1]) player += 1;
-            //                    else if (!GameManager.playersMoved3x3[1]) thirdIsPlayer = true;
-
-            //                if (slot.SOccupier.name == "Player1-3")
-            //                    if (GameManager.playersMoved3x3[2]) player += 1;
-            //                    else if (!GameManager.playersMoved3x3[2]) thirdIsPlayer = true;
-
-            //                if (slot.SOccupier.name == "Player2-1")
-            //                    if (GameManager.playersMoved3x3[3]) ai += 1;
-            //                    else if (!GameManager.playersMoved3x3[3]) thirdIsAI = true;
-
-            //                if (slot.SOccupier.name == "Player2-2")
-            //                    if (GameManager.playersMoved3x3[4]) ai += 1;
-            //                    else if (!GameManager.playersMoved3x3[4]) thirdIsAI = true;
-
-            //                if (slot.SOccupier.name == "Player2-3")
-            //                    if (GameManager.playersMoved3x3[5]) ai += 1;
-            //                    else if (!GameManager.playersMoved3x3[5]) thirdIsAI = true;
-            //            }
-            //        }
-            //    }
-            //}
             foreach (string winningSlot in winningOption)
             {
                 Slot slot = GameManager.slotCentres3x3.Where(x => x.SName == winningSlot).ToArray()[0];

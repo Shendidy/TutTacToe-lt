@@ -225,6 +225,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 bool moved = ChecksService.CheckIfMoved(computerPiece);
                 Vector2 oldPosition = computerPiece.position;
 
+
+
+
+
                 if (GameManager.difficulty == 2)
                 {
                     Slot[] tempBoard = CopyService.CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
@@ -243,6 +247,12 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                         }
                     }
                 }
+
+
+
+
+
+
                 else if (GameManager.difficulty == 3)
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels

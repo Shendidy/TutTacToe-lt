@@ -138,10 +138,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             Rigidbody2D currentPlayer = GetCurrentPlayer();
             rectTransform.position = finalSlot.SVector2;
 
-            SetPlayersMovedService.SetPlayersMoved3x3(
-                rectTransform.name.ToCharArray()[6].ToString(),
-                rectTransform.name.ToCharArray()[8].ToString()
-                );
+            SetPlayersMovedService.SetPlayersMoved3x3(rectTransform);
 
             foreach (Slot slot in GameManager.slotCentres3x3)
             {
@@ -234,26 +231,67 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             PickComputerPiece();
         }
 
-        //boardScore = CalculationsService.CalculateBoardScore();
 
-        
-        Slot oldSlot = new Slot("temp", new Vector2(0, 0));
 
-        // Get old slot
-        foreach (Slot slot in GameManager.slotCentres3x3)
+
+
+
+
+
+
+
+
+
+
+
+        // all you need here is to set newComputerSlot and newComputerPiece...
+        else
         {
-            if (slot.SOccupier == newComputerPiece)
+            Slot[] slotsArray = GameManager.slotCentres3x3;
+            Rigidbody2D computerPieceToMove = new Rigidbody2D();
+            Slot newSlot = new Slot("temp", new Vector2(0, 0));
+            Rigidbody2D[] computerPlayers = players.Where(player => (player.name.ToCharArray()[6].ToString() == "2")).ToArray();
+
+            foreach (Rigidbody2D computerPiece in players)
             {
-                oldSlot = slot;
-                break;
+                bool moved = ChecksService.CheckIfMoved(computerPiece);
+                if (!moved) SetPlayersMovedService.SetPlayersMoved3x3(computerPiece);
+
+                if (GameManager.difficulty == 2)
+                {
+                    // put here the logic of checking all available moves in a depth of 1 check level
+                    if (computerPiece.name.ToCharArray()[6].ToString() == "2")
+                    {
+                        //move piece to new location and update game arrays!
+                    }
+                }
+
+
+
+                else if (GameManager.difficulty == 3)
+                {
+                    // put here the logic of checking all available moves in a depth of 2 check levels
+                }
+
+                // If didn't move before this check then mark as unmoved
+                if (!moved) SetPlayersMovedService.SetPlayersNotMoved3x3(computerPiece);
             }
+
+            newComputerSlot = newSlot;
+            newComputerPiece = computerPieceToMove;
         }
 
+        // ******************************************************* //
+        // *************** Above is the trial code *************** //
+        // ******************************************************* //
+
+        //boardScore = CalculationsService.CalculateBoardScore();
+
+        // Get old slot
+        Slot oldSlot = GameManager.slotCentres3x3.Where(slot => (slot.SOccupier == newComputerPiece)).ToArray()[0];
+
         newComputerPiece.position = newComputerSlot.SVector2;
-        SetPlayersMovedService.SetPlayersMoved3x3(
-                newComputerPiece.name.ToCharArray()[6].ToString(),
-                newComputerPiece.name.ToCharArray()[8].ToString()
-                );
+        SetPlayersMovedService.SetPlayersMoved3x3(newComputerPiece);
 
         // Empty SOccupier of player 2 old slot
         oldSlot.SOccupier = null;

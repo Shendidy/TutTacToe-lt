@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static bool newGame { get; set; }
-    public static Slot[] slotCentres3x3 { get; set; }
+    public static Slot[] boardSlots3x3 { get; set; }
     public static int playerInTurn { get; set; }
     public static bool gameOver { get; set; }
     public static int difficulty { get; set; }

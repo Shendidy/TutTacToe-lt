@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class CalculationsService
 {
-    public static int CalculateBoardScore()
+    public static int CalculateBoardScore(Slot[] board)
     {
         int boardScore = CalculateScoreFromMovedPieces();
-        boardScore += CalculateScoreFromCentreSlot();
-        boardScore += CalculateScoreFromCorners();
-        boardScore += CalculateScoreFrom2InLine();
+        boardScore += CalculateScoreFromCentreSlot(board);
+        boardScore += CalculateScoreFromCorners(board);
+        boardScore += CalculateScoreFrom2InLine(board);
 
         return boardScore;
     }
@@ -25,19 +25,19 @@ public class CalculationsService
 
         return aiMoved;
     }
-    private static int CalculateScoreFromCentreSlot()
+    private static int CalculateScoreFromCentreSlot(Slot[] board)
     {
-        int centreScore = GameManager.slotCentres3x3[4].SOccupier == null ? 0
-            : GameManager.slotCentres3x3[4].SOccupier.name.ToCharArray()[6].ToString() == "2"
+        int centreScore = board[4].SOccupier == null ? 0
+            : board[4].SOccupier.name.ToCharArray()[6].ToString() == "2"
             ? 8
             : -8;
 
         return centreScore;
     }
-    private static int CalculateScoreFromCorners()
+    private static int CalculateScoreFromCorners(Slot[] board)
     {
         int cornersScore = 0;
-        foreach (Slot slot in GameManager.slotCentres3x3)
+        foreach (Slot slot in board)
             if (slot.SName == "slot11"
                 || slot.SName == "slot31"
                 || slot.SName == "slot13"
@@ -59,7 +59,7 @@ public class CalculationsService
 
         return cornersScore;
     }
-    private static int CalculateScoreFrom2InLine()
+    private static int CalculateScoreFrom2InLine(Slot[] board)
     {
         int score = 0;
 
@@ -71,7 +71,7 @@ public class CalculationsService
             bool thirdIsPlayer = false;
             foreach (string winningSlot in winningOption)
             {
-                Slot slot = GameManager.slotCentres3x3.Where(x => x.SName == winningSlot).ToArray()[0];
+                Slot slot = board.Where(x => x.SName == winningSlot).ToArray()[0];
                 if (slot.SOccupier?.name == "Player1-1")
                     if (GameManager.playersMoved3x3[0]) player += 1;
 
@@ -90,11 +90,15 @@ public class CalculationsService
                 if (slot.SOccupier?.name == "Player2-3")
                     if (GameManager.playersMoved3x3[5]) ai += 1;
             }
-            if (ai == 2)
+            if (ai == 3)
+            {
+                score += 10000;
+            }
+            else if (ai == 2)
             {
                 foreach(string winningSlot in winningOption)
                 {
-                    Slot slot = GameManager.slotCentres3x3.Where(x => x.SName == winningSlot).ToArray()[0];
+                    Slot slot = board.Where(x => x.SName == winningSlot).ToArray()[0];
                     string occupierName = slot.SOccupier?.name;
                     if ((occupierName == "Player2-1" && !GameManager.playersMoved3x3[3])
                         || (occupierName == "Player2-2" && !GameManager.playersMoved3x3[4])
@@ -113,7 +117,7 @@ public class CalculationsService
             {
                 foreach (string winningSlot in winningOption)
                 {
-                    Slot slot = GameManager.slotCentres3x3.Where(x => x.SName == winningSlot).ToArray()[0];
+                    Slot slot = board.Where(x => x.SName == winningSlot).ToArray()[0];
                     string occupierName = slot.SOccupier?.name;
                     if ((occupierName == "Player1-1" && !GameManager.playersMoved3x3[0])
                         || (occupierName == "Player1-2" && !GameManager.playersMoved3x3[1])
@@ -125,7 +129,7 @@ public class CalculationsService
                         thirdIsAI = true;
                 }
                 if (thirdIsPlayer) score -= 15;
-                else if (thirdIsAI) score -= 30;
+                else if (thirdIsAI) score += 1000;
                 else score -= 100;
             }
         }

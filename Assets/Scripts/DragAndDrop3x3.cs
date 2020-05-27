@@ -58,7 +58,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
-        GameManager.difficulty = 1;
+        GameManager.difficulty = 2;
         GameManager.boardWidth = 3;
         GameManager.playersMoved3x3 = new bool[] { false, false, false, false, false, false };
     }
@@ -74,7 +74,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 GameManager.newGame = false;
             }
 
-            foreach (Slot slot in GameManager.slotCentres3x3)
+            foreach (Slot slot in GameManager.boardSlots3x3)
                 if (slot.SOccupier)
                     if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
 
@@ -115,7 +115,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         float distance = float.MaxValue;
         Slot finalSlot = new Slot("temp", new Vector2(0, 0));
 
-        foreach (Slot slot in GameManager.slotCentres3x3)
+        foreach (Slot slot in GameManager.boardSlots3x3)
             if (Vector2.Distance(rectTransform.position, slot.SVector2) < distance)
             {
                 distance = Vector2.Distance(rectTransform.position, slot.SVector2);
@@ -140,7 +140,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
             SetPlayersMovedService.SetPlayersMoved3x3(rectTransform);
 
-            foreach (Slot slot in GameManager.slotCentres3x3)
+            foreach (Slot slot in GameManager.boardSlots3x3)
             {
                 if (slot.SOccupier?.name == rectTransform.name)
                 {
@@ -149,7 +149,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 }
             }
 
-            foreach (Slot slot in GameManager.slotCentres3x3)
+            foreach (Slot slot in GameManager.boardSlots3x3)
             {
                 if (Vector2.Distance(slot.SVector2, rectTransform.position) < 0.25)
                 {
@@ -169,7 +169,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             }
             else
             {
-                GameManager.playerInTurn = 2;
+                ChangePlayerInTurn();
                 ComputerMove();
             }
         }
@@ -183,40 +183,40 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     }
     private bool SlotIsFree(Slot finalSlot)
     {
-        foreach (Slot slot in GameManager.slotCentres3x3)
+        foreach (Slot slot in GameManager.boardSlots3x3)
             if (slot == finalSlot && slot.SOccupier) return false;
         return true;
     }
     private void PopulateSlotCentres()
     {
-        GameManager.slotCentres3x3 = new Slot[9];
+        GameManager.boardSlots3x3 = new Slot[9];
 
-        GameManager.slotCentres3x3[0] = new Slot("slot11", slot11.position);
-        GameManager.slotCentres3x3[1] = new Slot("slot21", slot21.position);
-        GameManager.slotCentres3x3[2] = new Slot("slot31", slot31.position);
-        GameManager.slotCentres3x3[3] = new Slot("slot12", slot12.position);
-        GameManager.slotCentres3x3[4] = new Slot("slot22", slot22.position);
-        GameManager.slotCentres3x3[5] = new Slot("slot32", slot32.position);
-        GameManager.slotCentres3x3[6] = new Slot("slot13", slot13.position);
-        GameManager.slotCentres3x3[7] = new Slot("slot23", slot23.position);
-        GameManager.slotCentres3x3[8] = new Slot("slot33", slot33.position);
+        GameManager.boardSlots3x3[0] = new Slot("slot11", slot11.position);
+        GameManager.boardSlots3x3[1] = new Slot("slot21", slot21.position);
+        GameManager.boardSlots3x3[2] = new Slot("slot31", slot31.position);
+        GameManager.boardSlots3x3[3] = new Slot("slot12", slot12.position);
+        GameManager.boardSlots3x3[4] = new Slot("slot22", slot22.position);
+        GameManager.boardSlots3x3[5] = new Slot("slot32", slot32.position);
+        GameManager.boardSlots3x3[6] = new Slot("slot13", slot13.position);
+        GameManager.boardSlots3x3[7] = new Slot("slot23", slot23.position);
+        GameManager.boardSlots3x3[8] = new Slot("slot33", slot33.position);
     }
     private void AddSlotCentresOccupiers()
     {
         if (GameManager.newGame)
         {
-            GameManager.slotCentres3x3[0].SOccupier = player11;
-            GameManager.slotCentres3x3[1].SOccupier = player12;
-            GameManager.slotCentres3x3[2].SOccupier = player13;
-            GameManager.slotCentres3x3[6].SOccupier = player21;
-            GameManager.slotCentres3x3[7].SOccupier = player22;
-            GameManager.slotCentres3x3[8].SOccupier = player23;
+            GameManager.boardSlots3x3[0].SOccupier = player11;
+            GameManager.boardSlots3x3[1].SOccupier = player12;
+            GameManager.boardSlots3x3[2].SOccupier = player13;
+            GameManager.boardSlots3x3[6].SOccupier = player21;
+            GameManager.boardSlots3x3[7].SOccupier = player22;
+            GameManager.boardSlots3x3[8].SOccupier = player23;
         }
     }
     private void PopulatePlayersLocation()
     {
         playersLocation = new List<Slot>();
-        foreach (Slot slot in GameManager.slotCentres3x3)
+        foreach (Slot slot in GameManager.boardSlots3x3)
         {
             if (slot.SOccupier) playersLocation.Add(slot);
         }
@@ -247,22 +247,34 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // all you need here is to set newComputerSlot and newComputerPiece...
         else
         {
-            Slot[] slotsArray = GameManager.slotCentres3x3;
-            Rigidbody2D computerPieceToMove = new Rigidbody2D();
-            Slot newSlot = new Slot("temp", new Vector2(0, 0));
+            int boardScore = int.MinValue;
+            Rigidbody2D computerPieceToMove = new Rigidbody2D(); // Populate with final computer piece to move decision
+            Slot newSlot = new Slot("temp", new Vector2(0, 0)); // Populate with final slot to move piece to
             Rigidbody2D[] computerPlayers = players.Where(player => (player.name.ToCharArray()[6].ToString() == "2")).ToArray();
 
-            foreach (Rigidbody2D computerPiece in players)
+            foreach (Rigidbody2D computerPiece in computerPlayers)
             {
                 bool moved = ChecksService.CheckIfMoved(computerPiece);
-                if (!moved) SetPlayersMovedService.SetPlayersMoved3x3(computerPiece);
+                Vector2 oldPosition = computerPiece.position;
 
                 if (GameManager.difficulty == 2)
                 {
                     // put here the logic of checking all available moves in a depth of 1 check level
-                    if (computerPiece.name.ToCharArray()[6].ToString() == "2")
+                    // move piece to new location and update game arrays!
+                    Slot[] tempBoard = CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
+                    Slot[] freeSlots = tempBoard.Where(slot => (slot.SOccupier == null)).ToArray();
+                    foreach (Slot slot in freeSlots)
                     {
-                        //move piece to new location and update game arrays!
+                        tempBoard = UpdateBoardSlotsService.UpdateBoardSlots(tempBoard, computerPiece, slot, false);
+                        if (!moved) SetPlayersMovedService.SetPlayersMoved3x3(computerPiece);
+                        int score = CalculationsService.CalculateBoardScore(tempBoard);
+                        if (!moved) SetPlayersMovedService.SetPlayersNotMoved3x3(computerPiece);
+                        if (score > boardScore)
+                        {
+                            boardScore = score;
+                            computerPieceToMove = computerPiece;
+                            newSlot = slot;
+                        }
                     }
                 }
 
@@ -272,12 +284,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels
                 }
-
-                // If didn't move before this check then mark as unmoved
-                if (!moved) SetPlayersMovedService.SetPlayersNotMoved3x3(computerPiece);
+                computerPiece.position = oldPosition;
             }
 
-            newComputerSlot = newSlot;
+            newComputerSlot = GameManager.boardSlots3x3.Where(slot => (slot.SName == newSlot.SName)).ToArray()[0];
             newComputerPiece = computerPieceToMove;
         }
 
@@ -285,26 +295,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // *************** Above is the trial code *************** //
         // ******************************************************* //
 
-        //boardScore = CalculationsService.CalculateBoardScore();
-
-        // Get old slot
-        Slot oldSlot = GameManager.slotCentres3x3.Where(slot => (slot.SOccupier == newComputerPiece)).ToArray()[0];
-
-        newComputerPiece.position = newComputerSlot.SVector2;
-        SetPlayersMovedService.SetPlayersMoved3x3(newComputerPiece);
-
-        // Empty SOccupier of player 2 old slot
-        oldSlot.SOccupier = null;
-
-        // Add SOccupier to newSlot
-        foreach (Slot slot in GameManager.slotCentres3x3)
-        {
-            if (Vector2.Distance(slot.SVector2, newComputerPiece.position) < 0.25)
-            {
-                slot.SOccupier = newComputerPiece;
-                break;
-            }
-        }
+        GameManager.boardSlots3x3 =
+            UpdateBoardSlotsService.UpdateBoardSlots(GameManager.boardSlots3x3, newComputerPiece, newComputerSlot, true);
 
         // Make alpha of newPlayerPiece = 1
         switch (newComputerPiece.name)
@@ -325,7 +317,28 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             gameStatus.color = Color.red;
             gameStatus.text = "YOU LOSE!";
         }
-        GameManager.playerInTurn = 1;
+        ChangePlayerInTurn();
+    }
+
+    private Slot[] CopySlotsArray(Slot[] board)
+    {
+        Slot[] newBoard = new Slot[board.Length];
+
+        for(int i = 0; i < newBoard.Length; i++)
+        {
+            newBoard[i] = new Slot("temp", new Vector2(0,0));
+            newBoard[i].SName = board[i].SName;
+            newBoard[i].SOccupier = board[i].SOccupier;
+            newBoard[i].SVector2 = board[i].SVector2;
+        }
+
+        return newBoard;
+    }
+
+    private void ChangePlayerInTurn()
+    {
+        GameManager.playerInTurn =
+            GameManager.playerInTurn == 1 ? 2 : 1;
     }
 
     private void PickRandomSlot()
@@ -335,9 +348,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         while (true)
         {
             int i = random.Next(0, (int)Math.Pow(GameManager.boardWidth, 2));
-            if (GameManager.slotCentres3x3[i].SOccupier == null)
+            if (GameManager.boardSlots3x3[i].SOccupier == null)
             {
-                newComputerSlot = GameManager.slotCentres3x3[i];
+                newComputerSlot = GameManager.boardSlots3x3[i];
                 break;
             }
         }
@@ -365,7 +378,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // I want to check if all pieces have moved
         if(DidAllPlayerPiecesMove())
         {
-            Slot[] tempSlotsArray = GameManager.slotCentres3x3.Where(slot
+            Slot[] tempSlotsArray = GameManager.boardSlots3x3.Where(slot
                 => slot.SOccupier?.name.ToCharArray()[6].ToString()
                 == GameManager.playerInTurn.ToString()).ToArray();
 

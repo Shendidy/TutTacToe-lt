@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,5 +13,10 @@ public class PopulateService
             players[i] = playersInGame[i];
 
         return players;
+    }
+
+    public static List<Slot> PopulatePlayersLocation()
+    {
+        return GameManager.boardSlots3x3.Where(slot => (slot.SOccupier != null)).ToArray().ToList();
     }
 }

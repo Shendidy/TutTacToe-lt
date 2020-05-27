@@ -9,19 +9,11 @@ public class PickAction
     public static Slot PickRandomSlot()
     {
         System.Random random = new System.Random();
-
-        while (true)
-        {
-            int i = random.Next(0, (int)Math.Pow(GameManager.boardWidth, 2));
-            if (GameManager.boardSlots3x3[i].SOccupier == null)
-            {
-                Slot newComputerSlot = GameManager.boardSlots3x3[i];
-                return newComputerSlot;
-            }
-        }
+        int i = random.Next(0, GameManager.boardWidth);
+        return GameManager.boardSlots3x3.Where(slot => (slot.SOccupier == null)).ToArray()[i];
     }
 
-    public static Rigidbody2D PickComputerPiece(Rigidbody2D[] players)// In case of easy game only, otherwise it will be picked in the pick slot method
+    public static Rigidbody2D PickComputerPiece(Rigidbody2D[] players)
     {
             System.Random random3 = new System.Random();
             int i = random3.Next(0, players.Length/2);

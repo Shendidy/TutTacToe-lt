@@ -216,18 +216,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         else
         {
             int boardScore = int.MinValue;
-            Rigidbody2D computerPieceToMove = new Rigidbody2D(); // Populate with final computer piece to move decision
-            Slot newSlot = new Slot("temp", new Vector2(0, 0)); // Populate with final slot to move piece to
+            List<Rigidbody2D> computerPieceToMove = new List<Rigidbody2D>(); // Populate with final computer piece to move decision
+            List<Slot> newSlot = new List<Slot>(); // Populate with final slot to move piece to
             Rigidbody2D[] computerPlayers = players.Where(player => (player.name.ToCharArray()[6].ToString() == "2")).ToArray();
 
             foreach (Rigidbody2D computerPiece in computerPlayers)
             {
                 bool moved = ChecksService.CheckIfMoved(computerPiece);
                 Vector2 oldPosition = computerPiece.position;
-
-
-
-
 
                 if (GameManager.difficulty == 2)
                 {
@@ -241,18 +237,19 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                         if (!moved) SetPlayersMovedService.SetPlayersNotMoved3x3(computerPiece);
                         if (score > boardScore)
                         {
+                            computerPieceToMove = new List<Rigidbody2D>();
+                            newSlot = new List<Slot>();
                             boardScore = score;
-                            computerPieceToMove = computerPiece;
-                            newSlot = slot;
+                            computerPieceToMove.Add(computerPiece);
+                            newSlot.Add(slot);
+                        }
+                        else if (score == boardScore)
+                        {
+                            computerPieceToMove.Add(computerPiece);
+                            newSlot.Add(slot);
                         }
                     }
                 }
-
-
-
-
-
-
                 else if (GameManager.difficulty == 3)
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels
@@ -260,8 +257,11 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 computerPiece.position = oldPosition;
             }
 
-            newComputerSlot = GameManager.boardSlots3x3.Where(slot => (slot.SName == newSlot.SName)).ToArray()[0];
-            newComputerPiece = computerPieceToMove;
+            System.Random random = new System.Random();
+            int i = random.Next(0, newSlot.Count);
+
+            newComputerSlot = GameManager.boardSlots3x3.Where(slot => (slot.SName == newSlot[i].SName)).ToArray()[0];
+            newComputerPiece = computerPieceToMove[i];
         }
         GameManager.boardSlots3x3 =
             UpdateBoardSlotsService.UpdateBoardSlots(GameManager.boardSlots3x3, newComputerPiece, newComputerSlot, true);

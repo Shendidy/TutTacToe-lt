@@ -48,7 +48,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     private bool isOutOfBoard;
     private float canvasDotAlpha;
-    private int boardScore;
     #endregion
     private void Awake()
     {
@@ -96,19 +95,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (!GameManager.gameOver)
         {
-            isOutOfBoard = CheckIfOutOfBoard();
+            isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
             MovePiece(isOutOfBoard);
         }
-    }
-    private bool CheckIfOutOfBoard()
-    {
-        if (rectTransform.position.x > nodeTopRight.position.x ||
-           rectTransform.position.x < nodeBottomLeft.position.x ||
-           rectTransform.position.y > nodeTopRight.position.y ||
-           rectTransform.position.y < nodeBottomLeft.position.y)
-            return true;
-
-        return false;
     }
     private Slot GetFinalSlot()
     {
@@ -128,14 +117,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         Slot finalSlot = GetFinalSlot();
 
-        if (isOutOfBoard || !SlotIsFree(finalSlot) || !ValidPlayer())
+        if (isOutOfBoard || !ChecksService.SlotIsFree(finalSlot) || !ValidPlayer())
         {
             rectTransform.position = pieceStartSlot.SVector2;
             canvasGroup.alpha = canvasDotAlpha;
         }
         else
         {
-            Rigidbody2D currentPlayer = GetCurrentPlayer();
+            Rigidbody2D currentPlayer = GetCurrentPiece();
             rectTransform.position = finalSlot.SVector2;
 
             SetPlayersMovedService.SetPlayersMoved3x3(rectTransform);
@@ -160,32 +149,25 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
             canvasGroup.alpha = Constants.StandingPlayerTransparency;
 
-            if (IsWinner())
+            if (ChecksService.IsWinner(GameManager.boardSlots3x3))
             {
                 GameManager.gameOver = true;
                 gameStatus.color = Color.blue;
                 gameStatus.text = "YOU WIN!";
-                //boardCanvas.GetComponent<Canvas>().enabled = false;
             }
             else
             {
-                ChangePlayerInTurn();
+                ChangeAction.ChangePlayerInTurn();
                 ComputerMove();
             }
         }
     }
-    private Rigidbody2D GetCurrentPlayer()
+    private Rigidbody2D GetCurrentPiece()
     {
         Rigidbody2D currentPlayer = new Rigidbody2D();
         foreach (Rigidbody2D player in players)
             if (player.name == rectTransform.name) currentPlayer = player;
         return currentPlayer;
-    }
-    private bool SlotIsFree(Slot finalSlot)
-    {
-        foreach (Slot slot in GameManager.boardSlots3x3)
-            if (slot == finalSlot && slot.SOccupier) return false;
-        return true;
     }
     private void PopulateSlotCentres()
     {
@@ -230,21 +212,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             PickRandomSlot();
             PickComputerPiece();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // all you need here is to set newComputerSlot and newComputerPiece...
         else
         {
             int boardScore = int.MinValue;
@@ -259,9 +226,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
                 if (GameManager.difficulty == 2)
                 {
-                    // put here the logic of checking all available moves in a depth of 1 check level
-                    // move piece to new location and update game arrays!
-                    Slot[] tempBoard = CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
+                    Slot[] tempBoard = CopyService.CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
                     Slot[] freeSlots = tempBoard.Where(slot => (slot.SOccupier == null)).ToArray();
                     foreach (Slot slot in freeSlots)
                     {
@@ -277,9 +242,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                         }
                     }
                 }
-
-
-
                 else if (GameManager.difficulty == 3)
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels
@@ -290,11 +252,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             newComputerSlot = GameManager.boardSlots3x3.Where(slot => (slot.SName == newSlot.SName)).ToArray()[0];
             newComputerPiece = computerPieceToMove;
         }
-
-        // ******************************************************* //
-        // *************** Above is the trial code *************** //
-        // ******************************************************* //
-
         GameManager.boardSlots3x3 =
             UpdateBoardSlotsService.UpdateBoardSlots(GameManager.boardSlots3x3, newComputerPiece, newComputerSlot, true);
 
@@ -311,36 +268,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 canvasGroup23.alpha = 1;
                 break;
         }
-        if (IsWinner())
+        if (ChecksService.IsWinner(GameManager.boardSlots3x3))
         {
             GameManager.gameOver = true;
             gameStatus.color = Color.red;
             gameStatus.text = "YOU LOSE!";
         }
-        ChangePlayerInTurn();
+        ChangeAction.ChangePlayerInTurn();
     }
-
-    private Slot[] CopySlotsArray(Slot[] board)
-    {
-        Slot[] newBoard = new Slot[board.Length];
-
-        for(int i = 0; i < newBoard.Length; i++)
-        {
-            newBoard[i] = new Slot("temp", new Vector2(0,0));
-            newBoard[i].SName = board[i].SName;
-            newBoard[i].SOccupier = board[i].SOccupier;
-            newBoard[i].SVector2 = board[i].SVector2;
-        }
-
-        return newBoard;
-    }
-
-    private void ChangePlayerInTurn()
-    {
-        GameManager.playerInTurn =
-            GameManager.playerInTurn == 1 ? 2 : 1;
-    }
-
     private void PickRandomSlot()
     {
         System.Random random = new System.Random();
@@ -355,7 +290,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             }
         }
     }
-
     private void PickComputerPiece()// In case of easy game only, otherwise it will be picked in the pick slot method
     {
         if (GameManager.difficulty == 1)
@@ -372,46 +306,5 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 }
             }
         }
-    }
-    private bool IsWinner()
-    {
-        // I want to check if all pieces have moved
-        if(DidAllPlayerPiecesMove())
-        {
-            Slot[] tempSlotsArray = GameManager.boardSlots3x3.Where(slot
-                => slot.SOccupier?.name.ToCharArray()[6].ToString()
-                == GameManager.playerInTurn.ToString()).ToArray();
-
-            String[] playersSlotsArray = tempSlotsArray.Select(x => x.SName).ToArray();
-
-            foreach(String[] winningSlots in GameManager.winningSlotsArray3x3)
-            {
-                bool[] winning = new bool[winningSlots.Length];
-                for(int i = 0; i < winningSlots.Length; i++)
-                {
-                    if (playersSlotsArray.Contains(winningSlots[i])) winning[i] = true;
-                }
-
-                if (!winning.Contains(false)) return true;
-            }
-        }
-
-        return false;
-    }
-    private bool DidAllPlayerPiecesMove()
-    {
-        if (GameManager.playerInTurn == 1
-            && GameManager.playersMoved3x3[0]
-            && GameManager.playersMoved3x3[1]
-            && GameManager.playersMoved3x3[2])
-            return true;
-
-        if (GameManager.playerInTurn == 2
-            && GameManager.playersMoved3x3[3]
-            && GameManager.playersMoved3x3[4]
-            && GameManager.playersMoved3x3[5])
-            return true;
-
-        return false;
     }
 }

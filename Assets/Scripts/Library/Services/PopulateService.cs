@@ -16,7 +16,5 @@ public class PopulateService
     }
 
     public static List<Slot> PopulatePlayersLocation()
-    {
-        return GameManager.boardSlots3x3.Where(slot => (slot.SOccupier != null)).ToArray().ToList();
-    }
+        => GameManager.boardSlots3x3.Where(slot => (slot.SOccupier != null)).ToArray().ToList();
 }

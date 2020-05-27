@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class SetPlayersMovedService
 {
+    public static void FirstSetupPlayersMoved()
+    {
+        GameManager.playersMoved3x3 = new bool[GameManager.boardWidth * 2];
+        for (int i = 0; i < GameManager.boardWidth * 2; i++)
+            GameManager.playersMoved3x3[i] = false;
+    }
+
     public static void SetPlayersMoved3x3(Rigidbody2D playerPiece)
     {
         int playerNumber = Int16.Parse(playerPiece.name.ToCharArray()[6].ToString()) == 1 ? 0 : 3;

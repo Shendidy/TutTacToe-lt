@@ -59,7 +59,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.gameOver = false;
         GameManager.difficulty = 2;
         GameManager.boardWidth = 3;
-        GameManager.playersMoved3x3 = new bool[] { false, false, false, false, false, false };
+
+        SetPlayersMovedService.FirstSetupPlayersMoved();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -209,8 +210,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (GameManager.difficulty == 1)
         {
-            PickRandomSlot();
-            PickComputerPiece();
+            newComputerSlot = PickAction.PickRandomSlot();
+            newComputerPiece = PickAction.PickComputerPiece(players);
         }
         else
         {
@@ -275,36 +276,5 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             gameStatus.text = "YOU LOSE!";
         }
         ChangeAction.ChangePlayerInTurn();
-    }
-    private void PickRandomSlot()
-    {
-        System.Random random = new System.Random();
-
-        while (true)
-        {
-            int i = random.Next(0, (int)Math.Pow(GameManager.boardWidth, 2));
-            if (GameManager.boardSlots3x3[i].SOccupier == null)
-            {
-                newComputerSlot = GameManager.boardSlots3x3[i];
-                break;
-            }
-        }
-    }
-    private void PickComputerPiece()// In case of easy game only, otherwise it will be picked in the pick slot method
-    {
-        if (GameManager.difficulty == 1)
-        {
-            System.Random random3 = new System.Random();
-
-            while (true)
-            {
-                int i = random3.Next(0, players.Length);
-                if (players[i].name.ToCharArray()[6].ToString() == "2")
-                {
-                    newComputerPiece = players[i];
-                    break;
-                }
-            }
-        }
     }
 }

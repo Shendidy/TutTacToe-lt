@@ -14,6 +14,9 @@ TagManager:
   - slot33
   - slot32
   - backgroundMusic
+  - micImage
+  - muteImage
+  - keyImage
   layers:
   - Default
   - TransparentFX

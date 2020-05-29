@@ -1616,8 +1616,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -3178.3}
-  m_SizeDelta: {x: -0.005493164, y: 6356.6055}
+  m_AnchoredPosition: {x: 0.0028076172, y: -1331.7}
+  m_SizeDelta: {x: -0.005493164, y: 2663.7402}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435655877
 MonoBehaviour:
@@ -1640,19 +1640,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 84
+    m_FontSize: 48
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 8
+    m_MinSize: 0
     m_MaxSize: 84
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "This game is played in many parts of Egypt that looks and follows the
-    same winning rules of Tic Tac Toe, but in this version the game goes on until
+    m_LineSpacing: 1.5
+  m_Text: "\nThis game is played in many parts of Egypt. It's based on the famous
+    Tic Tac Toe, but it removes the option of draw and the game would go on until
     there's a winner.\r\n\r\nIt starts with players pieces laid down in the row closer
     to them and with lower opacity, then once a piece is moved for the first time
     its opacity will go to full indicating that this piece is now in the game and
@@ -1672,7 +1672,7 @@ MonoBehaviour:
     forms a 4 pieces pattern, the first player reaching 10 points wins the game.
     The game will also end when a player manages to form a pattern of 4, but then
     that player won't necessarily win the game, so the challenge is not just to create
-    the winning pattern, but also to look at the bigger picture and create it in
+    the winning pattern, but also to look at the bigger picture and create it at
     the right time to win the game.\r\n\r\n5x5 Board: same as the 4x4 but with 1
     point for a pattern of 3 pieces, 3 points for a pattern of 4 pieces, and 5 points
     for a pattern of 5 (which also ends the game). The game will also end when a
@@ -1854,8 +1854,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904678694}
   m_HandleRect: {fileID: 904678693}
   m_Direction: 2
-  m_Value: 0.9999996
-  m_Size: 0.2208107
+  m_Value: 0.9999362
+  m_Size: 0.4034321
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2144,8 +2144,8 @@ RectTransform:
   m_Father: {fileID: 1231043677}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.779189}
-  m_AnchorMax: {x: 1, y: 0.9999997}
+  m_AnchorMin: {x: 0, y: 0.59652984}
+  m_AnchorMax: {x: 1, y: 0.999962}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

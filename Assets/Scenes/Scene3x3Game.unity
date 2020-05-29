@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -647,6 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -1193,6 +1197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -2760,6 +2766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -2908,6 +2916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -3056,6 +3066,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e5c83aed4c945d49171fd33a7b0f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  micButton: {fileID: 1300294019}
+  muteButton: {fileID: 1403352496}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}

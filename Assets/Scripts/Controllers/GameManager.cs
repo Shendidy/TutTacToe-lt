@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static int boardWidth { get; set; }
     public static bool[] playersMoved3x3 { get; set; }
     public static List<string[]> winningSlotsArray3x3 { get; private set; }
+    public static bool isMicOn { get; set; }
 
     GameManager()
     {

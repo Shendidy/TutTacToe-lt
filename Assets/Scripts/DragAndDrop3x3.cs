@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     #region Class Variables
+    public GameObject micButton;
+    public GameObject muteButton;
     private RectTransform rectTransform;
     public Text gameStatus;
     [SerializeField] private Canvas mainCanvas;
@@ -51,6 +53,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     #endregion
     private void Awake()
     {
+        GameManager.isMicOn = !AudioListener.pause;
+        micButton.SetActive(GameManager.isMicOn);
+        muteButton.SetActive(!GameManager.isMicOn);
+
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         gameStatus.text = "";

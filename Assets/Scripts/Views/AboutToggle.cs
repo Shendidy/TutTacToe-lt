@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AboutToggle : MonoBehaviour
 {
     public GameObject aboutPanel;
 
-    public void OpenAboutPanel()
+    public void ToggleAboutPanel()
     {
         if (aboutPanel != null) aboutPanel.SetActive(!aboutPanel.activeSelf);
     }

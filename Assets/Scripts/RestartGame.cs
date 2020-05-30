@@ -1,24 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RestartGame : MonoBehaviour
 {
     public void Restart()
     {
-        switch (GameManager.boardWidth)
+        int keysTotal = GameDataManager.LoadGameData()._keys;
+
+        if (GameManager.boardWidth == 3 && keysTotal >= 1)
         {
-            case 3:
-                GameManager.keysTotal -= 1;
-                SceneManager.LoadScene("Scene3x3Game");
-                break;
-            case 4:
-                GameManager.keysTotal -= 3;
-                SceneManager.LoadScene("Scene3x3Game"); // set 4x4 game scene
-                break;
-            case 5:
-                GameManager.keysTotal -= 5;
-                SceneManager.LoadScene("Scene3x3Game"); // set 5x5 game scene
-                break;
+            GameDataManager.SaveGameData(new GameData(keysTotal -= 1, DateTime.UtcNow));
+            SceneManager.LoadScene("Scene3x3Game");
+        }
+        else if(GameManager.boardWidth == 4 && keysTotal >= 3)
+        {
+            GameDataManager.SaveGameData(new GameData(keysTotal -= 3, DateTime.UtcNow));
+            SceneManager.LoadScene("Scene4x4Game");
+        }
+        else if(GameManager.boardWidth == 5 && keysTotal >= 5)
+        {
+            GameDataManager.SaveGameData(new GameData(keysTotal -= 5, DateTime.UtcNow));
+            SceneManager.LoadScene("Scene5x5Game");
+        }
+        else
+        {
+            GameDataManager.SaveGameData(new GameData(-1, DateTime.UtcNow));
+            KeyErrorToggle.ToggleKeyErrorPanel();
         }
     }
 }

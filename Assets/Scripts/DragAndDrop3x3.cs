@@ -54,13 +54,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        GameManager.keysTotal = GameDataManager.LoadGameData()._keys;
+        int keysTotal = GameDataManager.LoadGameData()._keys;
+        GameManager.keysTotal = keysTotal;
 
         GameManager.isMicOn = !AudioListener.pause;
         micButton.SetActive(GameManager.isMicOn);
         muteButton.SetActive(!GameManager.isMicOn);
 
-        keyCount.text = GameManager.keysTotal.ToString();
+        keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
         gameStatus.text = "";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
@@ -73,7 +74,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!GameManager.gameOver)
+        if (!GameManager.gameOver && GameManager.keysTotal >= 0)
         {
             if (GameManager.newGame)
             {
@@ -92,17 +93,21 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             players = PopulateService.PopulatePlayers(new Rigidbody2D[]{player11, player12, player13, player21, player22, player23});
             PopulatePlayersLocation();
         }
+        if (GameManager.keysTotal < 0)
+        {
+
+        }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (!GameManager.gameOver)
+        if (!GameManager.gameOver && GameManager.keysTotal >= 0)
         {
             rectTransform.anchoredPosition += eventData.delta / mainCanvas.scaleFactor;
         }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!GameManager.gameOver)
+        if (!GameManager.gameOver && GameManager.keysTotal >= 0)
         {
             isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
             MovePiece(isOutOfBoard);

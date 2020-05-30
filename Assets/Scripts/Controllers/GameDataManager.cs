@@ -24,22 +24,25 @@ public static class GameDataManager
     {
         SetPath();
         FileStream file;
-        GameData gameData = new GameData(10, DateTime.UtcNow);
+        //GameData gameData = new GameData(10, DateTime.UtcNow);
 
         if (File.Exists(_path))
         {
             file = File.OpenRead(_path);
             BinaryFormatter formatter = new BinaryFormatter();
-            gameData = (GameData)formatter.Deserialize(file);
+            GameData gameData = (GameData)formatter.Deserialize(file);
             file.Close();
+
+            return gameData;
         }
         else
         {
+            GameData gameData = new GameData(10, DateTime.UtcNow);
             SaveGameData(gameData);
             LoadGameData();
         }
 
-        return gameData;
+        return null;
     }
 
     private static void SetPath()

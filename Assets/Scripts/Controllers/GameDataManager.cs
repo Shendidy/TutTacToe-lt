@@ -31,6 +31,7 @@ public static class GameDataManager
             file = File.OpenRead(_path);
             BinaryFormatter formatter = new BinaryFormatter();
             gameData = (GameData)formatter.Deserialize(file);
+            file.Close();
         }
         else
         {
@@ -41,6 +42,8 @@ public static class GameDataManager
         return gameData;
     }
 
-    private static string SetPath()
-        => Application.persistentDataPath + "/gd/gd.ps";
+    private static void SetPath()
+    {
+        _path = Application.persistentDataPath + "/gd.ps";
+    }
 }

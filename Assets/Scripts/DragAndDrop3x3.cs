@@ -51,12 +51,14 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     #endregion
     private void Awake()
     {
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+
+        GameManager.keysTotal = GameDataManager.LoadGameData()._keys;
+
         GameManager.isMicOn = !AudioListener.pause;
         micButton.SetActive(GameManager.isMicOn);
         muteButton.SetActive(!GameManager.isMicOn);
-
-        rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
 
         keyCount.text = GameManager.keysTotal.ToString();
         gameStatus.text = "";

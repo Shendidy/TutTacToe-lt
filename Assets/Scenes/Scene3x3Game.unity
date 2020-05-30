@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -651,6 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -1199,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -2401,7 +2404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &988145872
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2768,6 +2771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -2918,6 +2922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}
@@ -3068,6 +3073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
   boardCanvas: {fileID: 313863948}

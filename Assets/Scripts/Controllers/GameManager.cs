@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool[] playersMoved3x3 { get; set; }
     public static List<string[]> winningSlotsArray3x3 { get; private set; }
     public static bool isMicOn { get; set; }
+    public static int keysTotal { get; set; }
 
     GameManager()
     {

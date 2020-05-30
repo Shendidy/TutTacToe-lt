@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +10,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public GameObject micButton;
     public GameObject muteButton;
     private RectTransform rectTransform;
+    public Text keyCount;
     public Text gameStatus;
     [SerializeField] private Canvas mainCanvas;
     public Transform boardCanvas;
@@ -59,6 +57,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+
+        keyCount.text = GameManager.keysTotal.ToString();
         gameStatus.text = "";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;

@@ -24,7 +24,6 @@ public static class GameDataManager
     {
         SetPath();
         FileStream file;
-        //GameData gameData = new GameData(10, DateTime.UtcNow);
 
         if (File.Exists(_path))
         {
@@ -33,16 +32,20 @@ public static class GameDataManager
             GameData gameData = (GameData)formatter.Deserialize(file);
             file.Close();
 
-            if (gameData._date.ToString("yyyy-MM-dd") != DateTime.UtcNow.ToString("yyyy-MM-dd") && gameData._keys < 10)
+            var storedDate = gameData._date.ToString(Constants._RefillKeysString);
+            var currentDate = DateTime.UtcNow.ToString(Constants._RefillKeysString);
+
+            if (storedDate != currentDate && gameData._keys < Constants._MaximumDailyKeysRefill)
             {
-                SaveGameData(new GameData(10, DateTime.UtcNow));
+                SaveGameData(new GameData(Constants._MaximumDailyKeysRefill, DateTime.UtcNow));
+                gameData = LoadGameData();
             }
 
             return gameData;
         }
         else
         {
-            GameData gameData = new GameData(10, DateTime.UtcNow);
+            GameData gameData = new GameData(Constants._MaximumDailyKeysRefill, DateTime.UtcNow);
             SaveGameData(gameData);
             LoadGameData();
         }

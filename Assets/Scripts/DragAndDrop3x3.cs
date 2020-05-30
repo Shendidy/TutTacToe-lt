@@ -89,7 +89,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                     if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
 
             canvasDotAlpha = canvasGroup.alpha;
-            canvasGroup.alpha = Constants.MovingPlayerTransparency;
+            canvasGroup.alpha = Constants._MovingPlayerTransparency;
 
             players = PopulateService.PopulatePlayers(new Rigidbody2D[]{player11, player12, player13, player21, player22, player23});
             PopulatePlayersLocation();
@@ -162,7 +162,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 }
             }
 
-            canvasGroup.alpha = Constants.StandingPlayerTransparency;
+            canvasGroup.alpha = Constants._StandingPlayerTransparency;
 
             if (ChecksService.IsWinner(GameManager.boardSlots3x3))
             {

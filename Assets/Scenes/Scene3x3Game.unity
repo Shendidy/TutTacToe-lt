@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -414,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf0ad65744184316931c06b8ff7c1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keyErrorPanel: {fileID: 1741472665}
 --- !u!1 &117753234
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -1187,6 +1190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -1611,8 +1615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -1331.7}
-  m_SizeDelta: {x: -0.005493164, y: 2663.7402}
+  m_AnchoredPosition: {x: 0.0028076172, y: -3943.8}
+  m_SizeDelta: {x: -0.005493164, y: 7888.162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435655877
 MonoBehaviour:
@@ -1635,14 +1639,14 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 48
+    m_FontSize: 72
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
+    m_BestFit: 1
+    m_MinSize: 72
     m_MaxSize: 84
     m_Alignment: 1
     m_AlignByGeometry: 0
-    m_RichText: 0
+    m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
@@ -1766,8 +1770,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1073583475}
   m_HandleRect: {fileID: 1073583474}
   m_Direction: 2
-  m_Value: 0.9999362
-  m_Size: 0.4034321
+  m_Value: 0.9997338
+  m_Size: 0.7659981
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1973,8 +1977,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904678694}
   m_HandleRect: {fileID: 904678693}
   m_Direction: 2
-  m_Value: 0.9999362
-  m_Size: 0.4034321
+  m_Value: 0.99996436
+  m_Size: 0.18590869
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2352,8 +2356,8 @@ RectTransform:
   m_Father: {fileID: 1231043677}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.59652984}
-  m_AnchorMax: {x: 1, y: 0.999962}
+  m_AnchorMin: {x: 0, y: 0.8140623}
+  m_AnchorMax: {x: 1, y: 0.999971}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2912,8 +2916,8 @@ RectTransform:
   m_Father: {fileID: 1666248836}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.59652984}
-  m_AnchorMax: {x: 1, y: 0.999962}
+  m_AnchorMin: {x: 0, y: 0.23393959}
+  m_AnchorMax: {x: 1, y: 0.9999377}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3045,6 +3049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -3196,6 +3201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -3347,6 +3353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   micButton: {fileID: 1300294019}
   muteButton: {fileID: 1403352496}
+  keyErrorPanel: {fileID: 1741472665}
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
   mainCanvas: {fileID: 1040330035}
@@ -4721,8 +4728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -1331.7}
-  m_SizeDelta: {x: -0.005493164, y: 2663.7402}
+  m_AnchoredPosition: {x: 0.0028076172, y: -275}
+  m_SizeDelta: {x: -0.005493164, y: 550.2932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635272394
 MonoBehaviour:
@@ -4747,12 +4754,12 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 72
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
+    m_BestFit: 1
+    m_MinSize: 72
     m_MaxSize: 84
     m_Alignment: 1
     m_AlignByGeometry: 0
-    m_RichText: 0
+    m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5

@@ -9,6 +9,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     #region Class Variables
     public GameObject micButton;
     public GameObject muteButton;
+    public GameObject keyErrorPanel;
     private RectTransform rectTransform;
     public Text keyCount;
     public Text gameStatus;
@@ -95,7 +96,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         }
         if (GameManager.keysTotal < 0)
         {
-
+            if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
         }
     }
     public void OnDrag(PointerEventData eventData)

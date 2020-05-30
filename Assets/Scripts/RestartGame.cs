@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class RestartGame : MonoBehaviour
 {
+    public GameObject keyErrorPanel;
+
     public void Restart()
     {
         int keysTotal = GameDataManager.LoadGameData()._keys;
@@ -26,7 +28,7 @@ public class RestartGame : MonoBehaviour
         else
         {
             GameDataManager.SaveGameData(new GameData(-1, DateTime.UtcNow));
-            KeyErrorToggle.ToggleKeyErrorPanel();
+            if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
         }
     }
 }

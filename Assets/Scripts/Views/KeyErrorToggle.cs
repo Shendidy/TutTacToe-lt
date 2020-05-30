@@ -2,9 +2,9 @@
 
 public class KeyErrorToggle : MonoBehaviour
 {
-    public static GameObject keyErrorPanel;
+    public GameObject keyErrorPanel;
 
-    public static void ToggleKeyErrorPanel()
+    public void ToggleKeyErrorPanel()
     {
         if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
     }

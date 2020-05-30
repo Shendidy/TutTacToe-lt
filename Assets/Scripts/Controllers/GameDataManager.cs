@@ -33,6 +33,11 @@ public static class GameDataManager
             GameData gameData = (GameData)formatter.Deserialize(file);
             file.Close();
 
+            if (gameData._date.ToString("yyyy-MM-dd") != DateTime.UtcNow.ToString("yyyy-MM-dd") && gameData._keys < 10)
+            {
+                SaveGameData(new GameData(10, DateTime.UtcNow));
+            }
+
             return gameData;
         }
         else

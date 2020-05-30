@@ -12,17 +12,20 @@ public class RestartGame : MonoBehaviour
 
         if (GameManager.boardWidth == 3 && keysTotal >= 1)
         {
-            GameDataManager.SaveGameData(new GameData(keysTotal -= 1, DateTime.UtcNow));
+            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
+                GameDataManager.SaveGameData(new GameData(keysTotal -= 1, DateTime.UtcNow));
             SceneManager.LoadScene("Scene3x3Game");
         }
         else if(GameManager.boardWidth == 4 && keysTotal >= 3)
         {
-            GameDataManager.SaveGameData(new GameData(keysTotal -= 3, DateTime.UtcNow));
+            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
+                GameDataManager.SaveGameData(new GameData(keysTotal -= 3, DateTime.UtcNow));
             SceneManager.LoadScene("Scene4x4Game");
         }
         else if(GameManager.boardWidth == 5 && keysTotal >= 5)
         {
-            GameDataManager.SaveGameData(new GameData(keysTotal -= 5, DateTime.UtcNow));
+            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
+                GameDataManager.SaveGameData(new GameData(keysTotal -= 5, DateTime.UtcNow));
             SceneManager.LoadScene("Scene5x5Game");
         }
         else

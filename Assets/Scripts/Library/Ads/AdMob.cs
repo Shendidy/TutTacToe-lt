@@ -7,7 +7,7 @@ using GoogleMobileAds.Api;
 
 public class AdMob : MonoBehaviour
 {
-    //public static AdMob instance;
+    public static AdMob instance;
     //public Text text;
     //public Text counter;
 
@@ -27,13 +27,13 @@ public class AdMob : MonoBehaviour
         MobileAds.Initialize(appID);
     }
 
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //        instance = this;
-    //    else
-    //        Destroy(this);
-    //}
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
 
     public void RequestBanner()
     {

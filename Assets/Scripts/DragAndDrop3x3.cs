@@ -52,6 +52,12 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     #endregion
     private void Awake()
     {
+        AdMob.instance.RequestBanner();
+        AdMob.instance.RequestInterstitial();
+        AdMob.instance.RequestRewardBasedVideo();
+
+        AdMob.instance.ShowBannerAd();
+
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 

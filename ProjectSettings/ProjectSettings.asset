@@ -260,7 +260,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: 96beda20dd5c546348cdaf04a7810227, type: 3}
   AndroidKeystoreName: '{inproject}: Assets/Ads/user.keystore'
-  AndroidKeyaliasName: 
+  AndroidKeyaliasName: my alias
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

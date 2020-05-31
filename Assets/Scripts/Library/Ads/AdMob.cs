@@ -25,6 +25,11 @@ public class AdMob : MonoBehaviour
     void Start()
     {
         MobileAds.Initialize(appID);
+        RequestBanner();
+        RequestInterstitial();
+        RequestRewardBasedVideo();
+
+        ShowBannerAd();
     }
 
     private void Awake()
@@ -38,18 +43,18 @@ public class AdMob : MonoBehaviour
     public void RequestBanner()
     {
         // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
+        bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
 
         // Called when an ad request has successfully loaded.
-        this.bannerView.OnAdLoaded += this.HandleOnAdLoaded;
+        bannerView.OnAdLoaded += HandleOnAdLoaded;
         // Called when an ad request failed to load.
-        this.bannerView.OnAdFailedToLoad += this.HandleOnAdFailedToLoad;
+        bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
         // Called when an ad is clicked.
-        this.bannerView.OnAdOpening += this.HandleOnAdOpened;
+        bannerView.OnAdOpening += HandleOnAdOpened;
         // Called when the user returned from the app after an ad click.
-        this.bannerView.OnAdClosed += this.HandleOnAdClosed;
+        bannerView.OnAdClosed += HandleOnAdClosed;
         // Called when the ad click caused the user to leave the application.
-        this.bannerView.OnAdLeavingApplication += this.HandleOnAdLeavingApplication;
+        bannerView.OnAdLeavingApplication += HandleOnAdLeavingApplication;
     }
 
     public void ShowBannerAd()
@@ -58,47 +63,47 @@ public class AdMob : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
 
         // Load the banner with the request.
-        this.bannerView.LoadAd(request);
+        bannerView.LoadAd(request);
     }
 
     public void HideBannerAd()
     {
-        this.bannerView.Hide();
+        bannerView.Hide();
     }
 
     public void RequestInterstitial()
     {
-        this.interstitialAd = new InterstitialAd(interstitialID);
+        interstitialAd = new InterstitialAd(interstitialID);
 
         // Called when an ad request has successfully loaded.
-        this.interstitialAd.OnAdLoaded += HandleOnAdLoaded;
+        interstitialAd.OnAdLoaded += HandleOnAdLoaded;
         // Called when an ad request failed to load.
-        this.interstitialAd.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        interstitialAd.OnAdFailedToLoad += HandleOnAdFailedToLoad;
         // Called when an ad is shown.
-        this.interstitialAd.OnAdOpening += HandleOnAdOpened;
+        interstitialAd.OnAdOpening += HandleOnAdOpened;
         // Called when the ad is closed.
-        this.interstitialAd.OnAdClosed += HandleOnAdClosed;
+        interstitialAd.OnAdClosed += HandleOnAdClosed;
         // Called when the ad click caused the user to leave the application.
-        this.interstitialAd.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+        interstitialAd.OnAdLeavingApplication += HandleOnAdLeavingApplication;
 
         AdRequest request = new AdRequest.Builder().Build();
-        this.interstitialAd.LoadAd(request);
+        interstitialAd.LoadAd(request);
     }
 
     public void ShowInterstitialAd()
     {
-        if (this.interstitialAd.IsLoaded())
+        if (interstitialAd.IsLoaded())
         {
-            this.interstitialAd.Show();
+            interstitialAd.Show();
         }
     }
 
     public void RequestRewardBasedVideo()
     {
-        this.rewardBasedVideoAd = RewardBasedVideoAd.Instance;
+        rewardBasedVideoAd = RewardBasedVideoAd.Instance;
 
         AdRequest request = new AdRequest.Builder().Build();
-        this.rewardBasedVideoAd.LoadAd(request, rewardedID);
+        rewardBasedVideoAd.LoadAd(request, rewardedID);
 
 
         // Called when the user should be rewarded for watching a video.

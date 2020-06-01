@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public static List<string[]> winningSlotsArray3x3 { get; private set; }
     public static bool isMicOn { get; set; }
     public static int keysTotal { get; set; }
+    public static int rewardedKeys { get; set; }
+    public static int interstitialAdCounter { get; set; }
+    public static bool interstitialAdRunning { get; set; }
 
     GameManager()
     {

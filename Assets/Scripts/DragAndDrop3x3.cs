@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public static DragAndDrop3x3 instance;
     #region Class Variables
     public GameObject micButton;
     public GameObject muteButton;
+    public GameObject gameItemsPanel;
     public GameObject keyErrorPanel;
+    public GameObject collectKeysPanel;
     private RectTransform rectTransform;
     public Text keyCount;
     public Text gameStatus;
@@ -52,8 +55,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     #endregion
     private void Awake()
     {
-        //AdMob.instance.ShowBannerAd();
-
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 

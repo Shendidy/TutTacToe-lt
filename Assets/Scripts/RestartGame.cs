@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class RestartGame : MonoBehaviour
 {
     public GameObject keyErrorPanel;
+    public GameObject gameItemsPanel;
 
     public void Restart()
     {
@@ -32,6 +33,7 @@ public class RestartGame : MonoBehaviour
         {
             GameDataManager.SaveGameData(new GameData(-1, DateTime.UtcNow));
             if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
+            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
         }
     }
 }

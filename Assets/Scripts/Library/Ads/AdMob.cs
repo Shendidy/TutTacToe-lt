@@ -8,8 +8,10 @@ using GoogleMobileAds.Api;
 public class AdMob : MonoBehaviour
 {
     public static AdMob instance;
-    //public Text text;
-    //public Text counter;
+    public Text keyCount;
+    public Text gameStatus;
+    public GameObject collectKeysPanel;
+    public GameObject gameItemsPanel;
 
     private string appID = "ca-app-pub-6785760956809900~7030560283";
 
@@ -19,17 +21,35 @@ public class AdMob : MonoBehaviour
 
     private BannerView bannerView;
     private InterstitialAd interstitialAd;
-    private RewardBasedVideoAd rewardBasedVideoAd;
+    private RewardedAd rewardedAd;
 
     // Start is called before the first frame update
     void Start()
     {
         MobileAds.Initialize(appID);
+        // Banner Ads
         RequestBanner();
-        RequestInterstitial();
-        RequestRewardBasedVideo();
-
         ShowBannerAd();
+
+        // Interstitial Ads
+        RequestInterstitial();
+
+        // Rewarded Video Ads
+        rewardedAd = new RewardedAd(rewardedID);
+        RequestRewardedAd();
+        RequestRewardedAd();
+        // Called when an ad request has successfully loaded.
+        rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        // Called when an ad request failed to load.
+        rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
+        // Called when an ad is shown.
+        rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        // Called when an ad request failed to show.
+        rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        // Called when the user should be rewarded for interacting with the ad.
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        // Called when the ad is closed.
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
     }
 
     private void Awake()
@@ -40,21 +60,22 @@ public class AdMob : MonoBehaviour
             Destroy(this);
     }
 
+    #region Banner methods
     public void RequestBanner()
     {
         // Create a 320x50 banner at the top of the screen.
         bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
 
-        // Called when an ad request has successfully loaded.
-        bannerView.OnAdLoaded += HandleOnAdLoaded;
-        // Called when an ad request failed to load.
-        bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
-        // Called when an ad is clicked.
-        bannerView.OnAdOpening += HandleOnAdOpened;
-        // Called when the user returned from the app after an ad click.
-        bannerView.OnAdClosed += HandleOnAdClosed;
-        // Called when the ad click caused the user to leave the application.
-        bannerView.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+        //// Called when an ad request has successfully loaded.
+        //bannerView.OnAdLoaded += HandleOnAdLoaded;
+        //// Called when an ad request failed to load.
+        //bannerView.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        //// Called when an ad is clicked.
+        //bannerView.OnAdOpening += HandleOnAdOpened;
+        //// Called when the user returned from the app after an ad click.
+        //bannerView.OnAdClosed += HandleOnAdClosed;
+        //// Called when the ad click caused the user to leave the application.
+        //bannerView.OnAdLeavingApplication += HandleOnAdLeavingApplication;
     }
 
     public void ShowBannerAd()
@@ -70,7 +91,9 @@ public class AdMob : MonoBehaviour
     {
         bannerView.Hide();
     }
+    #endregion
 
+    #region Interstitial methods
     public void RequestInterstitial()
     {
         interstitialAd = new InterstitialAd(interstitialID);
@@ -92,33 +115,56 @@ public class AdMob : MonoBehaviour
 
     public void ShowInterstitialAd()
     {
-        if (interstitialAd.IsLoaded())
+        int counter = 0;
+
+        while (counter < 6)
         {
-            interstitialAd.Show();
+            if (interstitialAd.IsLoaded())
+            {
+                interstitialAd.Show();
+                break;
+            }
+            else
+            {
+                counter++;
+                RequestInterstitial();
+                ShowInterstitialAd();
+            }
         }
     }
+    #endregion
 
-    public void RequestRewardBasedVideo()
+    #region Rewarded Ads methods
+    public void RequestRewardedAd()
     {
-        rewardBasedVideoAd = RewardBasedVideoAd.Instance;
 
         AdRequest request = new AdRequest.Builder().Build();
-        rewardBasedVideoAd.LoadAd(request, rewardedID);
-
-
-        // Called when the user should be rewarded for watching a video.
-        rewardBasedVideoAd.OnAdRewarded += HandleRewardBasedVideoRewarded;
+        rewardedAd.LoadAd(request);
     }
 
     public void ShowVideoRewadAd()
     {
-        if (rewardBasedVideoAd.IsLoaded())
+        GameManager.interstitialAdRunning = true;
+        int counter = 0;
+
+        while (counter < 6)
         {
-            rewardBasedVideoAd.Show();
+            if (rewardedAd.IsLoaded())
+            {
+                rewardedAd.Show();
+                break;
+            }
+            else
+            {
+                counter++;
+                RequestRewardedAd();
+                ShowVideoRewadAd();
+            }
         }
     }
+    #endregion
 
-
+    #region Events handling methods
     public void HandleOnAdLoaded(object sender, EventArgs args)
     {
         //text.text = "Banner loaded!";
@@ -136,22 +182,69 @@ public class AdMob : MonoBehaviour
 
     public void HandleOnAdClosed(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdClosed event received");
+        GameManager.interstitialAdRunning = false;
+        RequestInterstitial();
+        RequestBanner();
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args)
     {
-        MonoBehaviour.print("HandleAdLeavingApplication event received");
+        GameManager.interstitialAdRunning = false;
     }
 
-    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
+
+    // Rewarded Ad events handling methods
+    //public void HandleRewardBasedVideoRewarded(object sender, Reward args)
+    //{
+    //    string type = args.Type;
+    //    double amount = args.Amount;
+
+    //    GameManager.keysTotal += (int)amount;
+    //    keyCount.text = GameManager.keysTotal.ToString();
+    //    gameStatus.text = "You received " + amount.ToString() + " keys!";
+
+    //    GameDataManager.SaveGameData(new GameData((int)amount, DateTime.UtcNow));
+    //}
+
+
+    // Revents handling methods
+    public void HandleRewardedAdLoaded(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleRewardedAdLoaded event received");
+    }
+
+    public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
+    {
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToLoad event received with message: "
+                             + args.Message);
+    }
+
+    public void HandleRewardedAdOpening(object sender, EventArgs args)
+    {
+        MonoBehaviour.print("HandleRewardedAdOpening event received");
+    }
+
+    public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
+    {
+        MonoBehaviour.print(
+            "HandleRewardedAdFailedToShow event received with message: "
+                             + args.Message);
+    }
+
+    public void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
+        RequestRewardedAd();
+    }
+
+    public void HandleUserEarnedReward(object sender, Reward args)
     {
         string type = args.Type;
         double amount = args.Amount;
+        GameManager.rewardedKeys = (int)amount;
 
-        GameManager.keysTotal += (int)amount;
-
-        //counter.text = (int.Parse(counter.text) + amount).ToString();
-        //text.text = "User rewarded with: " + amount.ToString() + " " + type;
+        collectKeysPanel.SetActive(true);
+        gameItemsPanel.SetActive(false);
     }
+    #endregion
 }

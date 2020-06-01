@@ -52,18 +52,6 @@ public class ChecksService
 
                 if (!winning.Contains(false))
                 {
-                    if (GameManager.interstitialAdCounter > 2)
-                    {
-                        GameManager.interstitialAdCounter = 0;
-                        AdMob.instance.ShowInterstitialAd();
-
-                        while (GameManager.interstitialAdRunning)
-                        {
-                            // Hold operation until ad completes!
-                        }
-                    }
-                    else GameManager.interstitialAdCounter++;
-
                     return true;
                 }
             }

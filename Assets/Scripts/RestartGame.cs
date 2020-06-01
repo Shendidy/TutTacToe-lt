@@ -11,6 +11,9 @@ public class RestartGame : MonoBehaviour
     {
         int keysTotal = GameDataManager.LoadGameData()._keys;
 
+        GameManager.interstitialAdCounter++;
+        if (GameManager.interstitialAdCounter % 3 == 0) AdMob.instance.ShowInterstitialAd();
+
         if (GameManager.boardWidth == 3 && keysTotal >= 1)
         {
             if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])

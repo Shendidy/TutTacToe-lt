@@ -11,9 +11,6 @@ public class RestartGame : MonoBehaviour
     {
         int keysTotal = GameDataManager.LoadGameData()._keys;
 
-        GameManager.interstitialAdCounter++;
-        if (GameManager.interstitialAdCounter % 3 == 0) AdMob.instance.ShowInterstitialAd();
-
         if (GameManager.boardWidth == 3 && keysTotal >= 1)
         {
             if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
@@ -22,21 +19,24 @@ public class RestartGame : MonoBehaviour
         }
         else if(GameManager.boardWidth == 4 && keysTotal >= 3)
         {
-            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
+            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2] || GameManager.playersMoved3x3[3])
                 GameDataManager.SaveGameData(new GameData(keysTotal -= 3, DateTime.UtcNow));
             SceneManager.LoadScene("Scene4x4Game");
         }
         else if(GameManager.boardWidth == 5 && keysTotal >= 5)
         {
-            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2])
+            if (GameManager.playersMoved3x3[0] || GameManager.playersMoved3x3[1] || GameManager.playersMoved3x3[2] || GameManager.playersMoved3x3[3] || GameManager.playersMoved3x3[4])
                 GameDataManager.SaveGameData(new GameData(keysTotal -= 5, DateTime.UtcNow));
             SceneManager.LoadScene("Scene5x5Game");
         }
         else
         {
-            GameDataManager.SaveGameData(new GameData(-1, DateTime.UtcNow));
-            if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
-            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
+            GameDataManager.SaveGameData(new GameData(0, DateTime.UtcNow));
+            if (keyErrorPanel != null && gameItemsPanel != null)
+            {
+                keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
+                gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
+            }
         }
     }
 }

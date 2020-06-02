@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyErrorPanel: {fileID: 1741472665}
-  gameItemsPanel: {fileID: 0}
+  gameItemsPanel: {fileID: 1536263902}
 --- !u!1 &117753234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,6 +1553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyCount: {fileID: 988145871}
   gameStatus: {fileID: 1011701065}
+  collectText: {fileID: 1304086488}
   collectKeysPanel: {fileID: 1747894364}
   gameItemsPanel: {fileID: 1536263902}
   noKeysPanel: {fileID: 1741472665}
@@ -4151,7 +4152,7 @@ MonoBehaviour:
     m_LineSpacing: 1.5
   m_Text: '
 
-    Congratulations, you''ve earned 5 keys!
+    Congratulations, you''ve earned 50 keys!
 
     Collect them now and
     start playing...'
@@ -5625,7 +5626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.6625977, y: 1.011261}
+  m_AnchoredPosition: {x: -1.6625824, y: 1.011261}
   m_SizeDelta: {x: 3.5512085, y: 6.7318115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1719568464

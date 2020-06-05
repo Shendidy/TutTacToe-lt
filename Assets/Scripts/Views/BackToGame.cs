@@ -6,6 +6,7 @@ public class BackToGame : MonoBehaviour
     public GameObject aboutPanel;
     public GameObject getKeysPanel;
     public GameObject noKeysPanel;
+    public GameObject fireworksPanel;
 
     public void BackToGamePanel()
     {
@@ -13,5 +14,6 @@ public class BackToGame : MonoBehaviour
         if (aboutPanel != null) aboutPanel.SetActive(false);
         if (getKeysPanel != null) getKeysPanel.SetActive(false);
         if (noKeysPanel != null) noKeysPanel.SetActive(false);
+        if (fireworksPanel != null) fireworksPanel.SetActive(false);
     }
 }

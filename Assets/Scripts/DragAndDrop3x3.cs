@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -52,19 +54,21 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     private bool isOutOfBoard;
     private float canvasDotAlpha;
+    private int keysTotal;
     #endregion
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        int keysTotal = GameDataManager.LoadGameData()._keys;
+        keysTotal = GameDataManager.LoadGameData()._keys;
         GameManager.keysTotal = keysTotal;
 
         GameManager.isMicOn = !AudioListener.pause;
         micButton.SetActive(GameManager.isMicOn);
         muteButton.SetActive(!GameManager.isMicOn);
 
+        //Debug.Log("Total keys = " + keysTotal);
         keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
         gameStatus.text = "";
         GameManager.newGame = true;
@@ -76,20 +80,31 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         SetPlayersMovedService.FirstSetupPlayersMoved();
     }
 
+    private void Start()
+    {
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!GameManager.gameOver && GameManager.keysTotal >= 0)
+        if (!GameManager.gameOver && keysTotal >= 0)
         {
             if (GameManager.newGame)
             {
                 PopulateSlotCentres();
                 AddSlotCentresOccupiers();
                 GameManager.newGame = false;
+
+                if (GameManager.interstitialAdCounter >= 2 && keysTotal > 0)
+                {
+                    AdMob.instance.RequestInterstitial();
+                    //Debug.Log("Requested Interstitial from DragAndDrop class OnBeginDrag() method...");
+                }
             }
 
-            foreach (Slot slot in GameManager.boardSlots3x3)
-                if (slot.SOccupier)
-                    if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
+            //foreach (Slot slot in GameManager.boardSlots3x3)
+            //    if (slot.SOccupier)
+            //        if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
+            pieceStartSlot = GameManager.boardSlots3x3.Where(slot => (slot.SOccupier?.name == rectTransform.name)).ToArray()[0];
 
             canvasDotAlpha = canvasGroup.alpha;
             canvasGroup.alpha = Constants._MovingPlayerTransparency;
@@ -97,7 +112,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             players = PopulateService.PopulatePlayers(new Rigidbody2D[]{player11, player12, player13, player21, player22, player23});
             PopulatePlayersLocation();
         }
-        if (GameManager.keysTotal < 0)
+        if (keysTotal < 0)
         {
             if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
         }
@@ -172,6 +187,16 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 GameManager.gameOver = true;
                 gameStatus.color = Color.blue;
                 gameStatus.text = "YOU WIN!";
+
+
+                // add debug log to show if interstitial and rewarded are loaded
+                GameManager.interstitialAdCounter++;
+                //Debug.Log("interstitial counter = " + GameManager.interstitialAdCounter.ToString());
+                if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
+                {
+                    //Debug.Log("Calling ShowInterstitalAd from inside ChecksService in IsWinner method...");
+                    AdMob.instance.ShowInterstitialAd();
+                }
             }
             else
             {
@@ -301,6 +326,15 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             GameManager.gameOver = true;
             gameStatus.color = Color.red;
             gameStatus.text = "YOU LOSE!";
+
+            // add debug log to show if interstitial and rewarded are loaded
+            GameManager.interstitialAdCounter++;
+            //Debug.Log("interstitial counter = " + GameManager.interstitialAdCounter.ToString());
+            if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
+            {
+                //Debug.Log("Calling ShowInterstitalAd from inside ChecksService in IsWinner method...");
+                AdMob.instance.ShowInterstitialAd();
+            }
         }
         ChangeAction.ChangePlayerInTurn();
     }

@@ -15,36 +15,35 @@ public class AdMob : MonoBehaviour
     public GameObject collectKeysPanel;
     public GameObject gameItemsPanel;
     public GameObject noKeysPanel;
+    public GameObject getKeysPanel;
+    public Text loadingAddText;
 
-    private readonly string appID = Constants.adMobAppID;
+    private readonly string appID = Constants._AdMobAppID;
 
-    private readonly string bannerID = Constants.adMobBannerID;
-    private readonly string interstitialID = Constants.adMobInterstitialID;
-    private readonly string rewardedID = Constants.adMobRewardedID;
+    private readonly string bannerID = Constants._AdMobBannerTestID;
+    private readonly string interstitialID = Constants._AdMobInterstitialTestID;
+    private readonly string rewardedID = Constants._AdMobRewardedTestID;
 
     private BannerView bannerView;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
 
+    //private int interstitialAdCounter = 0;
+    //private int rewardedAdCounter = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.Log("started AdMob Start() method!");
+
         MobileAds.Initialize(appID);
+
+        this.rewardedAd = new RewardedAd(rewardedID);
+        this.interstitialAd = new InterstitialAd(interstitialID);
+
         // Banner Ads
         RequestBanner();
         ShowBannerAd();
-
-        // Interstitial Ads
-        RequestInterstitial();
-
-        // Rewarded Video Ads
-        rewardedAd = new RewardedAd(rewardedID);
-        RequestRewardedAd();
-
-        // Called when the user should be rewarded for interacting with the ad.
-        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
-        // Called when the ad is closed.
-        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
     }
 
     private void Awake()
@@ -59,49 +58,76 @@ public class AdMob : MonoBehaviour
     public void RequestBanner()
     {
         // Create a 320x50 banner at the top of the screen.
-        bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
+        this.bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
 
         // Called when the user returned from the app after an ad click.
-        bannerView.OnAdClosed += HandleOnBannerAdClosed;
+        this.bannerView.OnAdClosed += this.HandleOnBannerAdClosed;
     }
 
     public void ShowBannerAd()
     {
         AdRequest request = new AdRequest.Builder().Build();
-        bannerView.LoadAd(request);
+        this.bannerView.LoadAd(request);
     }
     #endregion
 
     #region Interstitial methods
     public void RequestInterstitial()
     {
-        interstitialAd = new InterstitialAd(interstitialID);
 
+        //Debug.Log("Before RequestInterstitial method, interstitial loaded = " + this.interstitialAd.IsLoaded());
         AdRequest request = new AdRequest.Builder().Build();
-        interstitialAd.LoadAd(request);
+        if (!this.interstitialAd.IsLoaded())
+            this.interstitialAd.LoadAd(request);
+        //Debug.Log("After RequestInterstitial method, interstitial loaded = " + this.interstitialAd.IsLoaded());
 
         // Called when the ad is closed.
-        interstitialAd.OnAdClosed += HandleOnInterstitialAdClosed;
+        this.interstitialAd.OnAdClosed += this.HandleOnInterstitialAdClosed;
     }
 
     public void ShowInterstitialAd()
     {
-        if (interstitialAd.IsLoaded())
-            interstitialAd.Show();
+        //Debug.Log("Before ShowInterstitialAd method, Interstitial loaded = " + this.interstitialAd.IsLoaded());
+        if (this.interstitialAd.IsLoaded())
+        {
+            this.interstitialAd.Show();
+            GameManager.interstitialAdCounter = 0;
+        }
     }
     #endregion
 
     #region Rewarded Ads methods
     public void RequestRewardedAd()
     {
-        AdRequest request = new AdRequest.Builder().Build();
-        rewardedAd.LoadAd(request);
+        //Debug.Log("Before RequestRewardedAd method, RewardedAd loaded = " + this.rewardedAd.IsLoaded());
+        if (!this.rewardedAd.IsLoaded())
+        {
+            AdRequest request = new AdRequest.Builder().Build();
+            this.rewardedAd.LoadAd(request);
+        }
+        //Debug.Log("After RequestRewardedAd method, RewardedAd loaded = " + this.rewardedAd.IsLoaded());
+
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += this.HandleUserEarnedReward;
+        // Called when the ad is closed.
+        this.rewardedAd.OnAdClosed += this.HandleRewardedAdClosed;
     }
 
     public void ShowVideoRewadAd()
     {
-        if (rewardedAd.IsLoaded())
-            rewardedAd.Show();
+        //Debug.Log("Rewarded is loaded = " + rewardedAd.IsLoaded());
+        if (this.rewardedAd.IsLoaded())
+        {
+            GameManager.interstitialAdCounter = 0;
+            this.rewardedAd.Show();
+        }
+        else
+        {
+            loadingAddText.text = "Your Ad will start in 2 seconds!";
+            RequestRewardedAd();
+            Thread.Sleep(2000);
+            this.rewardedAd.Show();
+        }
     }
     #endregion
 
@@ -109,17 +135,18 @@ public class AdMob : MonoBehaviour
 
     public void HandleOnBannerAdClosed(object sender, EventArgs args)
     {
-        RequestBanner();
     }
 
     public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
     {
-        RequestInterstitial();
+        //Debug.Log("On Interstitial Ad closed...");
     }
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
-        RequestRewardedAd();
+        //Debug.Log("On Rewarded Ad closed...");
+        if (getKeysPanel != null) getKeysPanel.SetActive(false);
+        this.RequestRewardedAd();
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -128,7 +155,10 @@ public class AdMob : MonoBehaviour
         double amount = args.Amount;
         GameManager.rewardedKeys = (int)amount;
 
-        collectText.text = "Congratulations. you've earned " + amount.ToString() + " keys!\n\nCollect them now and start playing...";
+        //Debug.Log("Type is: " + type + " and amount = " + amount.ToString());
+        //Debug.Log($"Type is: {type} and amount = {amount.ToString()}");
+
+        collectText.text = $"Congratulations. you've earned {amount.ToString()} {type}!\n\nCollect them now and start playing...";
 
         collectKeysPanel.SetActive(true);
         noKeysPanel.SetActive(false);

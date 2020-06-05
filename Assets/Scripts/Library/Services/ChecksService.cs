@@ -51,13 +51,7 @@ public class ChecksService
                 }
 
                 if (!winning.Contains(false))
-                {
-                    GameManager.interstitialAdCounter++;
-                    if (GameManager.interstitialAdCounter % 3 == 0)
-                        AdMob.instance.ShowInterstitialAd();
-
                     return true;
-                }
             }
         }
 

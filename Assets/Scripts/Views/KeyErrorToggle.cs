@@ -8,6 +8,6 @@ public class KeyErrorToggle : MonoBehaviour
     public void ToggleKeyErrorPanel()
     {
         if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
-        if (gameItemsPanel != null) gameItemsPanel.SetActive(!keyErrorPanel.activeSelf);
+        if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
     }
 }

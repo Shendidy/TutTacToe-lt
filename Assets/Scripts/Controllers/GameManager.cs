@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public static int keysTotal { get; set; }
     public static int rewardedKeys { get; set; }
     public static int interstitialAdCounter { get; set; }
+    public static bool isInterstitialAdLoaded { get; set; }
+    public static bool isRewardAdLoaded { get; set; }
 
     GameManager()
     {

@@ -69,6 +69,11 @@ public class AdMob : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         this.bannerView.LoadAd(request);
     }
+
+    public void HideBannerAd()
+    {
+        this.bannerView.Destroy();
+    }
     #endregion
 
     #region Interstitial methods

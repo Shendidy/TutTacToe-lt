@@ -74,7 +74,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
-        GameManager.difficulty = 2;
+        GameManager.difficulty = 1;
         GameManager.boardWidth = 3;
 
         SetPlayersMovedService.FirstSetupPlayersMoved();
@@ -97,13 +97,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 if (GameManager.interstitialAdCounter >= 2 && keysTotal > 0)
                 {
                     AdMob.instance.RequestInterstitial();
-                    //Debug.Log("Requested Interstitial from DragAndDrop class OnBeginDrag() method...");
                 }
             }
-
-            //foreach (Slot slot in GameManager.boardSlots3x3)
-            //    if (slot.SOccupier)
-            //        if (slot.SOccupier.name == rectTransform.name) pieceStartSlot = slot;
             pieceStartSlot = GameManager.boardSlots3x3.Where(slot => (slot.SOccupier?.name == rectTransform.name)).ToArray()[0];
 
             canvasDotAlpha = canvasGroup.alpha;
@@ -188,14 +183,16 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 gameStatus.color = Color.blue;
                 gameStatus.text = "YOU WIN!";
 
-
                 // add debug log to show if interstitial and rewarded are loaded
                 GameManager.interstitialAdCounter++;
+
+                FireworksToggle.instance.ToggleFireworksPanel();
+
                 //Debug.Log("interstitial counter = " + GameManager.interstitialAdCounter.ToString());
                 if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
                 {
                     //Debug.Log("Calling ShowInterstitalAd from inside ChecksService in IsWinner method...");
-                    AdMob.instance.ShowInterstitialAd();
+                    //AdMob.instance.ShowInterstitialAd();
                 }
             }
             else

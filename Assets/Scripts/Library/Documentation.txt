@@ -1,1 +1,49 @@
-﻿
+﻿Mobile Apps:
+
+Google Play Store Developer Account ID: 5375823039541262776
+
+
+
+TUT tac toe-lt:
+Tasks:
+
+- Fix game startup logo to include game’s name.
+
+- Hide banner ad when you show fireworks.
+
+- Make sure banner ad is back on when fireworks panel is closed.
+
+- Add sound effects to the Fireworks panel.
+
+- Add difficulty switch.
+
+- On switching difficulty, show message that this will take effect with starting a new game.
+
+
+         DONE
+***————————————————***
+
+- Fix bug where loading the no keys panel removes game items panel. DONE
+- 
+- Change where you deduct keys to be only in the OnBeginDrag method! FIXED ISSUE DIFFERENTLY
+
+- Before deducting the key check if total = 0, if so can’t play, trigger the no keys panel. DONE
+
+- Request interstitial Ad from begin drag, only if counter is ok and total keys > 0. DONE
+
+- Create a new panel that opens when player clicks on the key. DONE
+
+- Request the rewarded Ad when this panel is opened. DONE
+
+- Request the rewarded Ad when the no keys panel is opened. DONE
+
+- Change name to TUT tac toe. DONE
+
+- Change name at top of board. DONE
+
+- Change name also in AdMob account. DONE
+
+- Create Fireworks panel. DONE
+
+- Fix keys counter. DONE
+

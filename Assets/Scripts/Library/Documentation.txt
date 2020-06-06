@@ -7,7 +7,6 @@ Google Play Store Developer Account ID: 5375823039541262776
 TUT tac toe-lt:
 Tasks:
 
-- Fix game startup logo to include game’s name.
 
 - Hide banner ad when you show fireworks.
 
@@ -46,4 +45,6 @@ Tasks:
 - Create Fireworks panel. DONE
 
 - Fix keys counter. DONE
+
+- Fix game startup logo to include game’s name. DONE
 

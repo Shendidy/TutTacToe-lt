@@ -11,6 +11,7 @@ public class RewardedKeysAction : MonoBehaviour
     public void RewardPlayer()
     {
         int keysTotal = GameDataManager.LoadGameData()._keys;
+        if (keysTotal < 0) keysTotal = 0;
         keysTotal += GameManager.rewardedKeys;
         GameDataManager.SaveGameData(new GameData(keysTotal, DateTime.UtcNow));
 

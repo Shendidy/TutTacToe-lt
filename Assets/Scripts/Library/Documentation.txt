@@ -9,13 +9,13 @@ Tasks:
 
 - Add sound effects to the Fireworks panel.
 
-- Add difficulty switch.
-
-- On switching difficulty, show message that this will take effect with starting a new game.
-
 
          DONE
 ***————————————————***
+
+- Add difficulty switch. DONE
+
+- On switching difficulty, show message that this will take effect with starting a new game. CANCELLED
 
 - Hide banner ad when you show fireworks. DONE
 

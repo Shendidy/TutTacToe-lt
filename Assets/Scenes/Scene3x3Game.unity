@@ -2247,37 +2247,38 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: "\nThis game is played in many parts of Egypt. It's based on the famous
-    Tic Tac Toe, but it removes the option of draw and the game would go on until
-    there's a winner.\r\n\r\nIt starts with players pieces laid down in the row closer
-    to them and with lower opacity, then once a piece is moved for the first time
-    its opacity will go to full indicating that this piece is now in the game and
-    can be part of a winning pattern. (winning patterns are the same as those of
-    Tic Tac Toe)\r\n\r\nPieces can be moved from their slot to any available slot
-    on the board, so make sure you don't only build a path to 1 or more winning patterns,
-    but ensure you're preventing your opponent building their own path.\r\n\r\nYou
-    have 3 boards to choose from (3x3, 4x4, 5x5), and 2 difficulty levels (easy /
-    hard).\r\n\r\nEasy: your opponent will pick any random slot and any random piece
-    to move, so it's not challenging at all, but a good starting point to learn the
-    basic rules.\r\n\r\nHard: your opponent will think of the best move available
-    for them to win the game, so it's more challenging and more fun.\r\n\r\n3x3 Board:
-    As explained above, basically form a pattern of 3 moved pieces in a line (horizontally,
-    vertically, or diagonally) and win the game.\r\n\r\n4x4 Board: each player will
-    have 4 pieces instead of 3, and for every pattern of 3 you form you get 1 point,
-    and when you form a pattern of 4 you get 3 points and the game ends. If no one
-    forms a 4 pieces pattern, the first player reaching 10 points wins the game.
-    The game will also end when a player manages to form a pattern of 4, but then
-    that player won't necessarily win the game, so the challenge is not just to create
-    the winning pattern, but also to look at the bigger picture and create it at
-    the right time to win the game.\r\n\r\n5x5 Board: same as the 4x4 but with 1
-    point for a pattern of 3 pieces, 3 points for a pattern of 4 pieces, and 5 points
-    for a pattern of 5 (which also ends the game). The game will also end when a
-    player reaches 15 points.\r\n\r\nYou'll have 10 keys every day, you can use them
-    to play new games:\r\n  - 3x3 board: 1 key per game (any difficulty level).\r\n 
-    - 4x4 board: 3 keys per game (any difficulty level).\r\n  - 5x5 board: 5 keys
-    per game (any difficulty level).\r\n\r\nTo earn more keys, you'll just have to
-    watch a short advertisement by clicking on the key at the top left corner, and
-    you'll earn 5 more keys to use."
+  m_Text: "\nThis game is built on top of a game played in many parts of Egypt, we
+    call it \"Siega\". Which in turn is based on the famous Tic Tac Toe, but it eliminates
+    the option of draw and the game would go on until there's a winner.\r\n\r\nIt
+    starts with players pieces laid down in the row closer to them and with lower
+    opacity, then once a piece is moved for the first time its opacity will go to
+    full indicating that this piece is now in the game and can be part of a winning
+    pattern. (winning patterns are the same as those of Tic Tac Toe)\r\n\r\nPieces
+    can be moved from their slot to any available slot on the board, so make sure
+    you don't only build a path to 1 or more winning patterns, but ensure you're
+    preventing your opponent building their own path.\r\n\r\nYou have 3 boards to
+    choose from (3x3, 4x4, 5x5), and 2 difficulty levels (easy / hard).\r\n\r\nEasy:
+    your opponent will pick any random slot and any random piece to move, so it's
+    not challenging at all, but a good starting point to learn the basic rules.\r\n\r\nHard:
+    your opponent will think of the best move available for them to win the game,
+    so it's more challenging and more fun.\r\n\r\n3x3 Board: As explained above,
+    basically form a pattern of 3 moved pieces in a line (horizontally, vertically,
+    or diagonally) and win the game.\r\n\r\n4x4 Board: each player will have 4 pieces
+    instead of 3, and for every pattern of 3 you form you get 1 point, and when you
+    form a pattern of 4 you get 3 points and the game ends. If no one forms a 4 pieces
+    pattern, the first player reaching 10 points wins the game. The game will also
+    end when a player manages to form a pattern of 4, but then that player won't
+    necessarily win the game, so the challenge is not just to create the winning
+    pattern, but also to look at the bigger picture and create it at the right time
+    to win the game.\r\n\r\n5x5 Board: same as the 4x4 but with 1 point for a pattern
+    of 3 pieces, 3 points for a pattern of 4 pieces, and 5 points for a pattern of
+    5 (which also ends the game). The game will also end when a player reaches 15
+    points.\r\n\r\nYou'll have 10 keys every day, you can use them to play new games:\r\n 
+    - 3x3 board: 1 key per game (any difficulty level).\r\n  - 4x4 board: 3 keys
+    per game (any difficulty level).\r\n  - 5x5 board: 5 keys per game (any difficulty
+    level).\r\n\r\nTo earn more keys, you'll just have to watch a short advertisement
+    by clicking on the key at the top left corner, and you'll earn 5 more keys to
+    use."
 --- !u!222 &435655878
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2403,8 +2404,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1073583475}
   m_HandleRect: {fileID: 1073583474}
   m_Direction: 2
-  m_Value: 0.9999017
-  m_Size: 0.09478688
+  m_Value: 0.999873
+  m_Size: 0.0861674
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4709,8 +4710,8 @@ RectTransform:
   m_Father: {fileID: 1666248836}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.9051241}
-  m_AnchorMax: {x: 1, y: 0.999911}
+  m_AnchorMin: {x: 0, y: 0.91371655}
+  m_AnchorMax: {x: 1, y: 0.99988395}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7452,8 +7453,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -2287.8}
-  m_SizeDelta: {x: -0.005493164, y: 4576.5}
+  m_AnchoredPosition: {x: 0.0028076172, y: -2366.4}
+  m_SizeDelta: {x: -0.005493164, y: 4734.003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635272394
 MonoBehaviour:
@@ -7488,11 +7489,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
   m_Text: "\nYou don't have enough keys!\r\n\r\nYou can either support us and watch
-    a short advertisement  by clicking the red key, and instantly earn 5 more keys,
-    or buy the ads free version for about the price of a cup of coffee and never
-    be limited by the number of keys you have, plus you\u2019ll be able to set the
-    maximum score to end a 4x4 or 5x5 boards.\r\n\r\nIf you prefer to wait, tomorrow
-    you\u2019ll have 10 new keys in your key bank.\r"
+    a short advertisement  by clicking the key, and instantly earn 5 more keys, or
+    buy the ads free version for about the price of a cup of coffee and never be
+    limited by the number of keys you have.\r\n\r\nIf you prefer to wait, tomorrow
+    you\u2019ll have 10 new keys in your keys bank.\r"
 --- !u!222 &1635272395
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8053,8 +8053,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.035305556, y: 0.143}
   m_AnchorMax: {x: 0.9836945, y: 0.874}
-  m_AnchoredPosition: {x: 0.5192871, y: -0.14025879}
-  m_SizeDelta: {x: -1.0388184, y: 0.28027344}
+  m_AnchoredPosition: {x: 0.5192871, y: -14.428986}
+  m_SizeDelta: {x: -1.0388184, y: 28.858643}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741472667
 MonoBehaviour:

@@ -85,6 +85,11 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             GameManager.difficulty == 2 ? 2 : 1;
 
         difficulty = GameManager.difficulty;
+        // If you want the player to be able to change difficulty in
+        // the middle of a runnig game, refer to 'GameManager.difficulty' in
+        // code below, otherwise refer to 'difficulty'.
+
+
         GameManager.boardWidth = 3;
 
         SetPlayersMovedService.FirstSetupPlayersMoved();
@@ -270,7 +275,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
     public void ComputerMove()
     {
-        if (difficulty == 1)
+        if (GameManager.difficulty == 1)
         {
             newComputerSlot = PickAction.PickRandomSlot();
             newComputerPiece = PickAction.PickComputerPiece(players);
@@ -287,7 +292,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 bool moved = ChecksService.CheckIfMoved(computerPiece);
                 Vector2 oldPosition = computerPiece.position;
 
-                if (difficulty == 2)
+                if (GameManager.difficulty == 2)
                 {
                     Slot[] tempBoard = CopyService.CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
                     Slot[] freeSlots = tempBoard.Where(slot => (slot.SOccupier == null)).ToArray();
@@ -312,7 +317,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                         }
                     }
                 }
-                else if (difficulty == 3) // Probably wont have this option!
+                else if (GameManager.difficulty == 3) // Probably wont have this option!
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels
                 }

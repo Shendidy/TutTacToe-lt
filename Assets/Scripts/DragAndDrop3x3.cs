@@ -51,6 +51,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public Rigidbody2D player21;
     public Rigidbody2D player22;
     public Rigidbody2D player23;
+    // Audio
+    public AudioSource shh;
+    public AudioSource tick;
 
     private bool isOutOfBoard;
     private float canvasDotAlpha;
@@ -88,6 +91,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (!GameManager.gameOver && keysTotal >= 0)
         {
+            shh.Play();
             if (GameManager.newGame)
             {
                 PopulateSlotCentres();
@@ -126,6 +130,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
             MovePiece(isOutOfBoard);
         }
+        tick.Play();
     }
     private Slot GetFinalSlot()
     {

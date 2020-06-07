@@ -14,7 +14,7 @@ public class BackToGame : MonoBehaviour
 
     public void BackToGamePanel()
     {
-        AdMob.instance.RequestBanner();
+        //AdMob.instance.RequestBanner();
 
         if (gameItemsPanel != null) gameItemsPanel.SetActive(true);
         if (aboutPanel != null) aboutPanel.SetActive(false);
@@ -24,7 +24,7 @@ public class BackToGame : MonoBehaviour
 
         m_Volume.isGlobal = false;
 
-        AdMob.instance.ShowBannerAd();
+        //AdMob.instance.ShowBannerAd();
     }
 }
 

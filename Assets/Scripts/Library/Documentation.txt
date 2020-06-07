@@ -7,11 +7,6 @@ Google Play Store Developer Account ID: 5375823039541262776
 TUT tac toe-lt:
 Tasks:
 
-
-- Hide banner ad when you show fireworks.
-
-- Make sure banner ad is back on when fireworks panel is closed.
-
 - Add sound effects to the Fireworks panel.
 
 - Add difficulty switch.
@@ -22,8 +17,12 @@ Tasks:
          DONE
 ***————————————————***
 
+- Hide banner ad when you show fireworks. DONE
+
+- Make sure banner ad is back on when fireworks panel is closed. DONE
+
 - Fix bug where loading the no keys panel removes game items panel. DONE
-- 
+ 
 - Change where you deduct keys to be only in the OnBeginDrag method! FIXED ISSUE DIFFERENTLY
 
 - Before deducting the key check if total = 0, if so can’t play, trigger the no keys panel. DONE

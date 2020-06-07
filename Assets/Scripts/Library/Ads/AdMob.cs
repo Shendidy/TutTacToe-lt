@@ -24,7 +24,7 @@ public class AdMob : MonoBehaviour
     private readonly string interstitialID = Constants._AdMobInterstitialTestID;
     private readonly string rewardedID = Constants._AdMobRewardedTestID;
 
-    private BannerView bannerView;
+    //private BannerView bannerView;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
 
@@ -41,9 +41,9 @@ public class AdMob : MonoBehaviour
         this.rewardedAd = new RewardedAd(rewardedID);
         this.interstitialAd = new InterstitialAd(interstitialID);
 
-        // Banner Ads
-        RequestBanner();
-        ShowBannerAd();
+        //// Banner Ads
+        //RequestBanner();
+        //ShowBannerAd();
     }
 
     private void Awake()
@@ -55,25 +55,25 @@ public class AdMob : MonoBehaviour
     }
 
     #region Banner methods
-    public void RequestBanner()
-    {
-        // Create a 320x50 banner at the top of the screen.
-        this.bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
+    //public void RequestBanner()
+    //{
+    //    // Create a 320x50 banner at the top of the screen.
+    //    this.bannerView = new BannerView(bannerID, AdSize.Banner, AdPosition.Bottom);
 
-        // Called when the user returned from the app after an ad click.
-        this.bannerView.OnAdClosed += this.HandleOnBannerAdClosed;
-    }
+    //    // Called when the user returned from the app after an ad click.
+    //    this.bannerView.OnAdClosed += this.HandleOnBannerAdClosed;
+    //}
 
-    public void ShowBannerAd()
-    {
-        AdRequest request = new AdRequest.Builder().Build();
-        this.bannerView.LoadAd(request);
-    }
+    //public void ShowBannerAd()
+    //{
+    //    AdRequest request = new AdRequest.Builder().Build();
+    //    this.bannerView.LoadAd(request);
+    //}
 
-    public void HideBannerAd()
-    {
-        this.bannerView.Destroy();
-    }
+    //public void HideBannerAd()
+    //{
+    //    this.bannerView.Destroy();
+    //}
     #endregion
 
     #region Interstitial methods
@@ -138,9 +138,9 @@ public class AdMob : MonoBehaviour
 
     #region Events handling methods
 
-    public void HandleOnBannerAdClosed(object sender, EventArgs args)
-    {
-    }
+    //public void HandleOnBannerAdClosed(object sender, EventArgs args)
+    //{
+    //}
 
     public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
     {

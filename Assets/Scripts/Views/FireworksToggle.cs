@@ -23,7 +23,7 @@ public class FireworksToggle : MonoBehaviour
 
     public void ToggleFireworksPanel()
     {
-        AdMob.instance.HideBannerAd();
+        //AdMob.instance.HideBannerAd();
 
         if (gameItemsPanel != null) gameItemsPanel.SetActive(false);
         if (aboutPanel != null) aboutPanel.SetActive(false);

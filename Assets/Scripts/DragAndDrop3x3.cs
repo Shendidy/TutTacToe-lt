@@ -80,6 +80,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
+
+        GameManager.difficulty =
+            GameManager.difficulty == 2 ? 2 : 1;
+
         difficulty = GameManager.difficulty;
         GameManager.boardWidth = 3;
 

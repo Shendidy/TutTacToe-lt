@@ -20,9 +20,9 @@ public class AdMob : MonoBehaviour
 
     private readonly string appID = Constants._AdMobAppID;
 
-    private readonly string bannerID = Constants._AdMobBannerTestID;
-    private readonly string interstitialID = Constants._AdMobInterstitialTestID;
-    private readonly string rewardedID = Constants._AdMobRewardedTestID;
+    private readonly string bannerID = Constants._AdMobBannerID;
+    private readonly string interstitialID = Constants._AdMobInterstitialID;
+    private readonly string rewardedID = Constants._AdMobRewardedID;
 
     //private BannerView bannerView;
     private InterstitialAd interstitialAd;

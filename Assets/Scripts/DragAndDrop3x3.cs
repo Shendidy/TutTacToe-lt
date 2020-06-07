@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -29,8 +27,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     public CanvasGroup canvasGroup23;
     public Rigidbody2D nodeTopRight;
     public Rigidbody2D nodeBottomLeft;
-    public GameObject easyButton;
-    public GameObject hardButton;
     private Slot pieceStartSlot;
     private Rigidbody2D[] players;
     private List<Slot> playersLocation;
@@ -74,7 +70,6 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         micButton.SetActive(GameManager.isMicOn);
         muteButton.SetActive(!GameManager.isMicOn);
 
-        //Debug.Log("Total keys = " + keysTotal);
         keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
         gameStatus.text = "";
         GameManager.newGame = true;
@@ -82,28 +77,13 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.gameOver = false;
 
         GameManager.difficulty =
-            GameManager.difficulty == 2 ? 2 : 1;
+            GameManager.difficulty == 2 ? 2 : GameManager.difficulty == 3 ? 3 : 1;
 
         difficulty = GameManager.difficulty;
-        // If you want the player to be able to change difficulty in
-        // the middle of a runnig game, refer to 'GameManager.difficulty' in
-        // code below, otherwise refer to 'difficulty'.
-
 
         GameManager.boardWidth = 3;
 
         SetPlayersMovedService.FirstSetupPlayersMoved();
-
-        if (GameManager.difficulty == 1)
-        {
-            easyButton.SetActive(true);
-            hardButton.SetActive(false);
-        }
-        else
-        {
-            easyButton.SetActive(false);
-            hardButton.SetActive(true);
-        }
     }
 
     private void Start()
@@ -211,17 +191,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 gameStatus.color = Color.blue;
                 gameStatus.text = "YOU WIN!";
 
-                // add debug log to show if interstitial and rewarded are loaded
                 GameManager.interstitialAdCounter++;
 
                 FireworksToggle.instance.ToggleFireworksPanel();
-
-                //Debug.Log("interstitial counter = " + GameManager.interstitialAdCounter.ToString());
-                if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
-                {
-                    //Debug.Log("Calling ShowInterstitalAd from inside ChecksService in IsWinner method...");
-                    //AdMob.instance.ShowInterstitialAd();
-                }
             }
             else
             {
@@ -275,7 +247,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         rectTransform.name.ToCharArray()[6].ToString() == GameManager.playerInTurn.ToString();
     public void ComputerMove()
     {
-        if (GameManager.difficulty == 1)
+        SetDifficultyFromButtons();
+
+        if (difficulty == 1)
         {
             newComputerSlot = PickAction.PickRandomSlot();
             newComputerPiece = PickAction.PickComputerPiece(players);
@@ -292,9 +266,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 bool moved = ChecksService.CheckIfMoved(computerPiece);
                 Vector2 oldPosition = computerPiece.position;
 
-                if (GameManager.difficulty == 2)
+                if (difficulty == 2)
                 {
-                    Slot[] tempBoard = CopyService.CopySlotsArray(GameManager.boardSlots3x3);// GameManager.boardSlots3x3;
+                    Slot[] tempBoard = CopyService.CopySlotsArray(GameManager.boardSlots3x3);
                     Slot[] freeSlots = tempBoard.Where(slot => (slot.SOccupier == null)).ToArray();
                     foreach (Slot slot in freeSlots)
                     {
@@ -317,7 +291,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                         }
                     }
                 }
-                else if (GameManager.difficulty == 3) // Probably wont have this option!
+                else if (difficulty == 3) // Probably wont have this option!
                 {
                     // put here the logic of checking all available moves in a depth of 2 check levels
                 }
@@ -352,15 +326,32 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             gameStatus.color = Color.red;
             gameStatus.text = "YOU LOSE!";
 
-            // add debug log to show if interstitial and rewarded are loaded
             GameManager.interstitialAdCounter++;
-            //Debug.Log("interstitial counter = " + GameManager.interstitialAdCounter.ToString());
             if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
             {
-                //Debug.Log("Calling ShowInterstitalAd from inside ChecksService in IsWinner method...");
                 AdMob.instance.ShowInterstitialAd();
             }
         }
         ChangeAction.ChangePlayerInTurn();
+    }
+
+    private void SetDifficultyFromButtons()
+    {
+        System.Random rand = new System.Random();
+
+        int i = rand.Next(0, 100);
+
+        switch (GameManager.difficulty)
+        {
+            case 1:
+                difficulty = 1;
+                break;
+            case 2:
+                difficulty = i < 50 ? 2 : 1;
+                break;
+            case 3:
+                difficulty = i < 90 ? 2 : 1;
+                break;
+        }
     }
 }

@@ -17,6 +17,9 @@ TagManager:
   - micImage
   - muteImage
   - keyImage
+  - keyEasy
+  - keyMid
+  - keyHard
   layers:
   - Default
   - TransparentFX

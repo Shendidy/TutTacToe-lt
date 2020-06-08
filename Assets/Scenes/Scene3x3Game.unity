@@ -2288,7 +2288,7 @@ MonoBehaviour:
     we call it "Siega". Which in turn is based on the famous Tic Tac Toe, but it
     eliminates the option of draw and the game would go on until there''s a winner.
 
-    
+
 
     It
     starts with players pieces laid down in the row closer to them and with lower
@@ -2296,48 +2296,48 @@ MonoBehaviour:
     full indicating that this piece is now in the game and can be part of a winning
     pattern. (winning patterns are the same as those of Tic Tac Toe)
 
-    
+
 
     Pieces
     can be moved from their slot to any available slot on the board, so make sure
     you don''t only build a path to 1 or more winning patterns, but ensure you''re
     preventing your opponent building their own path.
 
-    
+
 
     You have 3 difficulty
     levels to choose from (easy, mid, hard).
 
-    
-
-    Easy: your opponent will
-    pick any random slot and any random piece to move, so it''s not challenging at
-    all, but a good starting point to learn the basic rules.
 
 
-    Mid: 50% of the
-    time your opponent will think of their best move to win or to prevent you winning.
+    Easy: your opponent will pick
+    any random slot and any random piece to move, so it''s not challenging at all,
+    but a good starting point to learn the basic rules.
+
+
+    Mid: 50% of the time
+    your opponent will think of their best move to win or to prevent you winning.
     Not as easy as the option above, but it adds a bit of challenge and fun to the
     game.
 
-    
 
-    Hard: 90% of the time your opponent will think of their best
-    move to win or to prevent you winning. Much more challenging and fun than Mid,
-    good luck...
 
-    
+    Hard: 90% of the time your opponent will think of their best move
+    to win or to prevent you winning. Much more challenging and fun than Mid, good
+    luck...
 
-    You''ll have 5 keys every day, you can use them to
-    play new games, each game requires 1 key.
 
-    
 
-    To earn more keys, you''ll
-    just have to watch a short advertisement by clicking on the key at the top left
-    corner, and you''ll earn 5 more keys to use. Otherwise, you can buy the ads free
-    version for almost as much as a cup of coffee and enjoy the game for as much
-    as you want without any interruptions.'
+    You''ll have 5 keys every day, you can use them to play new games,
+    each game requires 1 key.
+
+
+
+    To earn more keys, you''ll just have to watch
+    a short advertisement by clicking on the key at the top left corner, and you''ll
+    earn 5 more keys to use. Otherwise, you can buy the ads free version for almost
+    as much as a cup of coffee and enjoy the game for as much as you want without
+    any interruptions.'
 --- !u!222 &435655878
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4142,7 +4142,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 382a739ed42cd4d6fb57060173fe2f26, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d5be41424f8b14d15939e34b40be1961, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1

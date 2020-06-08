@@ -132,8 +132,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         {
             isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
             MovePiece(isOutOfBoard);
+            tick.Play();
         }
-        tick.Play();
     }
     private Slot GetFinalSlot()
     {

@@ -2335,7 +2335,7 @@ MonoBehaviour:
 
     To earn more keys, you''ll just have to watch
     a short advertisement by clicking on the key at the top left corner, and you''ll
-    earn 5 more keys to use. Otherwise, you can buy the ads free version for almost
+    earn more keys to use. Otherwise, you can buy the ads free version for almost
     as much as a cup of coffee and enjoy the game for as much as you want without
     any interruptions.'
 --- !u!222 &435655878
@@ -2763,7 +2763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540581378}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -66, y: -1168, z: -7056.742}
+  m_LocalPosition: {x: -13, y: -1023, z: -7056.742}
   m_LocalScale: {x: 78.40825, y: 78.40825, z: 78.40825}
   m_Children: []
   m_Father: {fileID: 1088307293}
@@ -3080,7 +3080,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.16827643}
-  m_AnchoredPosition: {x: 0, y: -0.119659424}
+  m_AnchoredPosition: {x: 0, y: -0.11968994}
   m_SizeDelta: {x: 0, y: -0.23936462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &574632892
@@ -4982,8 +4982,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00061035156, y: -0.0021972656}
-  m_SizeDelta: {x: 0.0010070801, y: -0.004333496}
+  m_AnchoredPosition: {x: -27.000977, y: 49}
+  m_SizeDelta: {x: 526.97534, y: 144.06177}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088307294
 MonoBehaviour:
@@ -7421,7 +7421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27, y: 49}
+  m_AnchoredPosition: {x: -26.999878, y: 49}
   m_SizeDelta: {x: 526.9783, y: 144.06152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633457225
@@ -7531,10 +7531,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
   m_Text: "\nYou don't have enough keys!\r\n\r\nYou can either support us and watch
-    a short advertisement  by clicking the key, and instantly earn 5 more keys, or
+    a short advertisement  by clicking the key, and instantly earn more keys, or
     buy the ads free version for about the price of a cup of coffee and never be
     limited by the number of keys you have.\r\n\r\nIf you prefer to wait, tomorrow
-    you\u2019ll have 5 new keys in your keys bank.\r"
+    you\u2019ll have new keys in your keys bank.\r"
 --- !u!222 &1635272395
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -18,11 +18,11 @@ public class AdMob : MonoBehaviour
     public GameObject getKeysPanel;
     public Text loadingAddText;
 
-    private readonly string appID = Constants._AdMobAppID;
+    private readonly string appID = Constants._AdMobAppIDIos;
 
-    private readonly string bannerID = Constants._AdMobBannerID;
-    private readonly string interstitialID = Constants._AdMobInterstitialID;
-    private readonly string rewardedID = Constants._AdMobRewardedID;
+    private readonly string bannerID = Constants._AdMobBannerTestID;
+    private readonly string interstitialID = Constants._AdMobInterstitialTestID;
+    private readonly string rewardedID = Constants._AdMobRewardedTestID;
 
     //private BannerView bannerView;
     private InterstitialAd interstitialAd;

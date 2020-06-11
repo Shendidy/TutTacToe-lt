@@ -116,6 +116,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         }
         if (keysTotal < 0)
         {
+            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
             if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);
         }
     }

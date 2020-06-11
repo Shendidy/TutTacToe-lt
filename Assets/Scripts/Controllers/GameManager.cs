@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static int interstitialAdCounter { get; set; }
     public static bool isInterstitialAdLoaded { get; set; }
     public static bool isRewardAdLoaded { get; set; }
+    public static string mobileSystem { get; set; }
 
     GameManager()
     {

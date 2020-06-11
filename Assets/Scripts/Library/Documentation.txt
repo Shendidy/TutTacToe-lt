@@ -1,6 +1,11 @@
-﻿Mobile Apps:
+﻿APP Store release:
+        - Change in AdMob the var mobileSystem to "ios"
 
-Google Play Store Developer Account ID: 5375823039541262776
+Play Store release:
+        - Change in AdMob the var mobileSystem to "android"
+
+
+
 
 
 

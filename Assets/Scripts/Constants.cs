@@ -25,4 +25,7 @@ public class Constants
     public const int _KeysPerBoard3x3 = 1;
     public const int _KeysPerBoard4x4 = 3;
     public const int _KeysPerBoard5x5 = 5;
+
+    public const string _AppStoreLink = "";
+    public const string _PlayStoreLink = "https://play.google.com/store/apps/details?id=com.Shendidy.TUTtactoe";
 }

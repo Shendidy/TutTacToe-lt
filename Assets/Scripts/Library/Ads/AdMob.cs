@@ -18,23 +18,37 @@ public class AdMob : MonoBehaviour
     public GameObject getKeysPanel;
     public Text loadingAddText;
 
-    private readonly string appID = Constants._AdMobAppIDIos;
-
-    private readonly string bannerID = Constants._AdMobBannerIDIos;
-    private readonly string interstitialID = Constants._AdMobInterstitialIDIos;
-    private readonly string rewardedID = Constants._AdMobRewardedIDIos;
+    private string appID;
+    private string bannerID;
+    private string interstitialID;
+    private string rewardedID;
 
     //private BannerView bannerView;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
 
-    //private int interstitialAdCounter = 0;
-    //private int rewardedAdCounter = 0;
-
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("started AdMob Start() method!");
+        GameManager.mobileSystem = "ios"; // "ios" or "android"
+
+        switch (GameManager.mobileSystem)
+        {
+            case "ios":
+                appID = Constants._AdMobAppIDIos;
+                bannerID = Constants._AdMobBannerIDIos;
+                interstitialID = Constants._AdMobInterstitialIDIos;
+                rewardedID = Constants._AdMobRewardedIDIos;
+                break;
+            case "android":
+                appID = Constants._AdMobAppID;
+                bannerID = Constants._AdMobBannerID;
+                interstitialID = Constants._AdMobInterstitialID;
+                rewardedID = Constants._AdMobRewardedID;
+                break;
+            default:
+                break;
+        }
 
         MobileAds.Initialize(appID);
 
@@ -82,12 +96,11 @@ public class AdMob : MonoBehaviour
 
         //Debug.Log("Before RequestInterstitial method, interstitial loaded = " + this.interstitialAd.IsLoaded());
         AdRequest request = new AdRequest.Builder().Build();
-        if (!this.interstitialAd.IsLoaded())
-            this.interstitialAd.LoadAd(request);
+        this.interstitialAd.LoadAd(request);
         //Debug.Log("After RequestInterstitial method, interstitial loaded = " + this.interstitialAd.IsLoaded());
 
         // Called when the ad is closed.
-        this.interstitialAd.OnAdClosed += this.HandleOnInterstitialAdClosed;
+        //this.interstitialAd.OnAdClosed += this.HandleOnInterstitialAdClosed;
     }
 
     public void ShowInterstitialAd()
@@ -105,11 +118,11 @@ public class AdMob : MonoBehaviour
     public void RequestRewardedAd()
     {
         //Debug.Log("Before RequestRewardedAd method, RewardedAd loaded = " + this.rewardedAd.IsLoaded());
-        if (!this.rewardedAd.IsLoaded())
-        {
+        //if (!this.rewardedAd.IsLoaded())
+        //{
             AdRequest request = new AdRequest.Builder().Build();
             this.rewardedAd.LoadAd(request);
-        }
+        //}
         //Debug.Log("After RequestRewardedAd method, RewardedAd loaded = " + this.rewardedAd.IsLoaded());
 
         // Called when the user should be rewarded for interacting with the ad.
@@ -126,24 +139,24 @@ public class AdMob : MonoBehaviour
             GameManager.interstitialAdCounter = 0;
             this.rewardedAd.Show();
         }
-        else
-        {
-            loadingAddText.text = "Your Ad will start shortly!";
+        //else
+        //{
+        //    loadingAddText.text = "Your Ad will start shortly!";
 
-            RewardedAd testRewardedAd = new RewardedAd(Constants._AdMobRewardedTestID);
-            AdRequest requestTest = new AdRequest.Builder().Build();
-            testRewardedAd.LoadAd(requestTest);
+        //    RewardedAd testRewardedAd = new RewardedAd(Constants._AdMobRewardedTestID);
+        //    AdRequest requestTest = new AdRequest.Builder().Build();
+        //    testRewardedAd.LoadAd(requestTest);
 
-            Thread.Sleep(2000);
-            if(testRewardedAd.IsLoaded())
-                testRewardedAd.Show();
-            else
-            {
-                Thread.Sleep(2000);
-                if (testRewardedAd.IsLoaded())
-                    testRewardedAd.Show();
-            }
-        }
+        //    Thread.Sleep(2000);
+        //    if(testRewardedAd.IsLoaded())
+        //        testRewardedAd.Show();
+        //    else
+        //    {
+        //        Thread.Sleep(2000);
+        //        if (testRewardedAd.IsLoaded())
+        //            testRewardedAd.Show();
+        //    }
+        //}
     }
     #endregion
 
@@ -153,10 +166,10 @@ public class AdMob : MonoBehaviour
     //{
     //}
 
-    public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
-    {
-        //Debug.Log("On Interstitial Ad closed...");
-    }
+    //public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
+    //{
+    //    //Debug.Log("On Interstitial Ad closed...");
+    //}
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {

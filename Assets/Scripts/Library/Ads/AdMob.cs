@@ -20,9 +20,9 @@ public class AdMob : MonoBehaviour
 
     private readonly string appID = Constants._AdMobAppIDIos;
 
-    private readonly string bannerID = Constants._AdMobBannerID;
-    private readonly string interstitialID = Constants._AdMobInterstitialID;
-    private readonly string rewardedID = Constants._AdMobRewardedID;
+    private readonly string bannerID = Constants._AdMobBannerIDIos;
+    private readonly string interstitialID = Constants._AdMobInterstitialIDIos;
+    private readonly string rewardedID = Constants._AdMobRewardedIDIos;
 
     //private BannerView bannerView;
     private InterstitialAd interstitialAd;
@@ -128,10 +128,21 @@ public class AdMob : MonoBehaviour
         }
         else
         {
-            loadingAddText.text = "Your Ad will start in 2 seconds!";
-            RequestRewardedAd();
+            loadingAddText.text = "Your Ad will start shortly!";
+
+            RewardedAd testRewardedAd = new RewardedAd(Constants._AdMobRewardedTestID);
+            AdRequest requestTest = new AdRequest.Builder().Build();
+            testRewardedAd.LoadAd(requestTest);
+
             Thread.Sleep(2000);
-            this.rewardedAd.Show();
+            if(testRewardedAd.IsLoaded())
+                testRewardedAd.Show();
+            else
+            {
+                Thread.Sleep(2000);
+                if (testRewardedAd.IsLoaded())
+                    testRewardedAd.Show();
+            }
         }
     }
     #endregion

@@ -71,7 +71,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         muteButton.SetActive(!GameManager.isMicOn);
 
         keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
-        gameStatus.text = "";
+        gameStatus.text = "Move a blue TUT to start the game";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
@@ -131,7 +131,9 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (!GameManager.gameOver && GameManager.keysTotal >= 0)
         {
+            var playerPiece = rectTransform.name.ToCharArray()[6].ToString() == "1";
             isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
+            if (!isOutOfBoard && playerPiece) gameStatus.text = "";
             MovePiece(isOutOfBoard);
             tick.Play();
         }

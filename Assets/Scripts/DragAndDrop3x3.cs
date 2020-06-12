@@ -94,6 +94,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (!GameManager.gameOver && keysTotal >= 0)
         {
+            AdMob.instance.RequestInterstitial();
             shh.Play();
             if (GameManager.newGame)
             {
@@ -131,6 +132,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     {
         if (!GameManager.gameOver && GameManager.keysTotal >= 0)
         {
+            AdMob.instance.RequestRewardedAd();
             var playerPiece = rectTransform.name.ToCharArray()[6].ToString() == "1";
             isOutOfBoard = ChecksService.CheckIfOutOfBoard(rectTransform.position, nodeTopRight.position, nodeBottomLeft.position);
             if (!isOutOfBoard && playerPiece) gameStatus.text = "";

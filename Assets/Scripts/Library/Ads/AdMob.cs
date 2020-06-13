@@ -30,7 +30,7 @@ public class AdMob : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.mobileSystem = "ios"; // "ios" or "android"
+        GameManager.mobileSystem = "android"; // "ios" or "android"
 
         switch (GameManager.mobileSystem)
         {
@@ -189,14 +189,22 @@ public class AdMob : MonoBehaviour
 
     public void HandleRewardedAdCouldntLoad()
     {
-        AudioListener.pause = false;
-        GameManager.rewardedKeys = Constants._RefillOnRewardedAd;
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            collectText.text = "Error. Check internet connection!\n\nInternet connection is required to load the short ad and earn your additional keys";
+        }
+        else
+        {
+            AudioListener.pause = false;
+            GameManager.rewardedKeys = Constants._RefillOnRewardedAd;
 
-        collectText.text = $"Congratulations. you've earned {Constants._RefillOnRewardedAd.ToString()} keys!\n\nCollect them now and start playing...";
+            collectText.text = $"Congratulations. you've earned {Constants._RefillOnRewardedAd.ToString()} keys!\n\nCollect them now and start playing...";
 
-        collectKeysPanel.SetActive(true);
-        noKeysPanel.SetActive(false);
-        gameItemsPanel.SetActive(false);
+            collectKeysPanel.SetActive(true);
+            getKeysPanel.SetActive(false);
+            noKeysPanel.SetActive(false);
+            gameItemsPanel.SetActive(false);
+        }
     }
     #endregion
 }

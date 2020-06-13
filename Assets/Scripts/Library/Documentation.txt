@@ -8,15 +8,18 @@ Play Store release:
 TUT tac toe-lt:
 Tasks:
 
-- Stop music when an ad starts, then replay when it ends.
 - Add scoring system to the game.
-- Request rewarded and interstitial ads with every on begin (if not loaded).
-- Return banner ads.
 - Add sound effects to the Fireworks panel.
 
 
          DONE
 ***————————————————***
+
+- Stop music when an ad starts, then replay when it ends. Done
+
+- Request rewarded and interstitial ads with every on begin (if not loaded). DONE
+
+- Return banner ads. DONE
 
 - Add difficulty switch. DONE
 

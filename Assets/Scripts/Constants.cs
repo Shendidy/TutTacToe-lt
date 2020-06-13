@@ -26,6 +26,6 @@ public class Constants
     public const int _KeysPerBoard4x4 = 3;
     public const int _KeysPerBoard5x5 = 5;
 
-    public const string _AppStoreLink = "";
+    public const string _AppStoreLink = "https://apps.apple.com/app/tut-tac-toe/id1517767463";
     public const string _PlayStoreLink = "https://play.google.com/store/apps/details?id=com.Shendidy.TUTtactoe";
 }

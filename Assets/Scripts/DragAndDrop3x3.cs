@@ -352,10 +352,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 difficulty = 1;
                 break;
             case 2:
-                difficulty = i < 50 ? 2 : 1;
+                difficulty = i < 60 ? 2 : 1;
                 break;
             case 3:
-                difficulty = i < 90 ? 2 : 1;
+                difficulty = i < 105 ? 2 : 1;
                 break;
         }
     }

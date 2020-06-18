@@ -30,7 +30,7 @@ public class AdMob : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.mobileSystem = "android"; // "ios" or "android"
+        GameManager.mobileSystem = "android"; // "ios", "android", or "test"
 
         switch (GameManager.mobileSystem)
         {
@@ -41,10 +41,16 @@ public class AdMob : MonoBehaviour
                 rewardedID = Constants._AdMobRewardedIDIos;
                 break;
             case "android":
-                appID = Constants._AdMobAppID;
-                bannerID = Constants._AdMobBannerID;
-                interstitialID = Constants._AdMobInterstitialID;
-                rewardedID = Constants._AdMobRewardedID;
+                appID = Constants._AdMobAppIDAndroid;
+                bannerID = Constants._AdMobBannerIDAndroid;
+                interstitialID = Constants._AdMobInterstitialIDAndroid;
+                rewardedID = Constants._AdMobRewardedIDAndroid;
+                break;
+            case "test":
+                appID = Constants._AdMobAppIDAndroid;
+                bannerID = Constants._AdMobBannerIDTest;
+                interstitialID = Constants._AdMobInterstitialIDTest;
+                rewardedID = Constants._AdMobRewardedIDTest;
                 break;
             default:
                 break;

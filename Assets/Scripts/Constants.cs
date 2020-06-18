@@ -28,4 +28,7 @@ public class Constants
 
     public const string _AppStoreLink = "https://apps.apple.com/app/tut-tac-toe/id1517767463";
     public const string _PlayStoreLink = "https://play.google.com/store/apps/details?id=com.Shendidy.TUTtactoe";
+
+    public const int _MidScore = 3;
+    public const int _HardScore = 5;
 }

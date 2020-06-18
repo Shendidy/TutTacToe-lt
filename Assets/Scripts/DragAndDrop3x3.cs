@@ -84,6 +84,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         GameManager.boardWidth = 3;
 
         SetPlayersMovedService.FirstSetupPlayersMoved();
+
+        GameManager.playerScore = GameManager.cpuScore = 0;
     }
 
     private void Start()
@@ -355,7 +357,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 difficulty = i < 60 ? 2 : 1;
                 break;
             case 3:
-                difficulty = i < 105 ? 2 : 1;
+                difficulty = i < 105  ? 2 : 1;
                 break;
         }
     }

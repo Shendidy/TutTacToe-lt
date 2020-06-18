@@ -31,4 +31,6 @@ public class Constants
 
     public const int _MidScore = 3;
     public const int _HardScore = 5;
+
+    public const int _InterstitialAdFrequency = 1;
 }

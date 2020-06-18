@@ -194,15 +194,24 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
             if (ChecksService.IsWinner(GameManager.boardSlots3x3))
             {
-                GameManager.gameOver = true;
-                gameStatus.color = Color.blue;
-                gameStatus.text = "YOU WIN!";
+                GameManager.playerScore++;
 
-                GameManager.interstitialAdCounter++;
+                Debug.Log($"Player: {GameManager.playerScore}, CPU: {GameManager.cpuScore}");
 
-                FireworksToggle.instance.ToggleFireworksPanel();
+                if ((GameManager.difficulty == 1)
+                    || (GameManager.difficulty == 2 && GameManager.playerScore >= Constants._MidScore)
+                    || (GameManager.difficulty == 3 && GameManager.playerScore >= Constants._HardScore))
+                {
+                    GameManager.gameOver = true;
+                    gameStatus.color = Color.blue;
+                    gameStatus.text = "YOU WIN!";
+
+                    GameManager.interstitialAdCounter++;
+
+                    FireworksToggle.instance.ToggleFireworksPanel();
+                }
             }
-            else
+            if(!GameManager.gameOver)
             {
                 ChangeAction.ChangePlayerInTurn();
                 ComputerMove();
@@ -329,17 +338,25 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         }
         if (ChecksService.IsWinner(GameManager.boardSlots3x3))
         {
-            GameManager.gameOver = true;
-            gameStatus.color = Color.red;
-            gameStatus.text = "YOU LOSE!";
+            GameManager.cpuScore++;
+            Debug.Log($"Player: {GameManager.playerScore}, CPU: {GameManager.cpuScore}");
 
-            GameManager.interstitialAdCounter++;
-            if (GameManager.interstitialAdCounter % 3 == 0 && GameManager.interstitialAdCounter != 0)
+            if ((GameManager.difficulty == 1)
+                || (GameManager.difficulty == 2 && GameManager.cpuScore >= Constants._MidScore)
+                || (GameManager.difficulty == 3 && GameManager.cpuScore >= Constants._HardScore))
             {
-                AdMob.instance.ShowInterstitialAd();
+                GameManager.gameOver = true;
+                gameStatus.color = Color.red;
+                gameStatus.text = "YOU LOSE!";
+
+                GameManager.interstitialAdCounter++;
+                if (GameManager.interstitialAdCounter >= Constants._InterstitialAdFrequency)
+                {
+                    AdMob.instance.ShowInterstitialAd();
+                }
             }
         }
-        ChangeAction.ChangePlayerInTurn();
+        if (!GameManager.gameOver) ChangeAction.ChangePlayerInTurn();
     }
 
     private void SetDifficultyFromButtons()

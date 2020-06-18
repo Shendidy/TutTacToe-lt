@@ -9,6 +9,8 @@ public class ToggleDifficulty : MonoBehaviour
     public GameObject easyButton;
     public GameObject midButton;
     public GameObject hardButton;
+    public GameObject difficultyPanel;
+    public GameObject gameItemsPanel;
 
     public void Awake()
     {
@@ -17,6 +19,8 @@ public class ToggleDifficulty : MonoBehaviour
             easyButton = GameObject.FindGameObjectsWithTag("keyEasy")[0];
             midButton = GameObject.FindGameObjectsWithTag("keyMid")[0];
             hardButton = GameObject.FindGameObjectsWithTag("keyHard")[0];
+            difficultyPanel = GameObject.FindGameObjectsWithTag("difficultyPanelTag")[0];
+            gameItemsPanel = GameObject.FindGameObjectsWithTag("gameItemsPanelTag")[0];
         }
 
         switch (GameManager.difficulty)
@@ -45,7 +49,8 @@ public class ToggleDifficulty : MonoBehaviour
         }
         else
         {
-
+            if (difficultyPanel != null) difficultyPanel.SetActive(!difficultyPanel.activeSelf);
+            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
         }
     }
 
@@ -61,7 +66,8 @@ public class ToggleDifficulty : MonoBehaviour
         }
         else
         {
-
+            if (difficultyPanel != null) difficultyPanel.SetActive(!difficultyPanel.activeSelf);
+            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
         }
     }
 
@@ -77,7 +83,8 @@ public class ToggleDifficulty : MonoBehaviour
         }
         else
         {
-
+            if (difficultyPanel != null) difficultyPanel.SetActive(!difficultyPanel.activeSelf);
+            if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
         }
     }
 }

@@ -116,7 +116,7 @@ public class AdMob : MonoBehaviour
         //Debug.Log("Before ShowInterstitialAd method, Interstitial loaded = " + this.interstitialAd.IsLoaded());
         if (this.interstitialAd.IsLoaded())
         {
-            AudioListener.pause = true;
+            //AudioListener.pause = true;
             this.interstitialAd.Show();
             GameManager.interstitialAdCounter = 0;
         }
@@ -147,7 +147,7 @@ public class AdMob : MonoBehaviour
         //Debug.Log("Rewarded is loaded = " + rewardedAd.IsLoaded());
         if (this.rewardedAd.IsLoaded())
         {
-            AudioListener.pause = true;
+            //AudioListener.pause = true;
             GameManager.interstitialAdCounter = 0;
             this.rewardedAd.Show();
         }
@@ -166,19 +166,19 @@ public class AdMob : MonoBehaviour
 
     public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
     {
-        AudioListener.pause = false;
+        //AudioListener.pause = false;
     }
 
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
-        AudioListener.pause = false;
+        //AudioListener.pause = false;
         if (getKeysPanel != null) getKeysPanel.SetActive(false);
         this.RequestRewardedAd();
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        AudioListener.pause = false;
+        //AudioListener.pause = false;
         string type = args.Type;
         double amount = args.Amount;
         GameManager.rewardedKeys = (int)amount;
@@ -201,7 +201,7 @@ public class AdMob : MonoBehaviour
         }
         else
         {
-            AudioListener.pause = false;
+            //AudioListener.pause = false;
             GameManager.rewardedKeys = Constants._RefillOnRewardedAd;
 
             collectText.text = $"Congratulations. you've earned {Constants._RefillOnRewardedAd.ToString()} keys!\n\nCollect them now and start playing...";

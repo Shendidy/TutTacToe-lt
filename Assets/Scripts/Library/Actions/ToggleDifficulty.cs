@@ -35,28 +35,49 @@ public class ToggleDifficulty : MonoBehaviour
 
     public void SetDifficultyEasy()
     {
-        GameManager.difficulty = 1;
-        
-        easyButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
-        midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-        hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+        if (GameManager.newGame)
+        {
+            GameManager.difficulty = 1;
+
+            easyButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
+            midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+        }
+        else
+        {
+
+        }
     }
 
     public void SetDifficultyMid()
     {
-        GameManager.difficulty = 2;
+        if (GameManager.newGame)
+        {
+            GameManager.difficulty = 2;
 
-        easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-        midButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
-        hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            midButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
+            hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+        }
+        else
+        {
+
+        }
     }
 
     public void SetDifficultyHard()
     {
-        GameManager.difficulty = 3;
+        if (GameManager.newGame)
+        {
+            GameManager.difficulty = 3;
 
-        easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-        midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
-        hardButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
+            easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
+            hardButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
+        }
+        else
+        {
+
+        }
     }
 }

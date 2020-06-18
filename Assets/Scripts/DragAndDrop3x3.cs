@@ -71,7 +71,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         muteButton.SetActive(!GameManager.isMicOn);
 
         keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
-        gameStatus.text = "Move a blue TUT to start the game";
+        gameStatus.text = "Pick a difficulty and move a blue TUT to start the game";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;

@@ -1262,9 +1262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae889cab6d7c46fb80c26fb59af90e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyButton: {fileID: 0}
-  midButton: {fileID: 0}
-  hardButton: {fileID: 0}
+  easyButton: {fileID: 201147511}
+  midButton: {fileID: 728353792}
+  hardButton: {fileID: 938699895}
+  difficultyPanel: {fileID: 1009830298}
+  gameItemsPanel: {fileID: 1536263902}
 --- !u!114 &201147513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3670,9 +3672,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae889cab6d7c46fb80c26fb59af90e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyButton: {fileID: 0}
-  midButton: {fileID: 0}
-  hardButton: {fileID: 0}
+  easyButton: {fileID: 201147511}
+  midButton: {fileID: 728353792}
+  hardButton: {fileID: 938699895}
+  difficultyPanel: {fileID: 1009830298}
+  gameItemsPanel: {fileID: 1536263902}
 --- !u!114 &728353795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4500,9 +4504,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae889cab6d7c46fb80c26fb59af90e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyButton: {fileID: 0}
-  midButton: {fileID: 0}
-  hardButton: {fileID: 0}
+  easyButton: {fileID: 201147511}
+  midButton: {fileID: 728353792}
+  hardButton: {fileID: 938699895}
+  difficultyPanel: {fileID: 1009830298}
+  gameItemsPanel: {fileID: 1536263902}
 --- !u!114 &938699898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4886,7 +4892,7 @@ GameObject:
   - component: {fileID: 1009830300}
   m_Layer: 5
   m_Name: DifficultyPanel
-  m_TagString: Untagged
+  m_TagString: difficultyPanelTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7791,7 +7797,7 @@ GameObject:
   - component: {fileID: 1536263904}
   m_Layer: 5
   m_Name: GameItemsPanel
-  m_TagString: Untagged
+  m_TagString: gameItemsPanelTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8921,7 +8927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.035305556, y: 0.143}
   m_AnchorMax: {x: 0.9836945, y: 0.874}
-  m_AnchoredPosition: {x: 0.5192871, y: -14.428986}
+  m_AnchoredPosition: {x: 0.5192871, y: -14.429016}
   m_SizeDelta: {x: -1.0388184, y: 28.858643}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741472667

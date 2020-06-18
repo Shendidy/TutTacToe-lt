@@ -368,10 +368,10 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         switch (GameManager.difficulty)
         {
             case 1:
-                difficulty = 1;
+                difficulty = i < 60 ? 2 : 1;
                 break;
             case 2:
-                difficulty = i < 60 ? 2 : 1;
+                difficulty = i < 105 ? 2 : 1;
                 break;
             case 3:
                 difficulty = i < 105  ? 2 : 1;

@@ -39,7 +39,7 @@ public class ToggleDifficulty : MonoBehaviour
 
     public void SetDifficultyEasy()
     {
-        if (GameManager.newGame)
+        if (GameManager.newGame || GameManager.gameOver)
         {
             GameManager.difficulty = 1;
 
@@ -60,7 +60,7 @@ public class ToggleDifficulty : MonoBehaviour
 
     public void SetDifficultyMid()
     {
-        if (GameManager.newGame)
+        if (GameManager.newGame || GameManager.gameOver)
         {
             GameManager.difficulty = 2;
 
@@ -81,7 +81,7 @@ public class ToggleDifficulty : MonoBehaviour
 
     public void SetDifficultyHard()
     {
-        if (GameManager.newGame)
+        if (GameManager.newGame || GameManager.gameOver)
         {
             GameManager.difficulty = 3;
 

@@ -1267,7 +1267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.823, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00008010864}
+  m_AnchoredPosition: {x: 0, y: 0.00008392334}
   m_SizeDelta: {x: -0.000030517578, y: -0.0001449585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &199921215
@@ -2822,8 +2822,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1073583475}
   m_HandleRect: {fileID: 1073583474}
   m_Direction: 2
-  m_Value: 0.9912104
-  m_Size: 0.93353796
+  m_Value: 0.9996644
+  m_Size: 0.18386744
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3581,7 +3581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.09012998}
   m_AnchorMax: {x: 1, y: 0.16833785}
-  m_AnchoredPosition: {x: 0, y: 391.99994}
+  m_AnchoredPosition: {x: 0, y: 392}
   m_SizeDelta: {x: 0, y: 0.00012207031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &579234209
@@ -3728,7 +3728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15547225, y: 0.8456414}
   m_AnchorMax: {x: 0.855, y: 0.8997174}
-  m_AnchoredPosition: {x: 0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0.00012207031, y: 0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &670040315
@@ -3744,7 +3744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5063,7 +5063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.268, y: 0.08400001}
   m_AnchorMax: {x: 0.39177775, y: 0.13954157}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.000030517578, y: 0.000017166138}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &988145871
@@ -5657,8 +5657,8 @@ RectTransform:
   m_Father: {fileID: 1666248836}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.06587786}
-  m_AnchorMax: {x: 1, y: 0.9994158}
+  m_AnchorMin: {x: 0, y: 0.81585866}
+  m_AnchorMax: {x: 1, y: 0.9997261}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6723,7 +6723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.17400001, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.0000038146973}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.0000076293945}
   m_SizeDelta: {x: -0.000045776367, y: -0.000015258789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1239493083
@@ -8655,8 +8655,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -40.999985}
-  m_SizeDelta: {x: -0.005493164, y: 83.467285}
+  m_AnchoredPosition: {x: 0.0028076172, y: -1029.8}
+  m_SizeDelta: {x: -0.005493164, y: 2060.9836}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635272394
 MonoBehaviour:
@@ -8690,11 +8690,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: "\nYou don't have enough keys!\r\n\r\nYou can either support us and watch
-    a short advertisement  by clicking the key, and instantly earn more keys, or
-    buy the ads free version for about the price of a cup of coffee and never be
-    limited by the number of keys you have.\r\n\r\nIf you prefer to wait, tomorrow
-    you\u2019ll have new keys in your keys bank.\r"
+  m_Text: "You don't have enough keys!\r\n\r\nPlease choose an easier level, or you
+    can either support us and watch a short advertisement  by clicking the red key
+    at the bottom left corner, and instantly earn more keys. Or alternatively you
+    can buy the ads free version for about the price of a cup of coffee and never
+    be limited by the number of keys you have.\r\n\r\nIf you prefer to wait, tomorrow
+    you\u2019ll have new keys in your keys bank."
 --- !u!222 &1635272395
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9398,7 +9399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.035305556, y: 0.143}
   m_AnchorMax: {x: 0.9836945, y: 0.874}
-  m_AnchoredPosition: {x: 0.5192871, y: -14.429016}
+  m_AnchoredPosition: {x: 0.5192871, y: -14.428955}
   m_SizeDelta: {x: -1.0388184, y: 28.858643}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741472667
@@ -10505,7 +10506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.17400001, y: 0}
   m_AnchorMax: {x: 0.34461847, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00007247925}
+  m_AnchoredPosition: {x: 0, y: 0.00006866455}
   m_SizeDelta: {x: 0.000038146973, y: -0.00015258789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047188975

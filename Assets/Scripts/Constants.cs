@@ -1,5 +1,4 @@
-﻿using System;
-public class Constants
+﻿public class Constants
 {
     public const float _MovingPlayerTransparency = 0.6f;
     public const float _StandingPlayerTransparency = 1.0f;

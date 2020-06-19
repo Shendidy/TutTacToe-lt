@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -96,12 +97,22 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!GameManager.gameOver && keysTotal >= 0)
+        int requiredKeys;
+        if (GameManager.newGame) requiredKeys = GameManager.difficulty == 1 ? Constants._KeysPerDifficulty1
+            : GameManager.difficulty == 2 ? Constants._KeysPerDifficulty2
+            : Constants._KeysPerDifficulty3;
+        else requiredKeys = 0;
+
+        if (!GameManager.gameOver && keysTotal >= requiredKeys)
         {
             AdMob.instance.RequestInterstitial();
             shh.Play();
             if (GameManager.newGame)
             {
+                GameDataManager.SaveGameData(new GameData(keysTotal -= requiredKeys, DateTime.UtcNow));
+                GameManager.keysTotal = keysTotal;
+                keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
+
                 PopulateSlotCentres();
                 AddSlotCentresOccupiers();
                 GameManager.newGame = false;
@@ -110,6 +121,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
                 {
                     AdMob.instance.RequestInterstitial();
                 }
+
+                requiredKeys = 0;
             }
             pieceStartSlot = GameManager.boardSlots3x3.Where(slot => (slot.SOccupier?.name == rectTransform.name)).ToArray()[0];
 
@@ -119,7 +132,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             players = PopulateService.PopulatePlayers(new Rigidbody2D[]{player11, player12, player13, player21, player22, player23});
             PopulatePlayersLocation();
         }
-        if (keysTotal < 0)
+        if (keysTotal < requiredKeys)
         {
             if (gameItemsPanel != null) gameItemsPanel.SetActive(!gameItemsPanel.activeSelf);
             if (keyErrorPanel != null) keyErrorPanel.SetActive(!keyErrorPanel.activeSelf);

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
 using GoogleMobileAds.Api;
-using System.Threading;
 
 public class AdMob : MonoBehaviour
 {

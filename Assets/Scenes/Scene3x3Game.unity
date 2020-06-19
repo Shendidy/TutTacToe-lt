@@ -2614,8 +2614,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0037570433, y: 0}
   m_AnchorMax: {x: 0.96635234, y: 1}
-  m_AnchoredPosition: {x: 0.0028076172, y: -1513.3999}
-  m_SizeDelta: {x: -0.005493164, y: 3026.8955}
+  m_AnchoredPosition: {x: 0.0028076172, y: -6000.049}
+  m_SizeDelta: {x: -0.005493164, y: 12000.098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435655877
 MonoBehaviour:
@@ -2649,54 +2649,34 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: '
-
-    This game is built on top of a game played in many parts of Egypt,
-    we call it "Siega". Which in turn is based on the famous Tic Tac Toe, but it
-    eliminates the option of draw and the game would go on until there''s a winner.
-
-
-    It
-    starts with players pieces laid down in the row closer to them and with lower
-    opacity, then once a piece is moved for the first time its opacity will go to
-    full indicating that this piece is now in the game and can be part of a winning
-    pattern. (winning patterns are the same as those of Tic Tac Toe)
-
-
-    Pieces
-    can be moved from their slot to any available slot on the board, so make sure
-    you don''t only build a path to 1 or more winning patterns, but ensure you''re
-    preventing your opponent building their own path.
-
-
-    You have 3 difficulty
-    levels to choose from (easy, mid, hard).
-
-
-    Easy: your opponent will pick
-    any random slot and any random piece to move, so it''s not challenging at all,
-    but a good starting point to learn the basic rules.
-
-
-    Mid: 50% of the time
-    your opponent will think of their best move to win or to prevent you winning.
-    Not as easy as the option above, but it adds a bit of challenge and fun to the
-    game.
-
-
-    Hard: 90% of the time your opponent will think of their best move
-    to win or to prevent you winning. Much more challenging and fun than Mid, good
-    luck...
-
-
-    You''ll have 5 keys every day, you can use them to play new games,
-    each game requires 1 key.
-
-
-    To earn more keys, you''ll just have to watch
-    a short advertisement by clicking the red key at the bottom left corner, and
-    you''ll earn more keys to use. Otherwise, you can buy the ads free version for
-    almost as much as a cup of coffee and enjoy the game without any interruptions.'
+  m_Text: "This game is built on top of a game played in many parts of Egypt, we
+    call it \"Siega\". Which in turn is based on the famous Tic Tac Toe, but it eliminates
+    the option of draw and sets a target score that the game only ends when one of
+    the players reach that score.\n\nIt starts with players pieces laid down in the
+    row closer to them and with lower opacity, then once a piece is moved for the
+    first time its opacity will go to full indicating that this piece is now in the
+    game and can be part of a winning pattern. (winning patterns are the vertical,
+    horizontal, or diagonal). Within single game, every time a player forms a winning
+    pattern they earn a point. The game ends when any player achieves the target
+    score.\n\nPieces can be moved from their slot to any available slot on the board,
+    so make sure you don't only build a path to 1 or more winning patterns, but ensure
+    you're also preventing your opponent building their own path.\n\nYou have 3 difficulty
+    levels to choose from (easy, mid, hard).\n\nEasy: 40% of the time your opponent
+    will think of their best move to win or to prevent you winning, and the target
+    score to win the game is only 1. Not very , but it\u2019s a good starting point
+    to learn the game rules, and it only consumes 1 of your keys.\n\nMid: 80% of
+    the time your opponent will think of their best move to win or to prevent you
+    winning, and the target score to win the game is 3. Not very , but it\u2019s
+    a good starting point to learn the game rules, and it consumes 2 of your keys.\n\nHard:
+    100% of the time your opponent will think of their best move to win or to prevent
+    you winning, and the target score to win the game is 5. Much more challenging
+    and fun than Mid, and it consumes 3 of your keys.\n\nYou'll have 10 keys to consume
+    every day, you can use them to play new games, each game will consume a number
+    of keys as stated above. The keys will only be deducted from your keys bank upon
+    moving your first TUT (Tutankhamun head)\n\nTo earn more keys, you'll just have
+    to watch a short advertisement by clicking the red key at the bottom left corner.
+    Otherwise, you can buy the ads free version for almost as much as a cup of coffee
+    and enjoy the game without any interruptions."
 --- !u!222 &435655878
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3883,8 +3863,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 904678694}
   m_HandleRect: {fileID: 904678693}
   m_Direction: 2
-  m_Value: 0.9999841
-  m_Size: 0.27511367
+  m_Value: 1
+  m_Size: 0.03540056
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4657,8 +4637,8 @@ RectTransform:
   m_Father: {fileID: 1231043677}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.7248748}
-  m_AnchorMax: {x: 1, y: 0.99998844}
+  m_AnchorMin: {x: 0, y: 0.96459943}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000118255615, y: 0}
   m_SizeDelta: {x: 0.00008392334, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -22,6 +22,9 @@ TagManager:
   - keyHard
   - difficultyPanelTag
   - gameItemsPanelTag
+  - playerScoreTextTag
+  - cpuScoreTextTag
+  - winningScoreTextTag
   layers:
   - Default
   - TransparentFX

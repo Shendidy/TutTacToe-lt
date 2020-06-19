@@ -11,6 +11,9 @@ public class ToggleDifficulty : MonoBehaviour
     public GameObject hardButton;
     public GameObject difficultyPanel;
     public GameObject gameItemsPanel;
+    public Text playerScoreText;
+    public Text cpuScoreText;
+    public Text winningScoreText;
 
     public void Awake()
     {
@@ -43,6 +46,10 @@ public class ToggleDifficulty : MonoBehaviour
         {
             GameManager.difficulty = 1;
 
+            playerScoreText.text = "0";
+            cpuScoreText.text = "0";
+            winningScoreText.text = "1";
+
             easyButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
             midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
             hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
@@ -60,6 +67,10 @@ public class ToggleDifficulty : MonoBehaviour
         {
             GameManager.difficulty = 2;
 
+            playerScoreText.text = "0";
+            cpuScoreText.text = "0";
+            winningScoreText.text = "3";
+
             easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
             midButton.GetComponent<Image>().color = new Color(0f, 1f, 0f, 1f);
             hardButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
@@ -76,6 +87,10 @@ public class ToggleDifficulty : MonoBehaviour
         if (GameManager.newGame)
         {
             GameManager.difficulty = 3;
+
+            playerScoreText.text = "0";
+            cpuScoreText.text = "0";
+            winningScoreText.text = "5";
 
             easyButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);
             midButton.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.6f);

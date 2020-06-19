@@ -30,7 +30,7 @@ public class AdMob : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.mobileSystem = "android"; // "ios", "android", or "test"
+        GameManager.mobileSystem = "test"; // "ios", "android", or "test"
 
         switch (GameManager.mobileSystem)
         {

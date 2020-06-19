@@ -16,6 +16,8 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private RectTransform rectTransform;
     public Text keyCount;
     public Text gameStatus;
+    public Text playerScoreText;
+    public Text cpuScoreText;
     [SerializeField] private Canvas mainCanvas;
     public Transform boardCanvas;
     private CanvasGroup canvasGroup;
@@ -71,7 +73,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         muteButton.SetActive(!GameManager.isMicOn);
 
         keyCount.text = keysTotal < 0 ? "0" : keysTotal.ToString();
-        gameStatus.text = "Pick a difficulty and move a blue TUT to start the game";
+        gameStatus.text = "Pick a difficulty, then move a blue TUT to start the game";
         GameManager.newGame = true;
         GameManager.playerInTurn = 1;
         GameManager.gameOver = false;
@@ -195,6 +197,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
             if (ChecksService.IsWinner(GameManager.boardSlots3x3))
             {
                 GameManager.playerScore++;
+                playerScoreText.text = GameManager.playerScore.ToString();
 
                 Debug.Log($"Player: {GameManager.playerScore}, CPU: {GameManager.cpuScore}");
 
@@ -339,7 +342,7 @@ public class DragAndDrop3x3 : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         if (ChecksService.IsWinner(GameManager.boardSlots3x3))
         {
             GameManager.cpuScore++;
-            Debug.Log($"Player: {GameManager.playerScore}, CPU: {GameManager.cpuScore}");
+            cpuScoreText.text = GameManager.cpuScore.ToString();
 
             if ((GameManager.difficulty == 1)
                 || (GameManager.difficulty == 2 && GameManager.cpuScore >= Constants._MidScore)

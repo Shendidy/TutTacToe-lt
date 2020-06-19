@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class DifficultyToggle : MonoBehaviour
+public class DifficultyPanelToggle : MonoBehaviour
 {
-    public static DifficultyToggle instance;
+    public static DifficultyPanelToggle instance;
     public GameObject difficultyPanel;
     public GameObject gameItemsPanel;
 

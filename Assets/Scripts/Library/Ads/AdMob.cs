@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
 using GoogleMobileAds.Api;
-using System.Threading;
 
 public class AdMob : MonoBehaviour
 {
@@ -30,7 +27,7 @@ public class AdMob : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.mobileSystem = "android"; // "ios", "android", or "test"
+        GameManager.mobileSystem = "test"; // "ios", "android", or "test"
 
         switch (GameManager.mobileSystem)
         {

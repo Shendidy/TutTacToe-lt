@@ -21,10 +21,10 @@ TagManager:
   - keyMid
   - keyHard
   - difficultyPanelTag
-<<<<<<< HEAD
-=======
   - gameItemsPanelTag
->>>>>>> scoring
+  - playerScoreTextTag
+  - cpuScoreTextTag
+  - winningScoreTextTag
   layers:
   - Default
   - TransparentFX

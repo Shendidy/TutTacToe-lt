@@ -1,10 +1,9 @@
-﻿using System;
-public class Constants
+﻿public class Constants
 {
     public const float _MovingPlayerTransparency = 0.6f;
     public const float _StandingPlayerTransparency = 1.0f;
-    public const int _MaximumDailyKeysRefill = 5;
-    public const int _RefillOnRewardedAd = 3;
+    public const int _MaximumDailyKeysRefill = 10;
+    public const int _RefillOnRewardedAd = 6;
     public const string _RefillKeysString = "yyyy-MM-dd";
 
     public const string _AdMobAppIDAndroid = "ca-app-pub-6785760956809900~9030602312";
@@ -22,9 +21,9 @@ public class Constants
     public const string _AdMobInterstitialIDIos = "ca-app-pub-6785760956809900/3470690850";
     public const string _AdMobRewardedIDIos = "ca-app-pub-6785760956809900/3087547476";
 
-    public const int _KeysPerBoard3x3 = 1;
-    public const int _KeysPerBoard4x4 = 3;
-    public const int _KeysPerBoard5x5 = 5;
+    public const int _KeysPerDifficulty1 = 1;
+    public const int _KeysPerDifficulty2 = 2;
+    public const int _KeysPerDifficulty3 = 3;
 
     public const string _AppStoreLink = "https://apps.apple.com/app/tut-tac-toe/id1517767463";
     public const string _PlayStoreLink = "https://play.google.com/store/apps/details?id=com.Shendidy.TUTtactoe";
